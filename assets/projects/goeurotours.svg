@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+    <defs>
+        <linearGradient id="ge-sky" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#8ec5e8"/>
+            <stop offset="60%" stop-color="#e8d5b8"/>
+            <stop offset="100%" stop-color="#f5e6c8"/>
+        </linearGradient>
+        <linearGradient id="ge-mtn1" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#4a6a8a"/>
+            <stop offset="100%" stop-color="#2a4a6a"/>
+        </linearGradient>
+        <linearGradient id="ge-mtn2" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#6a8aaa"/>
+            <stop offset="100%" stop-color="#4a6a8a"/>
+        </linearGradient>
+    </defs>
+
+    <rect width="800" height="500" fill="url(#ge-sky)"/>
+
+    <!-- Sun -->
+    <circle cx="600" cy="200" r="50" fill="#ffd49a" opacity="0.8"/>
+    <circle cx="600" cy="200" r="35" fill="#ffcb80"/>
+
+    <!-- Mountains back -->
+    <path d="M 0 320 L 120 200 L 200 260 L 320 180 L 420 240 L 540 200 L 660 250 L 800 220 L 800 500 L 0 500 Z" fill="url(#ge-mtn2)"/>
+    <!-- Snow caps -->
+    <path d="M 100 215 L 120 200 L 140 215 L 130 220 L 110 220 Z" fill="#f0f4f8"/>
+    <path d="M 305 195 L 320 180 L 335 195 L 325 200 L 315 200 Z" fill="#f0f4f8"/>
+    <path d="M 525 215 L 540 200 L 555 215 L 545 220 L 535 220 Z" fill="#f0f4f8"/>
+
+    <!-- Mountains front -->
+    <path d="M 0 380 L 100 280 L 220 340 L 380 270 L 500 320 L 620 290 L 800 340 L 800 500 L 0 500 Z" fill="url(#ge-mtn1)"/>
+    <!-- snow front -->
+    <path d="M 85 295 L 100 280 L 115 295 L 105 300 L 95 300 Z" fill="#fff"/>
+    <path d="M 365 285 L 380 270 L 395 285 L 385 290 L 375 290 Z" fill="#fff"/>
+
+    <!-- Lake/foreground -->
+    <rect y="400" width="800" height="100" fill="#2a3a5a"/>
+    <path d="M 0 400 L 800 400 L 800 410 L 0 410 Z" fill="#fff" opacity="0.2"/>
+
+    <!-- Browser bar -->
+    <rect x="0" y="0" width="800" height="32" fill="#ffffff"/>
+    <circle cx="18" cy="16" r="5" fill="#ff5f57"/>
+    <circle cx="36" cy="16" r="5" fill="#febc2e"/>
+    <circle cx="54" cy="16" r="5" fill="#28c840"/>
+    <rect x="280" y="8" width="240" height="16" rx="4" fill="#e8dcc8"/>
+
+    <!-- Nav -->
+    <g transform="translate(40, 60)">
+        <circle cx="14" cy="14" r="12" fill="#fff"/>
+        <text x="14" y="19" text-anchor="middle" fill="#2a4a6a" font-family="Georgia,serif" font-weight="700" font-size="13">G</text>
+        <text x="36" y="20" fill="#fff" font-family="Georgia,serif" font-weight="700" font-size="16">Go Euro Tours</text>
+        <g font-family="Inter,sans-serif" font-size="10" fill="#fff" font-weight="500">
+            <text x="460" y="20">Tours</text>
+            <text x="510" y="20">Destinations</text>
+            <text x="585" y="20">About</text>
+            <text x="640" y="20">Reviews</text>
+            <text x="695" y="20">Book Now</text>
+        </g>
+    </g>
+
+    <!-- Hero text -->
+    <g transform="translate(40, 110)">
+        <text x="0" y="0" fill="#fff" font-family="Inter,sans-serif" font-size="11" font-weight="600" letter-spacing="3" opacity="0.9">CURATED EUROPEAN ADVENTURES</text>
+        <text x="0" y="55" fill="#fff" font-family="Georgia,serif" font-weight="700" font-size="46" letter-spacing="-1.5">Discover Europe,</text>
+        <text x="0" y="105" fill="#fff" font-family="Georgia,serif" font-style="italic" font-weight="700" font-size="46" letter-spacing="-1.5">your way.</text>
+        <text x="0" y="135" fill="#fff" font-family="Inter,sans-serif" font-size="13" opacity="0.9">Private tours, hand-picked stays, unforgettable memories.</text>
+    </g>
+
+    <!-- Search bar -->
+    <g transform="translate(40, 290)">
+        <rect width="640" height="64" rx="32" fill="#fff" filter="url(#shadow)"/>
+        <g font-family="Inter,sans-serif" font-size="10" fill="#5a6a8a">
+            <text x="28" y="22" font-weight="600" fill="#2a4a6a">DESTINATION</text>
+            <text x="28" y="44" font-size="13" fill="#1a1a1a">Ireland · Scotland</text>
+        </g>
+        <line x1="220" y1="16" x2="220" y2="48" stroke="#e0e0e0"/>
+        <g font-family="Inter,sans-serif" font-size="10" fill="#5a6a8a" transform="translate(230, 0)">
+            <text x="0" y="22" font-weight="600" fill="#2a4a6a">DATES</text>
+            <text x="0" y="44" font-size="13" fill="#1a1a1a">Apr 12 — Apr 19</text>
+        </g>
+        <line x1="400" y1="16" x2="400" y2="48" stroke="#e0e0e0"/>
+        <g font-family="Inter,sans-serif" font-size="10" fill="#5a6a8a" transform="translate(420, 0)">
+            <text x="0" y="22" font-weight="600" fill="#2a4a6a">TRAVELERS</text>
+            <text x="0" y="44" font-size="13" fill="#1a1a1a">2 Adults</text>
+        </g>
+        <rect x="540" y="8" width="92" height="48" rx="24" fill="#2a4a6a"/>
+        <text x="586" y="38" text-anchor="middle" fill="#fff" font-family="Inter,sans-serif" font-weight="600" font-size="12">Search →</text>
+    </g>
+</svg>

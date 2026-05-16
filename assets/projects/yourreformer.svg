@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+    <defs>
+        <linearGradient id="yr-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#f7f1ea"/>
+            <stop offset="100%" stop-color="#ead9c4"/>
+        </linearGradient>
+        <linearGradient id="yr-card" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#5a6f5a"/>
+            <stop offset="100%" stop-color="#3a4a3a"/>
+        </linearGradient>
+    </defs>
+
+    <rect width="800" height="500" fill="url(#yr-bg)"/>
+    <rect x="0" y="0" width="800" height="32" fill="#ffffff"/>
+    <circle cx="18" cy="16" r="5" fill="#ff5f57"/>
+    <circle cx="36" cy="16" r="5" fill="#febc2e"/>
+    <circle cx="54" cy="16" r="5" fill="#28c840"/>
+    <rect x="280" y="8" width="240" height="16" rx="4" fill="#f0e6d8"/>
+
+    <g transform="translate(40, 60)">
+        <text x="0" y="20" fill="#3a4a3a" font-family="Georgia,serif" font-weight="700" font-size="20" letter-spacing="2">YOUR REFORMER</text>
+        <g font-family="Inter,sans-serif" font-size="10" fill="#3a4a3a" font-weight="500">
+            <text x="500" y="20">Shop</text>
+            <text x="545" y="20">Classes</text>
+            <text x="605" y="20">Studio</text>
+            <text x="660" y="20">Account</text>
+            <text x="720" y="20">⊞ 1</text>
+        </g>
+    </g>
+
+    <g transform="translate(40, 120)">
+        <text x="0" y="0" fill="#8a6a4a" font-family="Inter,sans-serif" font-size="11" font-weight="600" letter-spacing="2">PILATES · WELLNESS</text>
+        <text x="0" y="48" fill="#3a4a3a" font-family="Georgia,serif" font-weight="700" font-size="38" letter-spacing="-1">Strengthen body,</text>
+        <text x="0" y="88" fill="#3a4a3a" font-family="Georgia,serif" font-style="italic" font-weight="700" font-size="38" letter-spacing="-1">at your own pace.</text>
+        <text x="0" y="120" fill="#5a5a5a" font-family="Inter,sans-serif" font-size="12">Premium home reformers for the modern studio.</text>
+        <rect x="0" y="140" width="140" height="38" rx="0" fill="#3a4a3a"/>
+        <text x="70" y="164" text-anchor="middle" fill="#fff" font-family="Inter,sans-serif" font-weight="600" font-size="11">SHOP REFORMERS →</text>
+    </g>
+
+    <g transform="translate(40, 320)">
+        <rect width="230" height="150" rx="4" fill="url(#yr-card)"/>
+        <rect x="14" y="100" width="120" height="3" fill="#fff"/>
+        <text x="14" y="125" fill="#fff" font-family="Inter,sans-serif" font-weight="600" font-size="12">Studio Pro Reformer</text>
+        <text x="14" y="142" fill="#d4c4b0" font-family="Inter,sans-serif" font-weight="700" font-size="11">$2,499</text>
+
+        <g transform="translate(250, 0)">
+            <rect width="230" height="150" rx="4" fill="#c4a584"/>
+            <rect x="14" y="100" width="120" height="3" fill="#fff"/>
+            <text x="14" y="125" fill="#fff" font-family="Inter,sans-serif" font-weight="600" font-size="12">Compact Reformer</text>
+            <text x="14" y="142" fill="#3a2a1a" font-family="Inter,sans-serif" font-weight="700" font-size="11">$1,799</text>
+        </g>
+
+        <g transform="translate(500, 0)">
+            <rect width="230" height="150" rx="4" fill="#8a9a8a"/>
+            <rect x="14" y="100" width="120" height="3" fill="#fff"/>
+            <text x="14" y="125" fill="#fff" font-family="Inter,sans-serif" font-weight="600" font-size="12">Accessories Set</text>
+            <text x="14" y="142" fill="#2a3a2a" font-family="Inter,sans-serif" font-weight="700" font-size="11">$249</text>
+        </g>
+    </g>
+</svg>
