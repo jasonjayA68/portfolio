@@ -48,7 +48,7 @@
 
         <text x="0" y="55" fill="#1a1a1a" font-family="Inter,sans-serif" font-weight="800" font-size="38" letter-spacing="-1.5">Stay connected,</text>
         <text x="0" y="95" fill="url(#cc-red)" font-family="Inter,sans-serif" font-weight="800" font-size="38" letter-spacing="-1.5">coast to coast.</text>
-        <text x="0" y="125" fill="#5a5a5a" font-family="Inter,sans-serif" font-size="12">Affordable mobile, internet & TV — built for Canadians.</text>
+        <text x="0" y="125" fill="#5a5a5a" font-family="Inter,sans-serif" font-size="12">Affordable mobile, internet &amp; TV — built for Canadians.</text>
 
         <rect x="0" y="148" width="140" height="40" rx="20" fill="url(#cc-red)"/>
         <text x="70" y="173" text-anchor="middle" fill="#fff" font-family="Inter,sans-serif" font-weight="600" font-size="11">Find My Plan →</text>

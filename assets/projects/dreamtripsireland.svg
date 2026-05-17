@@ -44,7 +44,7 @@
 
         <text x="0" y="68" fill="#fff" font-family="Georgia,serif" font-weight="700" font-size="44" letter-spacing="-1.5">Your Ireland</text>
         <text x="0" y="118" fill="url(#di-ac)" font-family="Georgia,serif" font-style="italic" font-weight="700" font-size="44" letter-spacing="-1.5">dream trip awaits.</text>
-        <text x="0" y="148" fill="#fff" font-family="Inter,sans-serif" font-size="13" opacity="0.95">Hand-crafted self-drive & guided tours across the Emerald Isle.</text>
+        <text x="0" y="148" fill="#fff" font-family="Inter,sans-serif" font-size="13" opacity="0.95">Hand-crafted self-drive &amp; guided tours across the Emerald Isle.</text>
 
         <rect x="0" y="170" width="160" height="42" rx="0" fill="url(#di-ac)"/>
         <text x="80" y="196" text-anchor="middle" fill="#1a1a1a" font-family="Inter,sans-serif" font-weight="700" font-size="11">Plan My Dream Trip →</text>
@@ -63,7 +63,7 @@
         <g transform="translate(240, 0)">
             <rect width="220" height="70" rx="6" fill="#fff" opacity="0.95"/>
             <text x="14" y="22" fill="#2a4a2a" font-family="Inter,sans-serif" font-weight="700" font-size="10" letter-spacing="1">WILD ATLANTIC WAY</text>
-            <text x="14" y="42" fill="#1a1a1a" font-family="Georgia,serif" font-weight="700" font-size="13">Cliffs & Connemara · 10d</text>
+            <text x="14" y="42" fill="#1a1a1a" font-family="Georgia,serif" font-weight="700" font-size="13">Cliffs &amp; Connemara · 10d</text>
             <text x="14" y="60" fill="#5a5a5a" font-family="Inter,sans-serif" font-size="10">From €2,490pp</text>
         </g>
         <g transform="translate(480, 0)">
