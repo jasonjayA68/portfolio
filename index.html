@@ -9,13 +9,20 @@
     <title>Jason Jay Ababao — Freelance Web Developer & Designer</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap"
         rel="stylesheet" />
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
     <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
+    <!-- Cursor glow that follows mouse -->
+    <div class="cursor-glow" aria-hidden="true"></div>
+
+    <!-- Animated grain/noise overlay -->
+    <div class="grain" aria-hidden="true"></div>
+
     <!-- Background gradient orbs -->
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
@@ -50,15 +57,18 @@
                 Available for freelance work
             </div>
             <h1 class="hero-title reveal">
-                Hi, I'm <span class="gradient-text">Jason Jay Ababao</span><br />
-                Full-Stack Web Developer.
+                Crafting digital
+                <span class="serif-italic gradient-text"> experiences </span>
+                that <span class="serif-italic">convert.</span>
             </h1>
-            <p class="hero-subtitle reveal">
-                WordPress · Shopify · Laravel · 5+ Years Experience
+            <p class="hero-name reveal">
+                <span class="dash"></span>
+                <span>Jason Jay Ababao · Full-Stack Web Developer</span>
             </p>
             <p class="hero-tagline reveal">
-                I build fast, polished, conversion-focused websites for brands across travel, e-commerce, wellness, and
-                professional services worldwide.
+                I design and build fast, polished websites for ambitious brands in
+                <strong>e-commerce</strong>, <strong>travel</strong>, <strong>wellness</strong>, and
+                <strong>professional services</strong> — across WordPress, Shopify, and Laravel.
             </p>
             <div class="hero-cta reveal">
                 <a href="#projects" class="btn btn-primary">
@@ -73,15 +83,17 @@
             </div>
             <div class="hero-stats reveal">
                 <div class="stat">
-                    <div class="stat-num">23+</div>
+                    <div class="stat-num" data-count="13">0</div>
+                    <div class="stat-suffix">+</div>
                     <div class="stat-label">Live Client Sites</div>
                 </div>
                 <div class="stat">
-                    <div class="stat-num">5+</div>
+                    <div class="stat-num" data-count="5">0</div>
+                    <div class="stat-suffix">+</div>
                     <div class="stat-label">Years Experience</div>
                 </div>
                 <div class="stat">
-                    <div class="stat-num">4</div>
+                    <div class="stat-num" data-count="4">0</div>
                     <div class="stat-label">Agencies Worked With</div>
                 </div>
             </div>
@@ -91,12 +103,69 @@
         </a>
     </section>
 
+    <!-- Marquee Brand Band -->
+    <section class="marquee-band" aria-label="Recent client work">
+        <div class="marquee-fade marquee-fade-left"></div>
+        <div class="marquee-fade marquee-fade-right"></div>
+        <div class="marquee-track">
+            <div class="marquee-content">
+                <span class="marquee-item">yourreformer.com</span>
+                <span class="marquee-dot">✦</span>
+                <span class="marquee-item">ebikegeneration.com</span>
+                <span class="marquee-dot">✦</span>
+                <span class="marquee-item">wovenpanel.com.au</span>
+                <span class="marquee-dot">✦</span>
+                <span class="marquee-item">subtleenergies.com.au</span>
+                <span class="marquee-dot">✦</span>
+                <span class="marquee-item">goeurotours.com</span>
+                <span class="marquee-dot">✦</span>
+                <span class="marquee-item">toptiervirtuals.com</span>
+                <span class="marquee-dot">✦</span>
+                <span class="marquee-item">thinktanktutors.com</span>
+                <span class="marquee-dot">✦</span>
+                <span class="marquee-item">connect.ca</span>
+                <span class="marquee-dot">✦</span>
+                <span class="marquee-item">dreamtripsireland.com</span>
+                <span class="marquee-dot">✦</span>
+                <span class="marquee-item">dreamtripsscotland.com</span>
+                <span class="marquee-dot">✦</span>
+            </div>
+            <div class="marquee-content" aria-hidden="true">
+                <span class="marquee-item">yourreformer.com</span>
+                <span class="marquee-dot">✦</span>
+                <span class="marquee-item">ebikegeneration.com</span>
+                <span class="marquee-dot">✦</span>
+                <span class="marquee-item">wovenpanel.com.au</span>
+                <span class="marquee-dot">✦</span>
+                <span class="marquee-item">subtleenergies.com.au</span>
+                <span class="marquee-dot">✦</span>
+                <span class="marquee-item">goeurotours.com</span>
+                <span class="marquee-dot">✦</span>
+                <span class="marquee-item">toptiervirtuals.com</span>
+                <span class="marquee-dot">✦</span>
+                <span class="marquee-item">thinktanktutors.com</span>
+                <span class="marquee-dot">✦</span>
+                <span class="marquee-item">connect.ca</span>
+                <span class="marquee-dot">✦</span>
+                <span class="marquee-item">dreamtripsireland.com</span>
+                <span class="marquee-dot">✦</span>
+                <span class="marquee-item">dreamtripsscotland.com</span>
+                <span class="marquee-dot">✦</span>
+            </div>
+        </div>
+    </section>
+
     <!-- About Section -->
     <section id="about" class="section">
         <div class="container">
             <div class="section-head reveal">
-                <span class="section-tag">About Me</span>
-                <h2 class="section-title">Designer and developer with an eye for detail.</h2>
+                <div class="section-eyebrow">
+                    <span class="section-num">01</span>
+                    <span class="section-tag">About Me</span>
+                </div>
+                <h2 class="section-title">A designer who codes — with an
+                    <span class="serif-italic">eye for detail.</span>
+                </h2>
             </div>
             <div class="about-grid">
                 <div class="about-text reveal">
@@ -171,9 +240,14 @@
     <section id="skills" class="section section-alt">
         <div class="container">
             <div class="section-head reveal">
-                <span class="section-tag">Skills & Tools</span>
-                <h2 class="section-title">The stack I build with.</h2>
-                <p class="section-sub">A curated toolkit for shipping modern websites — from design to deployment.</p>
+                <div class="section-eyebrow">
+                    <span class="section-num">02</span>
+                    <span class="section-tag">Skills & Tools</span>
+                </div>
+                <h2 class="section-title">The stack I build with —
+                    <span class="serif-italic">end to end.</span>
+                </h2>
+                <p class="section-sub">A curated toolkit for shipping modern websites, from design to deployment.</p>
             </div>
             <div class="skills-grid">
                 <div class="skill-card reveal">
@@ -294,8 +368,13 @@
     <section id="projects" class="section">
         <div class="container">
             <div class="section-head reveal">
-                <span class="section-tag">Selected Work</span>
-                <h2 class="section-title">Real projects. Live websites.</h2>
+                <div class="section-eyebrow">
+                    <span class="section-num">03</span>
+                    <span class="section-tag">Selected Work</span>
+                </div>
+                <h2 class="section-title">Real projects.
+                    <span class="serif-italic">Live websites.</span>
+                </h2>
                 <p class="section-sub">A selection of client sites I've designed, built, or maintained across
                     e-commerce, travel, wellness, and professional services.</p>
             </div>
@@ -578,12 +657,34 @@
         </div>
     </section>
 
+    <!-- Editorial Quote -->
+    <section class="quote-section" aria-label="Working principle">
+        <div class="container">
+            <div class="quote-inner reveal">
+                <span class="quote-mark" aria-hidden="true">“</span>
+                <blockquote class="quote-text">
+                    Good design is honest. It's <span class="serif-italic">obvious</span> once you see it,
+                    but takes <span class="serif-italic">discipline</span> to ship.
+                </blockquote>
+                <div class="quote-attr">
+                    <span class="quote-dash"></span>
+                    <span>My north star, on every project</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Experience Section -->
     <section id="experience" class="section section-alt">
         <div class="container">
             <div class="section-head reveal">
-                <span class="section-tag">Experience</span>
-                <h2 class="section-title">A timeline of my journey.</h2>
+                <div class="section-eyebrow">
+                    <span class="section-num">04</span>
+                    <span class="section-tag">Experience</span>
+                </div>
+                <h2 class="section-title">A timeline of
+                    <span class="serif-italic">my journey.</span>
+                </h2>
             </div>
             <div class="timeline">
                 <div class="timeline-item reveal">
@@ -632,12 +733,80 @@
         </div>
     </section>
 
+    <!-- Process Section -->
+    <section id="process" class="section">
+        <div class="container">
+            <div class="section-head reveal">
+                <div class="section-eyebrow">
+                    <span class="section-num">05</span>
+                    <span class="section-tag">How I Work</span>
+                </div>
+                <h2 class="section-title">A clear process,
+                    <span class="serif-italic">no surprises.</span>
+                </h2>
+                <p class="section-sub">From first call to launch day — a calm, organized workflow that keeps clients in
+                    the loop and projects on time.</p>
+            </div>
+            <div class="process-grid">
+                <article class="process-card reveal">
+                    <div class="process-num">01</div>
+                    <h3>Discovery</h3>
+                    <p>We start with a free call to understand your goals, audience, and the business outcomes
+                        the site needs to drive. You get a written scope before we move on.</p>
+                    <ul class="process-list">
+                        <li>Goal alignment</li>
+                        <li>Audience & content audit</li>
+                        <li>Scope & timeline</li>
+                    </ul>
+                </article>
+                <article class="process-card reveal">
+                    <div class="process-num">02</div>
+                    <h3>Design</h3>
+                    <p>I translate the brief into a clean, on-brand design — wireframes first, then high-fidelity
+                        mockups you can react to before a single line of code is written.</p>
+                    <ul class="process-list">
+                        <li>Wireframes & layout</li>
+                        <li>Typography & color</li>
+                        <li>Responsive mockups</li>
+                    </ul>
+                </article>
+                <article class="process-card reveal">
+                    <div class="process-num">03</div>
+                    <h3>Build</h3>
+                    <p>Approved designs become a fast, accessible website — WordPress, Shopify, or custom.
+                        Modular, easy to maintain, and built to scale with your business.</p>
+                    <ul class="process-list">
+                        <li>Pixel-perfect dev</li>
+                        <li>CMS configuration</li>
+                        <li>Integrations & forms</li>
+                    </ul>
+                </article>
+                <article class="process-card reveal">
+                    <div class="process-num">04</div>
+                    <h3>Launch</h3>
+                    <p>QA, SEO basics, analytics, and performance pass — then we ship. You get docs, a handover
+                        video, and post-launch support so you're never stuck.</p>
+                    <ul class="process-list">
+                        <li>QA & cross-browser</li>
+                        <li>SEO & analytics setup</li>
+                        <li>Handover & training</li>
+                    </ul>
+                </article>
+            </div>
+        </div>
+    </section>
+
     <!-- Contact Section -->
     <section id="contact" class="section">
         <div class="container">
             <div class="section-head reveal">
-                <span class="section-tag">Contact</span>
-                <h2 class="section-title">Let's build something great.</h2>
+                <div class="section-eyebrow">
+                    <span class="section-num">06</span>
+                    <span class="section-tag">Get in Touch</span>
+                </div>
+                <h2 class="section-title">Let's build
+                    <span class="serif-italic">something great.</span>
+                </h2>
                 <p class="section-sub">Have a project in mind or need a website refresh? I'd love to hear about it.</p>
             </div>
             <div class="contact-grid">

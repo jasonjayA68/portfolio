@@ -223,6 +223,105 @@
     }
 
     /* ----------------------------------------
+       Cursor glow that follows mouse (desktop)
+    ---------------------------------------- */
+    const cursorGlow = document.querySelector('.cursor-glow');
+    if (cursorGlow &&
+        window.matchMedia('(hover: hover) and (min-width: 768px)').matches &&
+        !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+
+        let glowX = window.innerWidth / 2;
+        let glowY = window.innerHeight / 2;
+        let targetX = glowX;
+        let targetY = glowY;
+        let glowActive = false;
+
+        document.addEventListener('mousemove', (e) => {
+            targetX = e.clientX;
+            targetY = e.clientY;
+            if (!glowActive) {
+                cursorGlow.classList.add('active');
+                glowActive = true;
+            }
+        });
+
+        document.addEventListener('mouseleave', () => {
+            cursorGlow.classList.remove('active');
+            glowActive = false;
+        });
+
+        const animateGlow = () => {
+            glowX += (targetX - glowX) * 0.12;
+            glowY += (targetY - glowY) * 0.12;
+            cursorGlow.style.transform = `translate(${glowX}px, ${glowY}px) translate(-50%, -50%)`;
+            requestAnimationFrame(animateGlow);
+        };
+        animateGlow();
+    }
+
+    /* ----------------------------------------
+       Animated stat counters
+    ---------------------------------------- */
+    const counters = document.querySelectorAll('.stat-num[data-count]');
+    if (counters.length && 'IntersectionObserver' in window) {
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                const el = entry.target;
+                const target = parseInt(el.dataset.count, 10);
+                const duration = 1400;
+                const start = performance.now();
+
+                const tick = (now) => {
+                    const t = Math.min((now - start) / duration, 1);
+                    const eased = 1 - Math.pow(1 - t, 3);
+                    el.textContent = Math.round(target * eased);
+                    if (t < 1) requestAnimationFrame(tick);
+                };
+                requestAnimationFrame(tick);
+                counterObserver.unobserve(el);
+            });
+        }, { threshold: 0.5 });
+
+        counters.forEach(el => counterObserver.observe(el));
+    }
+
+    /* ----------------------------------------
+       3D tilt on project cards (desktop)
+    ---------------------------------------- */
+    if (window.matchMedia('(hover: hover) and (min-width: 768px)').matches &&
+        !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+
+        const tiltCards = document.querySelectorAll('.project-card');
+        const MAX_TILT = 6;
+
+        tiltCards.forEach(card => {
+            let raf = null;
+
+            const onMove = (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = (e.clientX - rect.left) / rect.width;
+                const y = (e.clientY - rect.top) / rect.height;
+                const rotateY = (x - 0.5) * MAX_TILT * 2;
+                const rotateX = (0.5 - y) * MAX_TILT * 2;
+
+                if (raf) cancelAnimationFrame(raf);
+                raf = requestAnimationFrame(() => {
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-6px) scale(1.01)`;
+                });
+            };
+
+            const onLeave = () => {
+                if (raf) cancelAnimationFrame(raf);
+                card.style.transform = '';
+            };
+
+            card.addEventListener('mousemove', onMove);
+            card.addEventListener('mouseleave', onLeave);
+        });
+    }
+
+    /* ----------------------------------------
        Subtle parallax on hero orbs
     ---------------------------------------- */
     const orbs = document.querySelectorAll('.orb');
