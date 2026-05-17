@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+    <defs>
+        <linearGradient id="di-sky" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#a8d5ba"/>
+            <stop offset="100%" stop-color="#d4e8d4"/>
+        </linearGradient>
+        <linearGradient id="di-cliff" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#4a7a4a"/>
+            <stop offset="100%" stop-color="#2a4a2a"/>
+        </linearGradient>
+        <linearGradient id="di-ac" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#fbbf24"/>
+            <stop offset="100%" stop-color="#f59e0b"/>
+        </linearGradient>
+    </defs>
+
+    <rect width="800" height="500" fill="url(#di-sky)"/>
+    <!-- Distant hills -->
+    <path d="M 0 320 L 120 240 L 280 290 L 440 220 L 600 280 L 800 230 L 800 360 L 0 360 Z" fill="#7aa67a" opacity="0.6"/>
+    <!-- Foreground cliffs -->
+    <path d="M 0 380 L 160 280 L 320 360 L 480 270 L 640 340 L 800 290 L 800 500 L 0 500 Z" fill="url(#di-cliff)"/>
+    <!-- Sea/sky reflection -->
+    <rect y="360" width="800" height="20" fill="#5b8bb0" opacity="0.4"/>
+
+    <rect x="0" y="0" width="800" height="32" fill="#ffffff"/>
+    <circle cx="18" cy="16" r="5" fill="#ff5f57"/>
+    <circle cx="36" cy="16" r="5" fill="#febc2e"/>
+    <circle cx="54" cy="16" r="5" fill="#28c840"/>
+    <rect x="280" y="8" width="240" height="16" rx="4" fill="#e6f0e8"/>
+
+    <g transform="translate(40, 60)">
+        <text x="0" y="22" fill="#fff" font-family="Georgia,serif" font-style="italic" font-weight="700" font-size="22">Dream Trips Ireland</text>
+        <g font-family="Inter,sans-serif" font-size="10" fill="#fff" font-weight="600">
+            <text x="490" y="22">Itineraries</text>
+            <text x="555" y="22">Destinations</text>
+            <text x="625" y="22">Stories</text>
+            <text x="680" y="22">Contact</text>
+        </g>
+    </g>
+
+    <g transform="translate(40, 130)">
+        <rect width="180" height="26" rx="13" fill="rgba(255,255,255,0.2)" stroke="#fff" stroke-opacity="0.5"/>
+        <text x="14" y="17" fill="#fff" font-family="Inter,sans-serif" font-size="10" font-weight="700">★ TRUSTED BY 5,000+ TRAVELERS</text>
+
+        <text x="0" y="68" fill="#fff" font-family="Georgia,serif" font-weight="700" font-size="44" letter-spacing="-1.5">Your Ireland</text>
+        <text x="0" y="118" fill="url(#di-ac)" font-family="Georgia,serif" font-style="italic" font-weight="700" font-size="44" letter-spacing="-1.5">dream trip awaits.</text>
+        <text x="0" y="148" fill="#fff" font-family="Inter,sans-serif" font-size="13" opacity="0.95">Hand-crafted self-drive & guided tours across the Emerald Isle.</text>
+
+        <rect x="0" y="170" width="160" height="42" rx="0" fill="url(#di-ac)"/>
+        <text x="80" y="196" text-anchor="middle" fill="#1a1a1a" font-family="Inter,sans-serif" font-weight="700" font-size="11">Plan My Dream Trip →</text>
+
+        <rect x="172" y="170" width="120" height="42" rx="0" fill="none" stroke="#fff" stroke-width="1.5"/>
+        <text x="232" y="196" text-anchor="middle" fill="#fff" font-family="Inter,sans-serif" font-weight="500" font-size="11">View Tours</text>
+    </g>
+
+    <!-- Tour cards -->
+    <g transform="translate(40, 410)">
+        <rect width="220" height="70" rx="6" fill="#fff" opacity="0.95"/>
+        <text x="14" y="22" fill="#2a4a2a" font-family="Inter,sans-serif" font-weight="700" font-size="10" letter-spacing="1">SOUTHERN IRELAND</text>
+        <text x="14" y="42" fill="#1a1a1a" font-family="Georgia,serif" font-weight="700" font-size="13">Ring of Kerry · 7 days</text>
+        <text x="14" y="60" fill="#5a5a5a" font-family="Inter,sans-serif" font-size="10">From €1,890pp</text>
+
+        <g transform="translate(240, 0)">
+            <rect width="220" height="70" rx="6" fill="#fff" opacity="0.95"/>
+            <text x="14" y="22" fill="#2a4a2a" font-family="Inter,sans-serif" font-weight="700" font-size="10" letter-spacing="1">WILD ATLANTIC WAY</text>
+            <text x="14" y="42" fill="#1a1a1a" font-family="Georgia,serif" font-weight="700" font-size="13">Cliffs & Connemara · 10d</text>
+            <text x="14" y="60" fill="#5a5a5a" font-family="Inter,sans-serif" font-size="10">From €2,490pp</text>
+        </g>
+        <g transform="translate(480, 0)">
+            <rect width="220" height="70" rx="6" fill="url(#di-ac)"/>
+            <text x="14" y="22" fill="#1a1a1a" font-family="Inter,sans-serif" font-weight="700" font-size="10" letter-spacing="1">CUSTOM</text>
+            <text x="14" y="42" fill="#1a1a1a" font-family="Georgia,serif" font-weight="700" font-size="13">Design Your Own Trip</text>
+            <text x="14" y="60" fill="#3a2a08" font-family="Inter,sans-serif" font-size="10">Start with a free consult →</text>
+        </g>
+    </g>
+</svg>

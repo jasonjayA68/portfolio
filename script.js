@@ -128,6 +128,54 @@
     setActiveLink();
 
     /* ----------------------------------------
+       Show More Projects toggle
+    ---------------------------------------- */
+    const showMoreBtn = document.getElementById('showMoreProjects');
+    const projectsExtra = document.getElementById('projectsExtra');
+
+    if (showMoreBtn && projectsExtra) {
+        const btnText = showMoreBtn.querySelector('.show-more-text');
+        const btnCount = showMoreBtn.querySelector('.show-more-count');
+        const hiddenCount = projectsExtra.querySelectorAll('.project-card').length;
+
+        showMoreBtn.addEventListener('click', () => {
+            const isHidden = projectsExtra.hasAttribute('hidden');
+
+            if (isHidden) {
+                projectsExtra.removeAttribute('hidden');
+                showMoreBtn.classList.add('expanded');
+                showMoreBtn.setAttribute('aria-expanded', 'true');
+                btnText.textContent = 'Show Less';
+                btnCount.textContent = '−';
+
+                // Reveal animation on the newly visible cards
+                projectsExtra.querySelectorAll('.reveal').forEach((el, i) => {
+                    setTimeout(() => el.classList.add('visible'), i * 80);
+                });
+            } else {
+                projectsExtra.setAttribute('hidden', '');
+                showMoreBtn.classList.remove('expanded');
+                showMoreBtn.setAttribute('aria-expanded', 'false');
+                btnText.textContent = 'Show More Projects';
+                btnCount.textContent = '+' + hiddenCount;
+
+                // Reset reveal state so they animate again next time
+                projectsExtra.querySelectorAll('.reveal').forEach(el => el.classList.remove('visible'));
+
+                // Scroll back to projects section
+                const projects = document.getElementById('projects');
+                if (projects) {
+                    const navH = nav ? nav.offsetHeight : 0;
+                    window.scrollTo({
+                        top: projects.getBoundingClientRect().top + window.scrollY - navH - 12,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+        });
+    }
+
+    /* ----------------------------------------
        Contact form (frontend-only handler)
     ---------------------------------------- */
     const form = document.getElementById('contactForm');

@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+    <defs>
+        <linearGradient id="sc-bg" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#fff3e0"/>
+            <stop offset="50%" stop-color="#b3e5fc"/>
+            <stop offset="100%" stop-color="#4fc3f7"/>
+        </linearGradient>
+        <linearGradient id="sc-ac" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#00acc1"/>
+            <stop offset="100%" stop-color="#006064"/>
+        </linearGradient>
+    </defs>
+
+    <rect width="800" height="500" fill="url(#sc-bg)"/>
+    <circle cx="620" cy="120" r="40" fill="#ffb74d"/>
+    <circle cx="620" cy="120" r="50" fill="#ffb74d" opacity="0.3"/>
+
+    <!-- Beach line -->
+    <path d="M 0 380 Q 200 360 400 380 T 800 370 L 800 410 L 0 410 Z" fill="#fff3e0"/>
+    <!-- Water -->
+    <path d="M 0 410 L 800 410 L 800 500 L 0 500 Z" fill="#0288d1"/>
+
+    <rect x="0" y="0" width="800" height="32" fill="#ffffff"/>
+    <circle cx="18" cy="16" r="5" fill="#ff5f57"/>
+    <circle cx="36" cy="16" r="5" fill="#febc2e"/>
+    <circle cx="54" cy="16" r="5" fill="#28c840"/>
+    <rect x="280" y="8" width="240" height="16" rx="4" fill="#e1f5fe"/>
+
+    <g transform="translate(40, 60)">
+        <text x="0" y="22" fill="#006064" font-family="Inter,sans-serif" font-weight="800" font-size="14" letter-spacing="2">SUNSHINE COAST</text>
+        <text x="170" y="22" fill="#006064" font-family="Inter,sans-serif" font-weight="500" font-size="11">| Property Rentals</text>
+
+        <g font-family="Inter,sans-serif" font-size="10" fill="#006064" font-weight="600">
+            <text x="490" y="22">Stays</text>
+            <text x="535" y="22">Experiences</text>
+            <text x="610" y="22">Owners</text>
+            <text x="660" y="22">Login</text>
+            <text x="700" y="22">EN ▾</text>
+        </g>
+    </g>
+
+    <g transform="translate(40, 110)">
+        <text x="0" y="0" fill="#fff" font-family="Inter,sans-serif" font-size="11" font-weight="700" letter-spacing="2" stroke="#006064" stroke-width="0.3">QUEENSLAND · AUSTRALIA</text>
+        <text x="0" y="48" fill="#fff" font-family="Georgia,serif" font-weight="700" font-size="44" letter-spacing="-1.5" stroke="#006064" stroke-width="0.5">Your perfect</text>
+        <text x="0" y="96" fill="#fff" font-family="Georgia,serif" font-style="italic" font-weight="700" font-size="44" letter-spacing="-1.5" stroke="#006064" stroke-width="0.5">coastal escape.</text>
+    </g>
+
+    <!-- Search bar -->
+    <g transform="translate(40, 240)">
+        <rect width="720" height="68" rx="34" fill="#fff"/>
+        <g font-family="Inter,sans-serif" font-size="9" fill="#006064">
+            <text x="28" y="22" font-weight="700">LOCATION</text>
+            <text x="28" y="44" font-size="13" fill="#1a1a1a" font-weight="500">Noosa · Mooloolaba</text>
+        </g>
+        <line x1="190" y1="16" x2="190" y2="52" stroke="#e0e0e0"/>
+        <g font-family="Inter,sans-serif" font-size="9" fill="#006064" transform="translate(208, 0)">
+            <text x="0" y="22" font-weight="700">CHECK IN</text>
+            <text x="0" y="44" font-size="13" fill="#1a1a1a" font-weight="500">May 24, 2026</text>
+        </g>
+        <line x1="346" y1="16" x2="346" y2="52" stroke="#e0e0e0"/>
+        <g font-family="Inter,sans-serif" font-size="9" fill="#006064" transform="translate(366, 0)">
+            <text x="0" y="22" font-weight="700">CHECK OUT</text>
+            <text x="0" y="44" font-size="13" fill="#1a1a1a" font-weight="500">May 31, 2026</text>
+        </g>
+        <line x1="510" y1="16" x2="510" y2="52" stroke="#e0e0e0"/>
+        <g font-family="Inter,sans-serif" font-size="9" fill="#006064" transform="translate(530, 0)">
+            <text x="0" y="22" font-weight="700">GUESTS</text>
+            <text x="0" y="44" font-size="13" fill="#1a1a1a" font-weight="500">2 adults</text>
+        </g>
+        <rect x="616" y="10" width="92" height="48" rx="24" fill="url(#sc-ac)"/>
+        <text x="662" y="40" text-anchor="middle" fill="#fff" font-family="Inter,sans-serif" font-weight="700" font-size="12">Search</text>
+    </g>
+
+    <!-- Property cards -->
+    <g transform="translate(40, 340)">
+        <rect width="220" height="60" rx="10" fill="#fff" opacity="0.95"/>
+        <rect width="60" height="60" rx="10" fill="#80deea"/>
+        <text x="70" y="22" fill="#006064" font-family="Inter,sans-serif" font-weight="700" font-size="12">Noosa Beach Villa</text>
+        <text x="70" y="38" fill="#5a5a5a" font-family="Inter,sans-serif" font-size="10">3BR · Ocean view</text>
+        <text x="70" y="52" fill="#00acc1" font-family="Inter,sans-serif" font-weight="700" font-size="11">$485/night</text>
+
+        <g transform="translate(240, 0)">
+            <rect width="220" height="60" rx="10" fill="#fff" opacity="0.95"/>
+            <rect width="60" height="60" rx="10" fill="#ffb74d"/>
+            <text x="70" y="22" fill="#006064" font-family="Inter,sans-serif" font-weight="700" font-size="12">Mooloolaba Pad</text>
+            <text x="70" y="38" fill="#5a5a5a" font-family="Inter,sans-serif" font-size="10">2BR · Beachfront</text>
+            <text x="70" y="52" fill="#00acc1" font-family="Inter,sans-serif" font-weight="700" font-size="11">$320/night</text>
+        </g>
+        <g transform="translate(480, 0)">
+            <rect width="220" height="60" rx="10" fill="#fff" opacity="0.95"/>
+            <rect width="60" height="60" rx="10" fill="#a5d6a7"/>
+            <text x="70" y="22" fill="#006064" font-family="Inter,sans-serif" font-weight="700" font-size="12">Hinterland Retreat</text>
+            <text x="70" y="38" fill="#5a5a5a" font-family="Inter,sans-serif" font-size="10">4BR · Mountain view</text>
+            <text x="70" y="52" fill="#00acc1" font-family="Inter,sans-serif" font-weight="700" font-size="11">$540/night</text>
+        </g>
+    </g>
+</svg>

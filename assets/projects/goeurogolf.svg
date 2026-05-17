@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+    <defs>
+        <linearGradient id="gg-sky" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#7ec0ee"/>
+            <stop offset="100%" stop-color="#c8e6c9"/>
+        </linearGradient>
+        <linearGradient id="gg-grass" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#4caf50"/>
+            <stop offset="100%" stop-color="#2e7d32"/>
+        </linearGradient>
+    </defs>
+
+    <rect width="800" height="500" fill="url(#gg-sky)"/>
+    <circle cx="640" cy="120" r="42" fill="#fff8e1" opacity="0.9"/>
+
+    <!-- Rolling hills -->
+    <path d="M 0 300 Q 200 240 400 290 T 800 280 L 800 500 L 0 500 Z" fill="#81c784"/>
+    <path d="M 0 360 Q 200 320 400 360 T 800 350 L 800 500 L 0 500 Z" fill="url(#gg-grass)"/>
+
+    <!-- Golf flag -->
+    <line x1="600" y1="180" x2="600" y2="340" stroke="#3a2a18" stroke-width="3"/>
+    <path d="M 600 180 L 660 195 L 600 215 Z" fill="#c62828"/>
+    <circle cx="600" cy="340" r="6" fill="#1a1a1a"/>
+
+    <!-- Golf ball -->
+    <circle cx="200" cy="350" r="12" fill="#ffffff"/>
+    <circle cx="196" cy="346" r="1.5" fill="#e0e0e0"/>
+    <circle cx="204" cy="348" r="1.5" fill="#e0e0e0"/>
+    <circle cx="200" cy="354" r="1.5" fill="#e0e0e0"/>
+
+    <rect x="0" y="0" width="800" height="32" fill="#ffffff"/>
+    <circle cx="18" cy="16" r="5" fill="#ff5f57"/>
+    <circle cx="36" cy="16" r="5" fill="#febc2e"/>
+    <circle cx="54" cy="16" r="5" fill="#28c840"/>
+    <rect x="280" y="8" width="240" height="16" rx="4" fill="#e8f5e9"/>
+
+    <g transform="translate(40, 60)">
+        <text x="0" y="22" fill="#fff" font-family="Georgia,serif" font-weight="700" font-size="20" letter-spacing="3">GO EURO GOLF</text>
+        <g font-family="Inter,sans-serif" font-size="10" fill="#fff" font-weight="600">
+            <text x="430" y="22">Courses</text>
+            <text x="488" y="22">Packages</text>
+            <text x="555" y="22">Destinations</text>
+            <text x="630" y="22">About</text>
+            <text x="680" y="22">Book</text>
+        </g>
+    </g>
+
+    <g transform="translate(40, 120)">
+        <text x="0" y="0" fill="#fff" font-family="Inter,sans-serif" font-size="11" font-weight="600" letter-spacing="3">LUXURY GOLF EXPERIENCES</text>
+        <text x="0" y="55" fill="#fff" font-family="Georgia,serif" font-weight="700" font-size="46" letter-spacing="-1.5">Play Europe's</text>
+        <text x="0" y="105" fill="#fff" font-family="Georgia,serif" font-style="italic" font-weight="700" font-size="46" letter-spacing="-1.5">iconic courses.</text>
+        <text x="0" y="135" fill="#fff" font-family="Inter,sans-serif" font-size="13" opacity="0.95">Curated golf holidays through Ireland, Scotland, Spain & Portugal.</text>
+        <rect x="0" y="155" width="160" height="40" rx="0" fill="#1b5e20"/>
+        <text x="80" y="180" text-anchor="middle" fill="#fff" font-family="Inter,sans-serif" font-weight="600" font-size="11">Browse Packages →</text>
+    </g>
+
+    <g transform="translate(40, 410)">
+        <rect width="220" height="70" rx="8" fill="#fff" opacity="0.95"/>
+        <text x="14" y="22" fill="#1b5e20" font-family="Inter,sans-serif" font-weight="700" font-size="10" letter-spacing="1">ST ANDREWS · SCOTLAND</text>
+        <text x="14" y="42" fill="#1a1a1a" font-family="Georgia,serif" font-weight="700" font-size="13">The Old Course Package</text>
+        <text x="14" y="60" fill="#5a5a5a" font-family="Inter,sans-serif" font-size="10">7 nights · From €2,890pp</text>
+
+        <g transform="translate(240, 0)">
+            <rect width="220" height="70" rx="8" fill="#fff" opacity="0.95"/>
+            <text x="14" y="22" fill="#1b5e20" font-family="Inter,sans-serif" font-weight="700" font-size="10" letter-spacing="1">PORTRUSH · IRELAND</text>
+            <text x="14" y="42" fill="#1a1a1a" font-family="Georgia,serif" font-weight="700" font-size="13">Royal Portrush Tour</text>
+            <text x="14" y="60" fill="#5a5a5a" font-family="Inter,sans-serif" font-size="10">5 nights · From €2,140pp</text>
+        </g>
+
+        <g transform="translate(480, 0)">
+            <rect width="220" height="70" rx="8" fill="#fff" opacity="0.95"/>
+            <text x="14" y="22" fill="#1b5e20" font-family="Inter,sans-serif" font-weight="700" font-size="10" letter-spacing="1">ALGARVE · PORTUGAL</text>
+            <text x="14" y="42" fill="#1a1a1a" font-family="Georgia,serif" font-weight="700" font-size="13">Sunshine Coast Golf</text>
+            <text x="14" y="60" fill="#5a5a5a" font-family="Inter,sans-serif" font-size="10">7 nights · From €1,690pp</text>
+        </g>
+    </g>
+</svg>
