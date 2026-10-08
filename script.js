@@ -282,7 +282,7 @@
         {
             id: 'about',
             words: ['who is', 'who are you', 'about you', 'about jason', 'about him', 'yourself', 'background', 'introduce', 'bio'],
-            reply: () => `<p>Jason Jay Ababao is a full-stack web developer based in Naawan, Philippines, with 5+ years of experience. He's shipped 13 live client sites with 4 agencies, working with clients in Australia, Canada, Ireland and beyond.</p><p>He started in graphic design, so he cares about how things look as much as how they work.</p>`,
+            reply: () => `<p>Jason Jay Ababao is a full-stack web developer based in Naawan, Philippines, with 5+ years of experience. He's shipped 14 live client sites with agencies and direct clients in Australia, Canada, Ireland, the Philippines and beyond.</p><p>He started in graphic design, so he cares about how things look as much as how they work.</p>`,
         },
         {
             id: 'skills',
@@ -310,8 +310,13 @@
             reply: () => `<p>Travel is a big one — destination pages, itinerary builders and lead-capture funnels:</p>${listProjects(byIndustry('travel'))}`,
         },
         {
+            id: 'healthcare',
+            words: ['healthcare', 'health', 'medical', 'clinic', 'dialysis', 'hospital', 'doctor', 'patient'],
+            reply: () => `<p>Healthcare work — patient-friendly sites with booking and clear contact options:</p>${listProjects(byIndustry('healthcare'))}`,
+        },
+        {
             id: 'wellness',
-            words: ['wellness', 'health', 'fitness', 'beauty', 'skincare', 'pilates'],
+            words: ['wellness', 'fitness', 'beauty', 'skincare', 'pilates'],
             reply: () => `<p>Wellness and fitness brands Jason has built for:</p>${listProjects(projects.filter(p => /wellness|fitness/.test(p.industry)))}`,
         },
         {
