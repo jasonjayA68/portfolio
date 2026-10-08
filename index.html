@@ -4,964 +4,650 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jason Jay Ababao — Full-Stack Web Developer</title>
     <meta name="description"
-        content="Jason Jay Ababao — Freelance Web Developer & Designer building modern, responsive websites and digital experiences." />
-    <title>Jason Jay Ababao — Freelance Web Developer & Designer</title>
+        content="Jason Jay Ababao — full-stack web developer building fast, conversion-focused websites on WordPress, Shopify and Laravel." />
+    <meta name="theme-color" content="#0A0B0F" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Jason Jay Ababao — Full-Stack Web Developer" />
+    <meta property="og:description"
+        content="Fast, conversion-focused websites on WordPress, Shopify and Laravel. 13 live client sites, 5+ years." />
+    <meta property="og:image" content="assets/projects/yourreformer.webp" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Apply saved / system theme before first paint to avoid a flash -->
+    <script>
+        (function () {
+            var t = null;
+            try { t = localStorage.getItem('theme'); } catch (e) {}
+            if (t !== 'light' && t !== 'dark') {
+                t = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+            }
+            document.documentElement.setAttribute('data-theme', t);
+            document.documentElement.classList.add('js');
+        })();
+    </script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap"
         rel="stylesheet" />
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
     <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
-    <!-- Cursor glow that follows mouse -->
-    <div class="cursor-glow" aria-hidden="true"></div>
+    <!-- Icon sprite -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+        <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" /></symbol>
+        <symbol id="i-external" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9" /></symbol>
+        <symbol id="i-send" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" /></symbol>
+        <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" /></symbol>
+        <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" /></symbol>
+        <symbol id="i-close" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12" /></symbol>
+        <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6" /></symbol>
+        <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6.3 6.3l2.5 2.5M15.2 15.2l2.5 2.5M6.3 17.7l2.5-2.5M15.2 8.8l2.5-2.5" /></symbol>
+        <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3 7 9 6 9-6" /></symbol>
+        <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 8.6 8.6 0 0 1-3.8-.9L3 21l1.9-5.2A8.4 8.4 0 0 1 12 3.1a8.4 8.4 0 0 1 9 8.4z" /></symbol>
+        <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z" /><circle cx="12" cy="10" r="3" /></symbol>
+        <symbol id="i-code" viewBox="0 0 24 24"><path d="m16 18 6-6-6-6M8 6l-6 6 6 6" /></symbol>
+        <symbol id="i-server" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="7" rx="2" /><rect x="3" y="13" width="18" height="7" rx="2" /><path d="M7 7.5h.01M7 16.5h.01" /></symbol>
+        <symbol id="i-layout" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M3 9h18M9 21V9" /></symbol>
+        <symbol id="i-cart" viewBox="0 0 24 24"><circle cx="9" cy="20" r="1" /><circle cx="18" cy="20" r="1" /><path d="M2 3h3l2.7 12.4a2 2 0 0 0 2 1.6h8.6a2 2 0 0 0 2-1.6L22 7H6" /></symbol>
+        <symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18M7 15l4-4 3 3 5-6" /></symbol>
+        <symbol id="i-tool" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.8-3.8a6 6 0 0 1-7.9 7.9l-6.9 6.9a2.1 2.1 0 0 1-3-3l6.9-6.9a6 6 0 0 1 7.9-7.9z" /></symbol>
+        <symbol id="i-linkedin" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z" /><circle cx="4" cy="4" r="2" /></symbol>
+        <symbol id="i-github" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.9a3.4 3.4 0 0 0-.9-2.6c3.1-.3 6.4-1.5 6.4-7A5.4 5.4 0 0 0 20 4.8 5.1 5.1 0 0 0 19.9 1S18.7.6 16 2.5a13.4 13.4 0 0 0-7 0C6.3.6 5.1 1 5.1 1A5.1 5.1 0 0 0 5 4.8a5.4 5.4 0 0 0-1.5 3.8c0 5.4 3.3 6.6 6.4 7A3.4 3.4 0 0 0 9 18.1V22" /></symbol>
+        <symbol id="i-facebook" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" /></symbol>
+        <symbol id="i-whatsapp" viewBox="0 0 24 24"><path d="M3 21l1.7-5A8.5 8.5 0 1 1 8 19.4z" /><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1.2-1.4-1.9-1-1 .8a4 4 0 0 1-2.2-2.2l.8-1-1-1.9z" /></symbol>
+    </svg>
 
-    <!-- Animated grain/noise overlay -->
-    <div class="grain" aria-hidden="true"></div>
-
-    <!-- Background gradient orbs -->
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-    <div class="orb orb-3"></div>
+    <a class="skip-link" href="#main">Skip to content</a>
 
     <!-- Navigation -->
-    <nav class="nav" id="nav">
+    <header class="nav" id="nav">
         <div class="container nav-inner">
-            <a href="#home" class="logo" aria-label="Jason Jay Ababao">
-                <img src="assets/logo.svg" alt="Jason Jay Ababao" class="logo-img" />
+            <a href="#home" class="logo" aria-label="Jason Jay Ababao — home">
+                <span class="logo-mark" aria-hidden="true">jj</span>
+                <span class="logo-text">Jason Jay <span class="logo-dim">Ababao</span></span>
             </a>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="#home" class="nav-link">Home</a></li>
-                <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#skills" class="nav-link">Skills</a></li>
-                <li><a href="#projects" class="nav-link">Projects</a></li>
-                <li><a href="#experience" class="nav-link">Experience</a></li>
-                <li><a href="#contact" class="nav-link">Contact</a></li>
-            </ul>
-            <a href="#contact" class="btn btn-primary btn-sm nav-cta">Hire Me</a>
-            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
-                <span></span><span></span><span></span>
-            </button>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="container hero-inner">
-            <div class="badge reveal">
-                <span class="pulse-dot"></span>
-                Available for freelance work
-            </div>
-            <h1 class="hero-title reveal">
-                Crafting digital
-                <span class="serif-italic gradient-text"> experiences </span>
-                that <span class="serif-italic">convert.</span>
-            </h1>
-            <p class="hero-name reveal">
-                <span class="dash"></span>
-                <span>Jason Jay Ababao · Full-Stack Web Developer</span>
-            </p>
-            <p class="hero-tagline reveal">
-                I design and build fast, polished websites for ambitious brands in
-                <strong>e-commerce</strong>, <strong>travel</strong>, <strong>wellness</strong>, and
-                <strong>professional services</strong> — across WordPress, Shopify, and Laravel.
-            </p>
-            <div class="hero-cta reveal">
-                <a href="#projects" class="btn btn-primary">
-                    View Projects
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="5" y1="12" x2="19" y2="12" />
-                        <polyline points="12 5 19 12 12 19" />
-                    </svg>
-                </a>
-                <a href="#contact" class="btn btn-ghost">Contact Me</a>
-            </div>
-            <div class="hero-stats reveal">
-                <div class="stat">
-                    <div class="stat-num" data-count="13">0</div>
-                    <div class="stat-suffix">+</div>
-                    <div class="stat-label">Live Client Sites</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-num" data-count="5">0</div>
-                    <div class="stat-suffix">+</div>
-                    <div class="stat-label">Years Experience</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-num" data-count="4">0</div>
-                    <div class="stat-label">Agencies Worked With</div>
-                </div>
-            </div>
-        </div>
-        <a href="#about" class="scroll-indicator" aria-label="Scroll down">
-            <span class="mouse"><span class="wheel"></span></span>
-        </a>
-    </section>
-
-    <!-- Marquee Brand Band -->
-    <section class="marquee-band" aria-label="Recent client work">
-        <div class="marquee-fade marquee-fade-left"></div>
-        <div class="marquee-fade marquee-fade-right"></div>
-        <div class="marquee-track">
-            <div class="marquee-content">
-                <span class="marquee-item">yourreformer.com</span>
-                <span class="marquee-dot">✦</span>
-                <span class="marquee-item">ebikegeneration.com</span>
-                <span class="marquee-dot">✦</span>
-                <span class="marquee-item">wovenpanel.com.au</span>
-                <span class="marquee-dot">✦</span>
-                <span class="marquee-item">subtleenergies.com.au</span>
-                <span class="marquee-dot">✦</span>
-                <span class="marquee-item">goeurotours.com</span>
-                <span class="marquee-dot">✦</span>
-                <span class="marquee-item">toptiervirtuals.com</span>
-                <span class="marquee-dot">✦</span>
-                <span class="marquee-item">thinktanktutors.com</span>
-                <span class="marquee-dot">✦</span>
-                <span class="marquee-item">connect.ca</span>
-                <span class="marquee-dot">✦</span>
-                <span class="marquee-item">dreamtripsireland.com</span>
-                <span class="marquee-dot">✦</span>
-                <span class="marquee-item">dreamtripsscotland.com</span>
-                <span class="marquee-dot">✦</span>
-            </div>
-            <div class="marquee-content" aria-hidden="true">
-                <span class="marquee-item">yourreformer.com</span>
-                <span class="marquee-dot">✦</span>
-                <span class="marquee-item">ebikegeneration.com</span>
-                <span class="marquee-dot">✦</span>
-                <span class="marquee-item">wovenpanel.com.au</span>
-                <span class="marquee-dot">✦</span>
-                <span class="marquee-item">subtleenergies.com.au</span>
-                <span class="marquee-dot">✦</span>
-                <span class="marquee-item">goeurotours.com</span>
-                <span class="marquee-dot">✦</span>
-                <span class="marquee-item">toptiervirtuals.com</span>
-                <span class="marquee-dot">✦</span>
-                <span class="marquee-item">thinktanktutors.com</span>
-                <span class="marquee-dot">✦</span>
-                <span class="marquee-item">connect.ca</span>
-                <span class="marquee-dot">✦</span>
-                <span class="marquee-item">dreamtripsireland.com</span>
-                <span class="marquee-dot">✦</span>
-                <span class="marquee-item">dreamtripsscotland.com</span>
-                <span class="marquee-dot">✦</span>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="section">
-        <div class="container">
-            <div class="section-head reveal">
-                <div class="section-eyebrow">
-                    <span class="section-num">01</span>
-                    <span class="section-tag">About Me</span>
-                </div>
-                <h2 class="section-title">A designer who codes — with an
-                    <span class="serif-italic">eye for detail.</span>
-                </h2>
-            </div>
-            <div class="about-grid">
-                <div class="about-text reveal">
-                    <p>
-                        With 5 years of solid experience in web development, I'm a versatile and skilled Full-Stack
-                        Developer. I'm deeply passionate about my work and committed to continuous learning — always
-                        focusing on what truly matters to deliver meaningful results for my clients.
-                    </p>
-                    <p>
-                        I've shipped live sites across WordPress, Shopify, Laravel, and custom front-end builds —
-                        partnering with agencies and direct clients across Australia, Canada, Ireland, and beyond
-                        to bridge the gap between design and code.
-                    </p>
-                    <div class="about-highlights">
-                        <div class="highlight">
-                            <div class="highlight-icon">
-                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <polyline points="20 6 9 17 4 12" />
-                                </svg>
-                            </div>
-                            <div>
-                                <h4>Full-Stack Expertise</h4>
-                                <p>Front-end to back-end — PHP, Laravel, JS, and modern CMS platforms.</p>
-                            </div>
-                        </div>
-                        <div class="highlight">
-                            <div class="highlight-icon">
-                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <polyline points="20 6 9 17 4 12" />
-                                </svg>
-                            </div>
-                            <div>
-                                <h4>E-commerce Specialist</h4>
-                                <p>Shopify, WooCommerce, Shopify Hydrogen & Liquid theme development.</p>
-                            </div>
-                        </div>
-                        <div class="highlight">
-                            <div class="highlight-icon">
-                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <polyline points="20 6 9 17 4 12" />
-                                </svg>
-                            </div>
-                            <div>
-                                <h4>Reliable Delivery</h4>
-                                <p>Clear communication, on-time launches, long-term agency partnerships.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="about-card reveal">
-                    <div class="about-card-inner">
-                        <div class="avatar avatar-photo">
-                            <img src="assets/jason-jay.jpg" alt="Jason Jay Ababao" loading="lazy" />
-                        </div>
-                        <h3>Jason Jay Ababao</h3>
-                        <p class="about-card-role">Full-Stack Web Developer</p>
-                        <ul class="about-meta">
-                            <li><span>Location</span><strong>Naawan, Philippines</strong></li>
-                            <li><span>Experience</span><strong>5+ Years</strong></li>
-                            <li><span>Specialty</span><strong>WordPress & Shopify</strong></li>
-                            <li><span>Availability</span><strong>Open for Projects</strong></li>
-                        </ul>
-                        <a href="#contact" class="btn btn-primary btn-block">Let's Work Together</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills" class="section section-alt">
-        <div class="container">
-            <div class="section-head reveal">
-                <div class="section-eyebrow">
-                    <span class="section-num">02</span>
-                    <span class="section-tag">Skills & Tools</span>
-                </div>
-                <h2 class="section-title">The stack I build with —
-                    <span class="serif-italic">end to end.</span>
-                </h2>
-                <p class="section-sub">A curated toolkit for shipping modern websites, from design to deployment.</p>
-            </div>
-            <div class="skills-grid">
-                <div class="skill-card reveal">
-                    <div class="skill-icon">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <polyline points="16 18 22 12 16 6" />
-                            <polyline points="8 6 2 12 8 18" />
-                        </svg>
-                    </div>
-                    <h3>Front-End Development</h3>
-                    <p>Responsive, accessible interfaces built with modern web standards.</p>
-                    <ul class="skill-tags">
-                        <li>HTML5</li>
-                        <li>CSS3</li>
-                        <li>JavaScript</li>
-                        <li>jQuery</li>
-                        <li>Bootstrap</li>
-                    </ul>
-                </div>
-                <div class="skill-card reveal">
-                    <div class="skill-icon">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-                            <line x1="3" y1="9" x2="21" y2="9" />
-                            <line x1="9" y1="21" x2="9" y2="9" />
-                        </svg>
-                    </div>
-                    <h3>Back-End Development</h3>
-                    <p>Server-side logic, custom APIs, and database-driven applications.</p>
-                    <ul class="skill-tags">
-                        <li>PHP</li>
-                        <li>Laravel</li>
-                        <li>SQL</li>
-                        <li>REST APIs</li>
-                    </ul>
-                </div>
-                <div class="skill-card reveal">
-                    <div class="skill-icon">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="9" cy="21" r="1" />
-                            <circle cx="20" cy="21" r="1" />
-                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
-                        </svg>
-                    </div>
-                    <h3>WordPress & Elementor</h3>
-                    <p>Custom themes, page builders, and conversion-driven landing pages.</p>
-                    <ul class="skill-tags">
-                        <li>WordPress</li>
-                        <li>Elementor Pro</li>
-                        <li>WooCommerce</li>
-                        <li>ACF</li>
-                    </ul>
-                </div>
-                <div class="skill-card reveal">
-                    <div class="skill-icon">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="13.5" cy="6.5" r="2.5" />
-                            <circle cx="17.5" cy="10.5" r="2.5" />
-                            <circle cx="8.5" cy="7.5" r="2.5" />
-                            <circle cx="6.5" cy="12.5" r="2.5" />
-                            <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" />
-                        </svg>
-                    </div>
-                    <h3>Shopify Development</h3>
-                    <p>Branded storefronts, headless commerce, and Liquid theme customization.</p>
-                    <ul class="skill-tags">
-                        <li>Shopify</li>
-                        <li>Shopify Liquid</li>
-                        <li>Shopify Hydrogen</li>
-                        <li>Apps & Integrations</li>
-                    </ul>
-                </div>
-                <div class="skill-card reveal">
-                    <div class="skill-icon">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path
-                                d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
-                            <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
-                            <line x1="12" y1="22.08" x2="12" y2="12" />
-                        </svg>
-                    </div>
-                    <h3>SEO & Marketing</h3>
-                    <p>On-page SEO, technical fixes, and marketing automation workflows.</p>
-                    <ul class="skill-tags">
-                        <li>SEO</li>
-                        <li>GoHighLevel</li>
-                        <li>Analytics</li>
-                        <li>CRO</li>
-                    </ul>
-                </div>
-                <div class="skill-card reveal">
-                    <div class="skill-icon">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path
-                                d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
-                        </svg>
-                    </div>
-                    <h3>Design & Workflow</h3>
-                    <p>From graphic design roots to modern dev workflows — versioned, organized, shipped.</p>
-                    <ul class="skill-tags">
-                        <li>Git</li>
-                        <li>Graphic Design</li>
-                        <li>Figma</li>
-                        <li>VS Code</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="section">
-        <div class="container">
-            <div class="section-head reveal">
-                <div class="section-eyebrow">
-                    <span class="section-num">03</span>
-                    <span class="section-tag">Selected Work</span>
-                </div>
-                <h2 class="section-title">Real projects.
-                    <span class="serif-italic">Live websites.</span>
-                </h2>
-                <p class="section-sub">A selection of client sites I've designed, built, or maintained across
-                    e-commerce, travel, wellness, and professional services.</p>
-            </div>
-            <div class="projects-grid">
-                <a href="https://yourreformer.com" target="_blank" rel="noopener noreferrer" class="project-card reveal"
-                    aria-label="Visit Your Reformer (opens in new tab)">
-                    <div class="project-image">
-                        <img src="assets/projects/yourreformer.svg" alt="Your Reformer homepage preview"
-                            loading="lazy" />
-                        <span class="project-tag">Shopify</span>
-                        <span class="project-launch">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                                <polyline points="15 3 21 3 21 9" />
-                                <line x1="10" y1="14" x2="21" y2="3" />
-                            </svg>
-                        </span>
-                    </div>
-                    <div class="project-body">
-                        <h3>Your Reformer</h3>
-                        <p>Premium Pilates reformer e-commerce store built on Shopify, featuring product configurators,
-                            subscriptions, and integrated class booking.</p>
-                        <div class="project-meta">
-                            <span>E-commerce</span><span>•</span><span>Shopify</span>
-                        </div>
-                    </div>
-                </a>
-                <a href="https://ebikegeneration.com" target="_blank" rel="noopener noreferrer"
-                    class="project-card reveal" aria-label="Visit Ebike Generation (opens in new tab)">
-                    <div class="project-image">
-                        <img src="assets/projects/ebikegeneration.svg" alt="Ebike Generation homepage preview"
-                            loading="lazy" />
-                        <span class="project-tag">Shopify</span>
-                        <span class="project-launch">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                                <polyline points="15 3 21 3 21 9" />
-                                <line x1="10" y1="14" x2="21" y2="3" />
-                            </svg>
-                        </span>
-                    </div>
-                    <div class="project-body">
-                        <h3>Ebike Generation</h3>
-                        <p>High-performance e-bike storefront with custom product pages, financing integrations, and a
-                            bold motion-driven brand experience.</p>
-                        <div class="project-meta">
-                            <span>E-commerce</span><span>•</span><span>Shopify Liquid</span>
-                        </div>
-                    </div>
-                </a>
-                <a href="https://wovenpanel.com.au" target="_blank" rel="noopener noreferrer"
-                    class="project-card reveal" aria-label="Visit Woven Panel (opens in new tab)">
-                    <div class="project-image">
-                        <img src="assets/projects/wovenpanel.svg" alt="Woven Panel homepage preview" loading="lazy" />
-                        <span class="project-tag">Shopify</span>
-                        <span class="project-launch">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                                <polyline points="15 3 21 3 21 9" />
-                                <line x1="10" y1="14" x2="21" y2="3" />
-                            </svg>
-                        </span>
-                    </div>
-                    <div class="project-body">
-                        <h3>Woven Panel</h3>
-                        <p>Australian acoustic timber-panel brand site built on WordPress with WooCommerce, custom
-                            calculators, and a trade quoting workflow.</p>
-                        <div class="project-meta">
-                            <span>Shopify</span><span>•</span><span>E-Commerce</span>
-                        </div>
-                    </div>
-                </a>
-                <a href="https://subtleenergies.com.au" target="_blank" rel="noopener noreferrer"
-                    class="project-card reveal" aria-label="Visit Subtle Energies (opens in new tab)">
-                    <div class="project-image">
-                        <img src="assets/projects/subtleenergies.svg" alt="Subtle Energies homepage preview"
-                            loading="lazy" />
-                        <span class="project-tag">Shopify</span>
-                        <span class="project-launch">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                                <polyline points="15 3 21 3 21 9" />
-                                <line x1="10" y1="14" x2="21" y2="3" />
-                            </svg>
-                        </span>
-                    </div>
-                    <div class="project-body">
-                        <h3>Subtle Energies</h3>
-                        <p>Established Ayurvedic aromatherapy brand site with wholesale portal, training course
-                            platform, and global shipping built on WooCommerce.</p>
-                        <div class="project-meta">
-                            <span>Wellness</span><span>•</span><span>Shopify</span>
-                        </div>
-                    </div>
-                </a>
-                <a href="https://goeurotours.com" target="_blank" rel="noopener noreferrer" class="project-card reveal"
-                    aria-label="Visit Go Euro Tours (opens in new tab)">
-                    <div class="project-image">
-                        <img src="assets/projects/goeurotours.svg" alt="Go Euro Tours homepage preview"
-                            loading="lazy" />
-                        <span class="project-tag">WordPress</span>
-                        <span class="project-launch">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                                <polyline points="15 3 21 3 21 9" />
-                                <line x1="10" y1="14" x2="21" y2="3" />
-                            </svg>
-                        </span>
-                    </div>
-                    <div class="project-body">
-                        <h3>Go Euro Tours</h3>
-                        <p>Curated European tour operator site with destination pages, itinerary builder, lead capture,
-                            and bookings — built on WordPress + Elementor.</p>
-                        <div class="project-meta">
-                            <span>Travel</span><span>•</span><span>WordPress</span>
-                        </div>
-                    </div>
-                </a>
-                <a href="https://toptiervirtuals.com" target="_blank" rel="noopener noreferrer"
-                    class="project-card reveal" aria-label="Visit TopTier Virtuals (opens in new tab)">
-                    <div class="project-image">
-                        <img src="assets/projects/toptiervirtuals.svg" alt="TopTier Virtuals homepage preview"
-                            loading="lazy" />
-                        <span class="project-tag">WordPress</span>
-                        <span class="project-launch">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                                <polyline points="15 3 21 3 21 9" />
-                                <line x1="10" y1="14" x2="21" y2="3" />
-                            </svg>
-                        </span>
-                    </div>
-                    <div class="project-body">
-                        <h3>TopTier Virtuals</h3>
-                        <p>Lead-generation site for a virtual assistant agency with funnels, CRM-integrated booking,
-                            and conversion-optimized landing pages.</p>
-                        <div class="project-meta">
-                            <span>Lead Gen</span><span>•</span><span>WordPress</span>
-                        </div>
-                    </div>
-                </a>
-            </div>
-
-            <!-- Hidden extra projects (revealed via Show More button) -->
-            <div class="projects-grid projects-extra" id="projectsExtra" hidden>
-                <a href="https://thinktanktutors.com" target="_blank" rel="noopener noreferrer"
-                    class="project-card reveal" aria-label="Visit Think Tank Tutors (opens in new tab)">
-                    <div class="project-image">
-                        <img src="assets/projects/thinktanktutors.svg" alt="Think Tank Tutors homepage preview" loading="lazy" />
-                        <span class="project-tag">Education</span>
-                        <span class="project-launch">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                        </span>
-                    </div>
-                    <div class="project-body">
-                        <h3>Think Tank Tutors</h3>
-                        <p>Online tutoring platform with subject-matched tutor booking, SAT prep funnels, and parent dashboards built on WordPress.</p>
-                        <div class="project-meta">
-                            <span>Education</span><span>•</span><span>WordPress</span>
-                        </div>
-                    </div>
-                </a>
-                <a href="https://goeurogolf.com" target="_blank" rel="noopener noreferrer"
-                    class="project-card reveal" aria-label="Visit Go Euro Golf (opens in new tab)">
-                    <div class="project-image">
-                        <img src="assets/projects/goeurogolf.svg" alt="Go Euro Golf homepage preview" loading="lazy" />
-                        <span class="project-tag">WordPress</span>
-                        <span class="project-launch">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                        </span>
-                    </div>
-                    <div class="project-body">
-                        <h3>Go Euro Golf</h3>
-                        <p>Luxury golf-tour operator site with course directories, package builders, and an enquiry-to-booking flow for European destinations.</p>
-                        <div class="project-meta">
-                            <span>Travel</span><span>•</span><span>Elementor</span>
-                        </div>
-                    </div>
-                </a>
-                <a href="https://goirishtours.com" target="_blank" rel="noopener noreferrer"
-                    class="project-card reveal" aria-label="Visit Go Irish Tours (opens in new tab)">
-                    <div class="project-image">
-                        <img src="assets/projects/goirishtours.svg" alt="Go Irish Tours homepage preview" loading="lazy" />
-                        <span class="project-tag">WordPress</span>
-                        <span class="project-launch">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                        </span>
-                    </div>
-                    <div class="project-body">
-                        <h3>Go Irish Tours</h3>
-                        <p>Private Ireland tour company site with destination guides, custom itinerary requests, and review integrations — built on Elementor.</p>
-                        <div class="project-meta">
-                            <span>Travel</span><span>•</span><span>Elementor</span>
-                        </div>
-                    </div>
-                </a>
-                <a href="https://connect.ca" target="_blank" rel="noopener noreferrer"
-                    class="project-card reveal" aria-label="Visit Connect.ca (opens in new tab)">
-                    <div class="project-image">
-                        <img src="assets/projects/connect-ca.svg" alt="Connect.ca homepage preview" loading="lazy" />
-                        <span class="project-tag">Telecom</span>
-                        <span class="project-launch">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                        </span>
-                    </div>
-                    <div class="project-body">
-                        <h3>Connect.ca</h3>
-                        <p>Canadian connectivity provider site with plan comparison tools, sign-up funnels, and self-serve account workflows.</p>
-                        <div class="project-meta">
-                            <span>Telecom</span><span>•</span><span>WordPress</span>
-                        </div>
-                    </div>
-                </a>
-                <a href="https://sunshinecoastpropertyrentals.com" target="_blank" rel="noopener noreferrer"
-                    class="project-card reveal" aria-label="Visit Sunshine Coast Property Rentals (opens in new tab)">
-                    <div class="project-image">
-                        <img src="assets/projects/sunshinecoast.svg" alt="Sunshine Coast Property Rentals homepage preview" loading="lazy" />
-                        <span class="project-tag">Property</span>
-                        <span class="project-launch">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                        </span>
-                    </div>
-                    <div class="project-body">
-                        <h3>Sunshine Coast Rentals</h3>
-                        <p>Holiday rental site for Queensland's Sunshine Coast with availability search, property listings, and integrated booking management.</p>
-                        <div class="project-meta">
-                            <span>Property</span><span>•</span><span>WordPress</span>
-                        </div>
-                    </div>
-                </a>
-                <a href="https://dreamtripsireland.com" target="_blank" rel="noopener noreferrer"
-                    class="project-card reveal" aria-label="Visit Dream Trips Ireland (opens in new tab)">
-                    <div class="project-image">
-                        <img src="assets/projects/dreamtripsireland.svg" alt="Dream Trips Ireland homepage preview" loading="lazy" />
-                        <span class="project-tag">WordPress</span>
-                        <span class="project-launch">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                        </span>
-                    </div>
-                    <div class="project-body">
-                        <h3>Dream Trips Ireland</h3>
-                        <p>Bespoke Ireland travel planner site with self-drive and guided itineraries, lead capture, and a story-rich destination experience.</p>
-                        <div class="project-meta">
-                            <span>Travel</span><span>•</span><span>WordPress</span>
-                        </div>
-                    </div>
-                </a>
-                <a href="https://dreamtripsscotland.com" target="_blank" rel="noopener noreferrer"
-                    class="project-card reveal" aria-label="Visit Dream Trips Scotland (opens in new tab)">
-                    <div class="project-image">
-                        <img src="assets/projects/dreamtripsscotland.svg" alt="Dream Trips Scotland homepage preview" loading="lazy" />
-                        <span class="project-tag">WordPress</span>
-                        <span class="project-launch">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                        </span>
-                    </div>
-                    <div class="project-body">
-                        <h3>Dream Trips Scotland</h3>
-                        <p>Scotland travel brand site featuring Highland tours, castle itineraries, and whisky-trail packages with dramatic visual storytelling.</p>
-                        <div class="project-meta">
-                            <span>Travel</span><span>•</span><span>WordPress</span>
-                        </div>
-                    </div>
-                </a>
-            </div>
-
-            <div class="show-more-wrap reveal">
-                <button type="button" id="showMoreProjects" class="btn btn-ghost show-more-btn" aria-expanded="false" aria-controls="projectsExtra">
-                    <span class="show-more-text">Show More Projects</span>
-                    <span class="show-more-count">+7</span>
-                    <svg class="show-more-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            <nav aria-label="Primary">
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#skills" class="nav-link">Skills</a></li>
+                    <li><a href="#projects" class="nav-link">Work</a></li>
+                    <li><a href="#experience" class="nav-link">Experience</a></li>
+                    <li><a href="#process" class="nav-link">Process</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="nav-actions">
+                <button type="button" class="icon-btn theme-toggle" id="themeToggle" aria-label="Switch to light mode">
+                    <svg class="icon icon-sun"><use href="#i-sun" /></svg>
+                    <svg class="icon icon-moon"><use href="#i-moon" /></svg>
+                </button>
+                <a href="#contact" class="btn btn-primary btn-sm nav-cta">Hire me</a>
+                <button type="button" class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false"
+                    aria-controls="navLinks">
+                    <span></span><span></span>
                 </button>
             </div>
         </div>
-    </section>
+    </header>
 
-    <!-- Editorial Quote -->
-    <section class="quote-section" aria-label="Working principle">
-        <div class="container">
-            <div class="quote-inner reveal">
-                <span class="quote-mark" aria-hidden="true">“</span>
-                <blockquote class="quote-text">
-                    Good design is honest. It's <span class="serif-italic">obvious</span> once you see it,
-                    but takes <span class="serif-italic">discipline</span> to ship.
-                </blockquote>
-                <div class="quote-attr">
-                    <span class="quote-dash"></span>
-                    <span>My north star, on every project</span>
+    <main id="main">
+        <!-- Hero -->
+        <section id="home" class="hero">
+            <div class="hero-grid" aria-hidden="true"></div>
+            <div class="hero-glow" aria-hidden="true"></div>
+            <div class="container hero-inner">
+                <div class="hero-copy">
+                    <p class="status-pill reveal"><span class="status-dot"></span>Available for freelance work</p>
+                    <h1 class="hero-title reveal">Crafting digital <span class="accent-text">experiences</span> that
+                        convert.</h1>
+                    <p class="hero-name reveal"><span class="mono">Jason Jay Ababao</span> · Full-Stack Web Developer</p>
+                    <p class="hero-tagline reveal">
+                        I design and build fast, polished websites for ambitious brands in e-commerce, travel,
+                        wellness and professional services — across WordPress, Shopify and Laravel.
+                    </p>
+                    <div class="hero-cta reveal">
+                        <a href="#projects" class="btn btn-primary">View projects <svg class="icon"><use href="#i-arrow" /></svg></a>
+                        <a href="#contact" class="btn btn-ghost">Contact me</a>
+                    </div>
+                    <dl class="hero-stats reveal">
+                        <div class="stat"><dt>Live client sites</dt><dd><span data-count="13">13</span>+</dd></div>
+                        <div class="stat"><dt>Years experience</dt><dd><span data-count="5">5</span>+</dd></div>
+                        <div class="stat"><dt>Agencies</dt><dd><span data-count="4">4</span></dd></div>
+                    </dl>
                 </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Experience Section -->
-    <section id="experience" class="section section-alt">
-        <div class="container">
-            <div class="section-head reveal">
-                <div class="section-eyebrow">
-                    <span class="section-num">04</span>
-                    <span class="section-tag">Experience</span>
-                </div>
-                <h2 class="section-title">A timeline of
-                    <span class="serif-italic">my journey.</span>
-                </h2>
-            </div>
-            <div class="timeline">
-                <div class="timeline-item reveal">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <span class="timeline-date">Apr 2023 — Oct 2025</span>
-                        <h3>WordPress Developer</h3>
-                        <span class="timeline-company">DG Venture LTD</span>
-                        <p>Lead WordPress developer on client sites including Ebike Generation, Subtle Energies, Go Euro
-                            Tours, Sunshine Coast Property Rentals, and the Dream Trips Ireland/Scotland brands —
-                            custom themes, plugin integrations, and ongoing performance work.</p>
+                <!-- Terminal / assistant entry point -->
+                <div class="terminal reveal" aria-label="Ask my portfolio assistant">
+                    <div class="terminal-bar">
+                        <span class="terminal-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                        <span class="terminal-title">jason@portfolio: ~</span>
+                        <span class="terminal-badge">assistant</span>
                     </div>
-                </div>
-                <div class="timeline-item reveal">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <span class="timeline-date">Apr 2021 — Apr 2023</span>
-                        <h3>WordPress & Shopify Developer</h3>
-                        <span class="timeline-company">ESTRAT360</span>
-                        <p>Built and customized WordPress and Shopify sites for international clients including Think
-                            Tank Tutors, Go Euro Golf, Go Irish Tours, Woven Panel, Connect.ca, TopTier Virtuals, and
-                            Your Reformer.</p>
+                    <div class="terminal-body" id="terminalBody">
+                        <p class="t-line t-cmd"><span class="t-prompt">$</span> whoami</p>
+                        <p class="t-line">Full-stack web developer · 5+ years</p>
+                        <p class="t-line"><span class="t-key">stack</span> WordPress · Shopify · Laravel</p>
+                        <p class="t-line"><span class="t-key">shipped</span> 13 live client sites · 4 agencies</p>
+                        <p class="t-line"><span class="t-key">status</span> <span class="t-ok">available for freelance ✓</span></p>
                     </div>
-                </div>
-                <div class="timeline-item reveal">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <span class="timeline-date">Aug 2021 — Dec 2021</span>
-                        <h3>SEO Associate</h3>
-                        <span class="timeline-company">Somenowell Marketing LTD</span>
-                        <p>Handled on-page SEO, technical audits, and content optimization for marketing clients —
-                            sharpening the SEO instincts I now bring to every site I build.</p>
-                    </div>
-                </div>
-                <div class="timeline-item reveal">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <span class="timeline-date">Apr 2020 — Apr 2021</span>
-                        <h3>Graphic Designer</h3>
-                        <span class="timeline-company">Estensil Prints and Ads</span>
-                        <p>Designed brand assets, print collateral, and digital marketing materials — the visual
-                            foundation that informs my web design work today.</p>
+                    <form class="terminal-ask" id="heroAsk" autocomplete="off">
+                        <label for="heroAskInput" class="sr-only">Ask about my work</label>
+                        <span class="t-prompt" aria-hidden="true">›</span>
+                        <input type="text" id="heroAskInput" placeholder="Ask about my work…" maxlength="200" />
+                        <button type="submit" class="terminal-send" aria-label="Ask">
+                            <svg class="icon"><use href="#i-send" /></svg>
+                        </button>
+                    </form>
+                    <div class="terminal-hints">
+                        <button type="button" class="hint-chip" data-ask="What Shopify work have you done?">Shopify work?</button>
+                        <button type="button" class="hint-chip" data-ask="Are you available?">Available?</button>
+                        <button type="button" class="hint-chip" data-ask="How do you work?">Your process?</button>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- Process Section -->
-    <section id="process" class="section">
-        <div class="container">
-            <div class="section-head reveal">
-                <div class="section-eyebrow">
-                    <span class="section-num">05</span>
-                    <span class="section-tag">How I Work</span>
-                </div>
-                <h2 class="section-title">A clear process,
-                    <span class="serif-italic">no surprises.</span>
-                </h2>
-                <p class="section-sub">From first call to launch day — a calm, organized workflow that keeps clients in
-                    the loop and projects on time.</p>
+            <div class="container">
+                <p class="client-strip reveal">
+                    <span class="mono-label">Shipped for</span>
+                    <span>yourreformer.com</span><span>ebikegeneration.com</span><span>wovenpanel.com.au</span>
+                    <span>subtleenergies.com.au</span><span>goeurotours.com</span><span>thinktanktutors.com</span>
+                    <span>connect.ca</span><span>dreamtripsireland.com</span>
+                </p>
             </div>
-            <div class="process-grid">
-                <article class="process-card reveal">
-                    <div class="process-num">01</div>
-                    <h3>Discovery</h3>
-                    <p>We start with a free call to understand your goals, audience, and the business outcomes
-                        the site needs to drive. You get a written scope before we move on.</p>
-                    <ul class="process-list">
-                        <li>Goal alignment</li>
-                        <li>Audience & content audit</li>
-                        <li>Scope & timeline</li>
-                    </ul>
-                </article>
-                <article class="process-card reveal">
-                    <div class="process-num">02</div>
-                    <h3>Design</h3>
-                    <p>I translate the brief into a clean, on-brand design — wireframes first, then high-fidelity
-                        mockups you can react to before a single line of code is written.</p>
-                    <ul class="process-list">
-                        <li>Wireframes & layout</li>
-                        <li>Typography & color</li>
-                        <li>Responsive mockups</li>
-                    </ul>
-                </article>
-                <article class="process-card reveal">
-                    <div class="process-num">03</div>
-                    <h3>Build</h3>
-                    <p>Approved designs become a fast, accessible website — WordPress, Shopify, or custom.
-                        Modular, easy to maintain, and built to scale with your business.</p>
-                    <ul class="process-list">
-                        <li>Pixel-perfect dev</li>
-                        <li>CMS configuration</li>
-                        <li>Integrations & forms</li>
-                    </ul>
-                </article>
-                <article class="process-card reveal">
-                    <div class="process-num">04</div>
-                    <h3>Launch</h3>
-                    <p>QA, SEO basics, analytics, and performance pass — then we ship. You get docs, a handover
-                        video, and post-launch support so you're never stuck.</p>
-                    <ul class="process-list">
-                        <li>QA & cross-browser</li>
-                        <li>SEO & analytics setup</li>
-                        <li>Handover & training</li>
-                    </ul>
-                </article>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="section">
-        <div class="container">
-            <div class="section-head reveal">
-                <div class="section-eyebrow">
-                    <span class="section-num">06</span>
-                    <span class="section-tag">Get in Touch</span>
+        <!-- About -->
+        <section id="about" class="section">
+            <div class="container">
+                <header class="section-head reveal">
+                    <p class="eyebrow"><span>01</span> about</p>
+                    <h2 class="section-title">A designer who codes — with an eye for detail.</h2>
+                </header>
+                <div class="about-grid">
+                    <div class="about-text reveal">
+                        <p>
+                            With 5 years of solid experience in web development, I'm a versatile and skilled Full-Stack
+                            Developer. I'm deeply passionate about my work and committed to continuous learning —
+                            always focusing on what truly matters to deliver meaningful results for my clients.
+                        </p>
+                        <p>
+                            I've shipped live sites across WordPress, Shopify, Laravel and custom front-end builds —
+                            partnering with agencies and direct clients across Australia, Canada, Ireland and beyond
+                            to bridge the gap between design and code.
+                        </p>
+                        <ul class="highlights">
+                            <li class="card highlight">
+                                <h3>Full-stack expertise</h3>
+                                <p>Front-end to back-end — PHP, Laravel, JS and modern CMS platforms.</p>
+                            </li>
+                            <li class="card highlight">
+                                <h3>E-commerce specialist</h3>
+                                <p>Shopify, WooCommerce, Shopify Hydrogen and Liquid theme development.</p>
+                            </li>
+                            <li class="card highlight">
+                                <h3>Reliable delivery</h3>
+                                <p>Clear communication, on-time launches, long-term agency partnerships.</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <aside class="card profile reveal">
+                        <img src="assets/jason-jay.jpg" alt="Portrait of Jason Jay Ababao" class="profile-photo"
+                            width="320" height="320" loading="lazy" />
+                        <h3>Jason Jay Ababao</h3>
+                        <p class="profile-role">Full-Stack Web Developer</p>
+                        <dl class="profile-meta">
+                            <div><dt>location</dt><dd>Naawan, Philippines</dd></div>
+                            <div><dt>experience</dt><dd>5+ years</dd></div>
+                            <div><dt>specialty</dt><dd>WordPress &amp; Shopify</dd></div>
+                            <div><dt>availability</dt><dd class="ok">Open for projects</dd></div>
+                        </dl>
+                        <a href="#contact" class="btn btn-primary btn-block">Let's work together</a>
+                    </aside>
                 </div>
-                <h2 class="section-title">Let's build
-                    <span class="serif-italic">something great.</span>
-                </h2>
-                <p class="section-sub">Have a project in mind or need a website refresh? I'd love to hear about it.</p>
             </div>
-            <div class="contact-grid">
-                <div class="contact-info reveal">
-                    <h3>Get in touch</h3>
-                    <p>Whether you're launching something new or improving what you already have — I'm here to help.
-                        Reach out and let's talk.</p>
-                    <div class="contact-list">
-                        <a href="mailto:hello@example.com" class="contact-item">
-                            <span class="contact-icon">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path
-                                        d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-                                    <polyline points="22,6 12,13 2,6" />
-                                </svg>
-                            </span>
-                            <div>
-                                <span class="contact-label">Email</span>
-                                <strong>jasonjay.ababao1968@gmail.com</strong>
-                            </div>
-                        </a>
-                        <a href="https://wa.me/639674298088" target="_blank" rel="noopener" class="contact-item">
-                            <span class="contact-icon">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path
-                                        d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
-                                </svg>
-                            </span>
-                            <div>
-                                <span class="contact-label">WhatsApp</span>
-                                <strong>+63 967 429 8088</strong>
-                            </div>
-                        </a>
-                        <!-- <a href="https://jasonjayababao.site/" target="_blank" rel="noopener" class="contact-item">
-                            <span class="contact-icon">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <circle cx="12" cy="12" r="10" />
-                                    <line x1="2" y1="12" x2="22" y2="12" />
-                                    <path
-                                        d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-                                </svg>
-                            </span>
-                            <div>
-                                <span class="contact-label">Website</span>
-                                <strong>jasonjayababao.site</strong>
-                            </div>
-                        </a> -->
-                        <div class="contact-item static">
-                            <span class="contact-icon">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                                    <circle cx="12" cy="10" r="3" />
-                                </svg>
-                            </span>
-                            <div>
-                                <span class="contact-label">Location</span>
-                                <strong>Naawan, Misamis Oriental, PH</strong>
-                            </div>
+        </section>
+
+        <!-- Skills -->
+        <section id="skills" class="section section-alt">
+            <div class="container">
+                <header class="section-head reveal">
+                    <p class="eyebrow"><span>02</span> skills &amp; tools</p>
+                    <h2 class="section-title">The stack I build with — end to end.</h2>
+                    <p class="section-sub">A curated toolkit for shipping modern websites, from design to deployment.</p>
+                </header>
+                <div class="skills-grid">
+                    <article class="card skill reveal">
+                        <svg class="icon skill-icon"><use href="#i-code" /></svg>
+                        <h3>Front-end development</h3>
+                        <p>Responsive, accessible interfaces built with modern web standards.</p>
+                        <ul class="tags"><li>HTML5</li><li>CSS3</li><li>JavaScript</li><li>jQuery</li><li>Bootstrap</li></ul>
+                    </article>
+                    <article class="card skill reveal">
+                        <svg class="icon skill-icon"><use href="#i-server" /></svg>
+                        <h3>Back-end development</h3>
+                        <p>Server-side logic, custom APIs and database-driven applications.</p>
+                        <ul class="tags"><li>PHP</li><li>Laravel</li><li>SQL</li><li>REST APIs</li></ul>
+                    </article>
+                    <article class="card skill reveal">
+                        <svg class="icon skill-icon"><use href="#i-layout" /></svg>
+                        <h3>WordPress &amp; Elementor</h3>
+                        <p>Custom themes, page builders and conversion-driven landing pages.</p>
+                        <ul class="tags"><li>WordPress</li><li>Elementor Pro</li><li>WooCommerce</li><li>ACF</li></ul>
+                    </article>
+                    <article class="card skill reveal">
+                        <svg class="icon skill-icon"><use href="#i-cart" /></svg>
+                        <h3>Shopify development</h3>
+                        <p>Branded storefronts, headless commerce and Liquid theme customization.</p>
+                        <ul class="tags"><li>Shopify</li><li>Liquid</li><li>Hydrogen</li><li>Apps &amp; integrations</li></ul>
+                    </article>
+                    <article class="card skill reveal">
+                        <svg class="icon skill-icon"><use href="#i-chart" /></svg>
+                        <h3>SEO &amp; marketing</h3>
+                        <p>On-page SEO, technical fixes and marketing automation workflows.</p>
+                        <ul class="tags"><li>SEO</li><li>GoHighLevel</li><li>Analytics</li><li>CRO</li></ul>
+                    </article>
+                    <article class="card skill reveal">
+                        <svg class="icon skill-icon"><use href="#i-tool" /></svg>
+                        <h3>Design &amp; workflow</h3>
+                        <p>From graphic design roots to modern dev workflows — versioned, organized, shipped.</p>
+                        <ul class="tags"><li>Git</li><li>Graphic design</li><li>Figma</li><li>VS Code</li></ul>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects -->
+        <section id="projects" class="section">
+            <div class="container">
+                <header class="section-head reveal">
+                    <p class="eyebrow"><span>03</span> selected work</p>
+                    <h2 class="section-title">Real projects. Live websites.</h2>
+                    <p class="section-sub">A selection of client sites I've designed, built or maintained across
+                        e-commerce, travel, wellness and professional services.</p>
+                </header>
+
+                <div class="projects-grid">
+                    <article class="card project reveal" data-platform="shopify" data-industry="e-commerce fitness"
+                        data-keywords="reformer pilates">
+                        <div class="project-shot"><img src="assets/projects/yourreformer.webp" alt="Your Reformer homepage" width="1440" height="900" loading="lazy" /></div>
+                        <div class="project-body">
+                            <h3>Your Reformer</h3>
+                            <p>Premium Pilates reformer e-commerce store built on Shopify, featuring product
+                                configurators, subscriptions and integrated class booking.</p>
+                            <ul class="tags"><li>Shopify</li><li>E-commerce</li></ul>
+                            <a href="https://yourreformer.com" class="project-link" target="_blank" rel="noopener noreferrer">Live site<span class="sr-only"> — Your Reformer (opens in new tab)</span> <svg class="icon"><use href="#i-external" /></svg></a>
                         </div>
-                    </div>
-                    <div class="socials">
-                        <a href="#" aria-label="LinkedIn" class="social">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z" />
-                                <rect x="2" y="9" width="4" height="12" />
-                                <circle cx="4" cy="4" r="2" />
-                            </svg>
-                        </a>
-                        <a href="#" aria-label="GitHub" class="social">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path
-                                    d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
-                            </svg>
-                        </a>
-                        <a href="#" aria-label="Instagram" class="social">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
-                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
-                            </svg>
-                        </a>
-                        <a href="#" aria-label="Twitter" class="social">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path
-                                    d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z" />
-                            </svg>
-                        </a>
-                    </div>
+                    </article>
+                    <article class="card project reveal" data-platform="shopify" data-industry="e-commerce"
+                        data-keywords="ebike e-bike ebikes">
+                        <div class="project-shot"><img src="assets/projects/ebikegeneration.webp" alt="Ebike Generation homepage" width="1440" height="900" loading="lazy" /></div>
+                        <div class="project-body">
+                            <h3>Ebike Generation</h3>
+                            <p>High-performance e-bike storefront with custom product pages, financing integrations and a
+                                bold motion-driven brand experience.</p>
+                            <ul class="tags"><li>Shopify Liquid</li><li>E-commerce</li></ul>
+                            <a href="https://ebikegeneration.com" class="project-link" target="_blank" rel="noopener noreferrer">Live site<span class="sr-only"> — Ebike Generation (opens in new tab)</span> <svg class="icon"><use href="#i-external" /></svg></a>
+                        </div>
+                    </article>
+                    <article class="card project reveal" data-platform="shopify" data-industry="e-commerce architecture"
+                        data-keywords="woven wovenpanel">
+                        <div class="project-shot"><img src="assets/projects/wovenpanel.webp" alt="Woven Panel homepage" width="1440" height="900" loading="lazy" /></div>
+                        <div class="project-body">
+                            <h3>Woven Panel</h3>
+                            <p>Australian architectural mesh brand site built on Shopify, with product ranges, a project
+                                gallery and CPD presentation requests for architects.</p>
+                            <ul class="tags"><li>Shopify</li><li>E-commerce</li></ul>
+                            <a href="https://wovenpanel.com.au" class="project-link" target="_blank" rel="noopener noreferrer">Live site<span class="sr-only"> — Woven Panel (opens in new tab)</span> <svg class="icon"><use href="#i-external" /></svg></a>
+                        </div>
+                    </article>
+                    <article class="card project reveal" data-platform="shopify" data-industry="wellness e-commerce"
+                        data-keywords="subtle ayurvedic aromatherapy">
+                        <div class="project-shot"><img src="assets/projects/subtleenergies.webp" alt="Subtle Energies homepage" width="1440" height="900" loading="lazy" /></div>
+                        <div class="project-body">
+                            <h3>Subtle Energies</h3>
+                            <p>Established Ayurvedic aromatherapy brand site with wholesale portal, training course
+                                platform and global shipping built on Shopify.</p>
+                            <ul class="tags"><li>Shopify</li><li>Wellness</li></ul>
+                            <a href="https://subtleenergies.com.au" class="project-link" target="_blank" rel="noopener noreferrer">Live site<span class="sr-only"> — Subtle Energies (opens in new tab)</span> <svg class="icon"><use href="#i-external" /></svg></a>
+                        </div>
+                    </article>
+                    <article class="card project reveal" data-platform="wordpress elementor" data-industry="travel"
+                        data-keywords="goeurotours">
+                        <div class="project-shot"><img src="assets/projects/goeurotours.webp" alt="Go Euro Tours homepage" width="1440" height="900" loading="lazy" /></div>
+                        <div class="project-body">
+                            <h3>Go Euro Tours</h3>
+                            <p>Curated European tour operator site with destination pages, itinerary builder, lead capture
+                                and bookings — built on WordPress + Elementor.</p>
+                            <ul class="tags"><li>WordPress</li><li>Elementor</li><li>Travel</li></ul>
+                            <a href="https://goeurotours.com" class="project-link" target="_blank" rel="noopener noreferrer">Live site<span class="sr-only"> — Go Euro Tours (opens in new tab)</span> <svg class="icon"><use href="#i-external" /></svg></a>
+                        </div>
+                    </article>
+                    <article class="card project reveal" data-platform="wordpress" data-industry="lead gen services"
+                        data-keywords="toptier">
+                        <div class="project-shot"><img src="assets/projects/toptiervirtuals.webp" alt="TopTier Virtuals homepage" width="1440" height="900" loading="lazy" /></div>
+                        <div class="project-body">
+                            <h3>TopTier Virtuals</h3>
+                            <p>Lead-generation site for a virtual assistant agency with funnels, CRM-integrated booking and
+                                conversion-optimized landing pages.</p>
+                            <ul class="tags"><li>WordPress</li><li>Lead gen</li></ul>
+                            <a href="https://toptiervirtuals.com" class="project-link" target="_blank" rel="noopener noreferrer">Live site<span class="sr-only"> — TopTier Virtuals (opens in new tab)</span> <svg class="icon"><use href="#i-external" /></svg></a>
+                        </div>
+                    </article>
                 </div>
-                <form class="contact-form reveal" id="contactForm" novalidate>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" id="name" name="name" placeholder="Your full name" required />
+
+                <!-- Extra projects (revealed via Show More) -->
+                <div class="projects-grid projects-extra" id="projectsExtra" hidden>
+                    <article class="card project" data-platform="wordpress" data-industry="education"
+                        data-keywords="thinktank">
+                        <div class="project-shot"><img src="assets/projects/thinktanktutors.webp" alt="Think Tank Tutors homepage" width="1440" height="900" loading="lazy" /></div>
+                        <div class="project-body">
+                            <h3>Think Tank Tutors</h3>
+                            <p>Online tutoring platform with subject-matched tutor booking, SAT prep funnels and parent
+                                dashboards built on WordPress.</p>
+                            <ul class="tags"><li>WordPress</li><li>Education</li></ul>
+                            <a href="https://thinktanktutors.com" class="project-link" target="_blank" rel="noopener noreferrer">Live site<span class="sr-only"> — Think Tank Tutors (opens in new tab)</span> <svg class="icon"><use href="#i-external" /></svg></a>
                         </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" placeholder="JhonDoe@example.com" required />
+                    </article>
+                    <article class="card project" data-platform="wordpress elementor" data-industry="travel"
+                        data-keywords="goeurogolf">
+                        <div class="project-shot"><img src="assets/projects/goeurogolf.webp" alt="Go Euro Golf homepage" width="1440" height="900" loading="lazy" /></div>
+                        <div class="project-body">
+                            <h3>Go Euro Golf</h3>
+                            <p>Luxury golf-tour operator site with course directories, package builders and an
+                                enquiry-to-booking flow for European destinations.</p>
+                            <ul class="tags"><li>Elementor</li><li>Travel</li></ul>
+                            <a href="https://goeurogolf.com" class="project-link" target="_blank" rel="noopener noreferrer">Live site<span class="sr-only"> — Go Euro Golf (opens in new tab)</span> <svg class="icon"><use href="#i-external" /></svg></a>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="subject">Subject</label>
-                        <input type="text" id="subject" name="subject" placeholder="Project inquiry" required />
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Message</label>
-                        <textarea id="message" name="message" rows="6" placeholder="Tell me about your project..."
-                            required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-block">
-                        Send Message
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                            <line x1="22" y1="2" x2="11" y2="13" />
-                            <polygon points="22 2 15 22 11 13 2 9 22 2" />
-                        </svg>
+                    </article>
+                    <article class="card project" data-platform="wordpress elementor" data-industry="travel"
+                        data-keywords="goirishtours irish">
+                        <div class="project-shot"><img src="assets/projects/goirishtours.webp" alt="Go Irish Tours homepage" width="1440" height="900" loading="lazy" /></div>
+                        <div class="project-body">
+                            <h3>Go Irish Tours</h3>
+                            <p>Private Ireland tour company site with destination guides, custom itinerary requests and
+                                review integrations — built on Elementor.</p>
+                            <ul class="tags"><li>Elementor</li><li>Travel</li></ul>
+                            <a href="https://goirishtours.com" class="project-link" target="_blank" rel="noopener noreferrer">Live site<span class="sr-only"> — Go Irish Tours (opens in new tab)</span> <svg class="icon"><use href="#i-external" /></svg></a>
+                        </div>
+                    </article>
+                    <article class="card project" data-platform="wordpress" data-industry="real estate property"
+                        data-keywords="connect.ca toronto">
+                        <div class="project-shot"><img src="assets/projects/connect-ca.webp" alt="Connect.ca homepage" width="1440" height="900" loading="lazy" /></div>
+                        <div class="project-body">
+                            <h3>Connect.ca</h3>
+                            <p>Toronto real-estate brokerage site with pre-construction listings, VIP access sign-ups and
+                                buyer and seller lead funnels.</p>
+                            <ul class="tags"><li>WordPress</li><li>Real estate</li></ul>
+                            <a href="https://connect.ca" class="project-link" target="_blank" rel="noopener noreferrer">Live site<span class="sr-only"> — Connect.ca (opens in new tab)</span> <svg class="icon"><use href="#i-external" /></svg></a>
+                        </div>
+                    </article>
+                    <article class="card project" data-platform="wordpress" data-industry="property real estate"
+                        data-keywords="sunshine queensland">
+                        <div class="project-shot"><img src="assets/projects/sunshinecoast.webp" alt="Sunshine Coast Property Rentals homepage" width="1440" height="900" loading="lazy" /></div>
+                        <div class="project-body">
+                            <h3>Sunshine Coast Rentals</h3>
+                            <p>Holiday rental site for Queensland's Sunshine Coast with availability search, property
+                                listings and integrated booking management.</p>
+                            <ul class="tags"><li>WordPress</li><li>Property</li></ul>
+                            <a href="https://sunshinecoastpropertyrentals.com" class="project-link" target="_blank" rel="noopener noreferrer">Live site<span class="sr-only"> — Sunshine Coast Rentals (opens in new tab)</span> <svg class="icon"><use href="#i-external" /></svg></a>
+                        </div>
+                    </article>
+                    <article class="card project" data-platform="wordpress" data-industry="travel"
+                        data-keywords="dreamtripsireland">
+                        <div class="project-shot"><img src="assets/projects/dreamtripsireland.webp" alt="Dream Trips Ireland homepage" width="1440" height="900" loading="lazy" /></div>
+                        <div class="project-body">
+                            <h3>Dream Trips Ireland</h3>
+                            <p>Bespoke Ireland travel planner site with self-drive and guided itineraries, lead capture and
+                                a story-rich destination experience.</p>
+                            <ul class="tags"><li>WordPress</li><li>Travel</li></ul>
+                            <a href="https://dreamtripsireland.com" class="project-link" target="_blank" rel="noopener noreferrer">Live site<span class="sr-only"> — Dream Trips Ireland (opens in new tab)</span> <svg class="icon"><use href="#i-external" /></svg></a>
+                        </div>
+                    </article>
+                    <article class="card project" data-platform="wordpress" data-industry="travel"
+                        data-keywords="dreamtripsscotland scotland highland whisky">
+                        <div class="project-shot"><img src="assets/projects/dreamtripsscotland.webp" alt="Dream Trips Scotland homepage" width="1440" height="900" loading="lazy" /></div>
+                        <div class="project-body">
+                            <h3>Dream Trips Scotland</h3>
+                            <p>Scotland travel brand site featuring Highland tours, castle itineraries and whisky-trail
+                                packages with dramatic visual storytelling.</p>
+                            <ul class="tags"><li>WordPress</li><li>Travel</li></ul>
+                            <a href="https://dreamtripsscotland.com" class="project-link" target="_blank" rel="noopener noreferrer">Live site<span class="sr-only"> — Dream Trips Scotland (opens in new tab)</span> <svg class="icon"><use href="#i-external" /></svg></a>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="show-more-wrap">
+                    <button type="button" id="showMoreProjects" class="btn btn-ghost" aria-expanded="false"
+                        aria-controls="projectsExtra">
+                        <span class="show-more-text">Show more projects</span>
+                        <span class="show-more-count mono">+7</span>
+                        <svg class="icon show-more-chevron"><use href="#i-chevron" /></svg>
                     </button>
-                    <p class="form-status" id="formStatus"></p>
-                </form>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/+639674298088" target="_blank" rel="noopener" class="whatsapp-float" aria-label="WhatsApp">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
-            <path
-                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z" />
-        </svg>
-    </a>
+        <!-- Quote -->
+        <section class="quote" aria-label="Working principle">
+            <div class="container">
+                <figure class="quote-inner reveal">
+                    <blockquote>Good design is honest. It's <em>obvious</em> once you see it, but takes
+                        <em>discipline</em> to ship.</blockquote>
+                    <figcaption class="mono">// my north star, on every project</figcaption>
+                </figure>
+            </div>
+        </section>
 
-    <!-- Footer -->
+        <!-- Experience -->
+        <section id="experience" class="section section-alt">
+            <div class="container">
+                <header class="section-head reveal">
+                    <p class="eyebrow"><span>04</span> experience</p>
+                    <h2 class="section-title">A timeline of my journey.</h2>
+                </header>
+                <ol class="timeline">
+                    <li class="timeline-item reveal">
+                        <time class="timeline-date">Apr 2023 — Oct 2025</time>
+                        <div class="card timeline-card">
+                            <h3>WordPress Developer</h3>
+                            <p class="timeline-company">DG Venture LTD</p>
+                            <p>Lead WordPress developer on client sites including Ebike Generation, Subtle Energies, Go
+                                Euro Tours, Sunshine Coast Property Rentals and the Dream Trips Ireland/Scotland brands —
+                                custom themes, plugin integrations and ongoing performance work.</p>
+                        </div>
+                    </li>
+                    <li class="timeline-item reveal">
+                        <time class="timeline-date">Apr 2021 — Apr 2023</time>
+                        <div class="card timeline-card">
+                            <h3>WordPress &amp; Shopify Developer</h3>
+                            <p class="timeline-company">ESTRAT360</p>
+                            <p>Built and customized WordPress and Shopify sites for international clients including Think
+                                Tank Tutors, Go Euro Golf, Go Irish Tours, Woven Panel, Connect.ca, TopTier Virtuals and
+                                Your Reformer.</p>
+                        </div>
+                    </li>
+                    <li class="timeline-item reveal">
+                        <time class="timeline-date">Aug 2021 — Dec 2021</time>
+                        <div class="card timeline-card">
+                            <h3>SEO Associate</h3>
+                            <p class="timeline-company">Somenowell Marketing LTD</p>
+                            <p>Handled on-page SEO, technical audits and content optimization for marketing clients —
+                                sharpening the SEO instincts I now bring to every site I build.</p>
+                        </div>
+                    </li>
+                    <li class="timeline-item reveal">
+                        <time class="timeline-date">Apr 2020 — Apr 2021</time>
+                        <div class="card timeline-card">
+                            <h3>Graphic Designer</h3>
+                            <p class="timeline-company">Estensil Prints and Ads</p>
+                            <p>Designed brand assets, print collateral and digital marketing materials — the visual
+                                foundation that informs my web design work today.</p>
+                        </div>
+                    </li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- Process -->
+        <section id="process" class="section">
+            <div class="container">
+                <header class="section-head reveal">
+                    <p class="eyebrow"><span>05</span> how I work</p>
+                    <h2 class="section-title">A clear process, no surprises.</h2>
+                    <p class="section-sub">From first call to launch day — a calm, organized workflow that keeps clients
+                        in the loop and projects on time.</p>
+                </header>
+                <ol class="process-grid">
+                    <li class="card process reveal">
+                        <span class="process-num">01</span>
+                        <h3>Discovery</h3>
+                        <p>We start with a free call to understand your goals, audience and the business outcomes the
+                            site needs to drive. You get a written scope before we move on.</p>
+                        <ul class="process-list"><li>Goal alignment</li><li>Audience &amp; content audit</li><li>Scope &amp; timeline</li></ul>
+                    </li>
+                    <li class="card process reveal">
+                        <span class="process-num">02</span>
+                        <h3>Design</h3>
+                        <p>I translate the brief into a clean, on-brand design — wireframes first, then high-fidelity
+                            mockups you can react to before a single line of code is written.</p>
+                        <ul class="process-list"><li>Wireframes &amp; layout</li><li>Typography &amp; color</li><li>Responsive mockups</li></ul>
+                    </li>
+                    <li class="card process reveal">
+                        <span class="process-num">03</span>
+                        <h3>Build</h3>
+                        <p>Approved designs become a fast, accessible website — WordPress, Shopify or custom. Modular,
+                            easy to maintain and built to scale with your business.</p>
+                        <ul class="process-list"><li>Pixel-perfect dev</li><li>CMS configuration</li><li>Integrations &amp; forms</li></ul>
+                    </li>
+                    <li class="card process reveal">
+                        <span class="process-num">04</span>
+                        <h3>Launch</h3>
+                        <p>QA, SEO basics, analytics and a performance pass — then we ship. You get docs, a handover
+                            video and post-launch support so you're never stuck.</p>
+                        <ul class="process-list"><li>QA &amp; cross-browser</li><li>SEO &amp; analytics setup</li><li>Handover &amp; training</li></ul>
+                    </li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- Contact -->
+        <section id="contact" class="section section-alt">
+            <div class="container">
+                <header class="section-head reveal">
+                    <p class="eyebrow"><span>06</span> get in touch</p>
+                    <h2 class="section-title">Let's build something great.</h2>
+                    <p class="section-sub">Have a project in mind or need a website refresh? I'd love to hear about it.</p>
+                </header>
+                <div class="contact-grid">
+                    <div class="contact-info reveal">
+                        <ul class="contact-list">
+                            <li>
+                                <a href="mailto:jasonjay.ababao1968@gmail.com" class="card contact-item">
+                                    <svg class="icon"><use href="#i-mail" /></svg>
+                                    <span><span class="contact-label">email</span>jasonjay.ababao1968@gmail.com</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://wa.me/639674298088" target="_blank" rel="noopener noreferrer" class="card contact-item">
+                                    <svg class="icon"><use href="#i-whatsapp" /></svg>
+                                    <span><span class="contact-label">whatsapp</span>+63 967 429 8088</span>
+                                </a>
+                            </li>
+                            <li>
+                                <div class="card contact-item">
+                                    <svg class="icon"><use href="#i-pin" /></svg>
+                                    <span><span class="contact-label">location</span>Naawan, Misamis Oriental, PH</span>
+                                </div>
+                            </li>
+                        </ul>
+                        <ul class="socials" aria-label="Social profiles">
+                            <!-- TODO: add LinkedIn and Facebook profile URLs, then remove `hidden` -->
+                            <li hidden><a href="#" aria-label="LinkedIn" class="icon-btn"><svg class="icon"><use href="#i-linkedin" /></svg></a></li>
+                            <li><a href="https://github.com/jasonjayA68" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="icon-btn"><svg class="icon"><use href="#i-github" /></svg></a></li>
+                            <li hidden><a href="#" aria-label="Facebook" class="icon-btn"><svg class="icon"><use href="#i-facebook" /></svg></a></li>
+                        </ul>
+                        <button type="button" class="card ask-card" data-open-chat>
+                            <svg class="icon"><use href="#i-spark" /></svg>
+                            <span><strong>Quick question?</strong> Ask the portfolio assistant — instant answers about my
+                                work, stack and availability.</span>
+                        </button>
+                    </div>
+                    <form class="card contact-form reveal" id="contactForm" novalidate>
+                        <div class="form-row">
+                            <div class="field">
+                                <label for="name">Name</label>
+                                <input type="text" id="name" name="name" placeholder="Your full name" autocomplete="name" required />
+                            </div>
+                            <div class="field">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" placeholder="you@company.com" autocomplete="email" required />
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" name="subject" placeholder="Project inquiry" required />
+                        </div>
+                        <div class="field">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="6" placeholder="Tell me about your project…" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Send message <svg class="icon"><use href="#i-send" /></svg></button>
+                        <p class="form-note">Opens your email app with the message ready to send.</p>
+                        <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
     <footer class="footer">
         <div class="container footer-inner">
-            <div class="footer-brand">
-                <img src="assets/logo.svg" alt="Jason Jay Ababao" class="logo-img" />
-            </div>
-            <p class="footer-copy">&copy; <span id="year"></span> Jason Jay Ababao. All rights reserved.</p>
-            <div class="footer-links">
-                <a href="#home">Home</a>
-                <a href="#projects">Projects</a>
-                <a href="#contact">Contact</a>
-            </div>
+            <a href="#home" class="logo" aria-label="Back to top">
+                <span class="logo-mark" aria-hidden="true">jj</span>
+                <span class="logo-text">Jason Jay <span class="logo-dim">Ababao</span></span>
+            </a>
+            <p class="footer-copy">&copy; <span id="year">2026</span> Jason Jay Ababao. All rights reserved.</p>
+            <p class="footer-built mono">built with html · css · vanilla js</p>
         </div>
     </footer>
+
+    <!-- Portfolio assistant -->
+    <button type="button" class="chat-launcher" id="chatLauncher" aria-expanded="false" aria-controls="chatPanel">
+        <span class="chat-launcher-icon"><svg class="icon"><use href="#i-spark" /></svg></span>
+        <span class="chat-launcher-label">Ask the assistant</span>
+        <span class="status-dot" aria-hidden="true"></span>
+    </button>
+
+    <section class="chat-panel" id="chatPanel" role="dialog" aria-labelledby="chatTitle" hidden>
+        <header class="chat-head">
+            <span class="logo-mark" aria-hidden="true">jj</span>
+            <div class="chat-head-text">
+                <h2 id="chatTitle">Portfolio assistant</h2>
+                <p class="mono"><span class="status-dot"></span> scripted · answers from this site</p>
+            </div>
+            <button type="button" class="icon-btn" id="chatClose" aria-label="Close assistant">
+                <svg class="icon"><use href="#i-close" /></svg>
+            </button>
+        </header>
+        <div class="chat-log" id="chatLog" role="log" aria-live="polite"></div>
+        <div class="chat-suggestions" id="chatSuggestions"></div>
+        <form class="chat-form" id="chatForm" autocomplete="off">
+            <label for="chatInput" class="sr-only">Your question</label>
+            <input type="text" id="chatInput" placeholder="Ask about projects, stack, rates…" maxlength="200" />
+            <button type="submit" class="chat-send" aria-label="Send">
+                <svg class="icon"><use href="#i-send" /></svg>
+            </button>
+        </form>
+        <div class="chat-actions">
+            <a href="https://wa.me/639674298088" target="_blank" rel="noopener noreferrer"><svg class="icon"><use href="#i-whatsapp" /></svg> WhatsApp</a>
+            <a href="mailto:jasonjay.ababao1968@gmail.com"><svg class="icon"><use href="#i-mail" /></svg> Email</a>
+        </div>
+    </section>
 
     <script src="script.js"></script>
 </body>
