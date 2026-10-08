@@ -398,13 +398,15 @@ ul, ol { list-style: none; }
 .profile-meta .ok { color: var(--ok); }
 
 /* Skills */
-.skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.skills-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
 .skill { padding: 26px; display: flex; flex-direction: column; }
 .skill-icon {
     width: 40px; height: 40px; padding: 9px; margin-bottom: 18px;
     color: var(--accent-text); background: var(--accent-soft); border-radius: 10px;
     stroke-width: 1.75;
 }
+.skill-featured { border-color: var(--accent-line); background: linear-gradient(160deg, var(--accent-soft), var(--surface) 55%); }
+.skill-featured .skill-icon { background: var(--gradient); color: #fff; }
 .skill h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 6px; }
 .skill p { color: var(--text-muted); font-size: 0.925rem; margin-bottom: 18px; flex: 1; }
 

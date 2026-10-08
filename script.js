@@ -285,9 +285,19 @@
             reply: () => `<p>Jason Jay Ababao is a full-stack web developer based in Naawan, Philippines, with 5+ years of experience. He's shipped 14 live client sites with agencies and direct clients in Australia, Canada, Ireland, the Philippines and beyond.</p><p>He started in graphic design, so he cares about how things look as much as how they work.</p>`,
         },
         {
+            id: 'ai',
+            words: ['ai', 'ai tool', 'artificial intelligence', 'claude', 'claude code', 'codex', 'chatgpt', 'gpt', 'gemini', 'cursor', 'copilot', 'llm', 'agent', 'vibe coding'],
+            reply: () => `<p>Jason builds with AI in the loop — it speeds up planning, coding, reviews and debugging, while he stays responsible for the quality of what ships.</p><ul><li>Claude Code &amp; Codex — coding agents</li><li>Cursor — AI-first editor</li><li>ChatGPT &amp; Gemini — research, copy and problem-solving</li></ul>`,
+        },
+        {
+            id: 'crm',
+            words: ['crm', 'hubspot', 'gohighlevel', 'go high level', 'ghl', 'automation', 'pipeline', 'leads', 'funnel', 'email marketing'],
+            reply: () => `<p>For CRM and automation Jason works with <strong>HubSpot</strong> and <strong>GoHighLevel</strong> — lead pipelines, forms and follow-up automation connected to the website.</p>`,
+        },
+        {
             id: 'skills',
-            words: ['stack', 'skill', 'tech', 'technologies', 'tools', 'languages', 'framework', 'use', 'know'],
-            reply: () => `<p>The core stack:</p><ul><li>Front-end: HTML5, CSS3, JavaScript, jQuery, Bootstrap</li><li>Back-end: PHP, Laravel, SQL, REST APIs</li><li>CMS: WordPress, Elementor Pro, WooCommerce, ACF</li><li>Commerce: Shopify, Liquid, Hydrogen</li><li>Also: SEO, GoHighLevel, analytics, Figma, Git</li></ul>`,
+            words: ['stack', 'skill', 'tech', 'technologies', 'tools', 'languages', 'framework'],
+            reply: () => `<p>The core stack:</p><ul><li>Front-end: HTML5, CSS3, JavaScript, jQuery, Bootstrap</li><li>Back-end: PHP, Laravel, SQL, REST APIs</li><li>CMS: WordPress, Elementor Pro, WooCommerce, ACF</li><li>Commerce: Shopify, Liquid, Hydrogen</li><li>AI tools: Claude Code, Codex, ChatGPT, Gemini, Cursor</li><li>CRM: HubSpot, GoHighLevel</li><li>Also: SEO, analytics, Figma, Git</li></ul>`,
         },
         {
             id: 'shopify',
@@ -376,7 +386,7 @@
         },
         {
             id: 'bot',
-            words: ['are you ai', 'are you a bot', 'are you real', 'chatgpt', 'gpt', 'claude', 'llm', 'how do you work bot'],
+            words: ['are you ai', 'are you an ai', 'are you a bot', 'are you real', 'are you human'],
             reply: () => `<p>I'm a lightweight scripted assistant — I match your question to answers written from this portfolio. Nothing you type leaves your browser. For anything I can't answer, Jason's a message away.</p>`,
         },
         {
