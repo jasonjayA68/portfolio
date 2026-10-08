@@ -175,29 +175,73 @@
     }
 
     /* ----------------------------------------
-       Show more projects
+       Project filters + show more
     ---------------------------------------- */
+    const projectsGrid = document.getElementById('projectsGrid');
     const showMoreBtn = document.getElementById('showMoreProjects');
-    const projectsExtra = document.getElementById('projectsExtra');
+    const filterChips = Array.from(document.querySelectorAll('.filter-chip'));
+    let setProjectFilter = () => {};
 
-    if (showMoreBtn && projectsExtra) {
+    if (projectsGrid && showMoreBtn) {
+        const cards = Array.from(projectsGrid.querySelectorAll('.project'));
         const btnText = showMoreBtn.querySelector('.show-more-text');
         const btnCount = showMoreBtn.querySelector('.show-more-count');
-        const hiddenCount = projectsExtra.querySelectorAll('.project').length;
-        btnCount.textContent = '+' + hiddenCount;
+        const extraCount = cards.filter(c => c.hasAttribute('data-extra')).length;
+        const matches = (card, f) => f === 'all' || `${card.dataset.platform} ${card.dataset.industry}`.includes(f);
+        let filter = 'all';
+        let expanded = false;
+
+        filterChips.forEach(chip => {
+            const n = cards.filter(c => matches(c, chip.dataset.filter)).length;
+            chip.insertAdjacentHTML('beforeend', ` <span class="filter-count">${n}</span>`);
+        });
+
+        const render = (animate) => {
+            let delay = 0;
+            cards.forEach(card => {
+                const show = matches(card, filter) && (filter !== 'all' || expanded || !card.hasAttribute('data-extra'));
+                const wasHidden = card.hidden;
+                card.hidden = !show;
+                if (show && wasHidden && animate && !reduceMotion) {
+                    card.classList.add('visible');
+                    card.classList.remove('is-entering');
+                    card.style.animationDelay = `${delay}ms`;
+                    void card.offsetWidth;
+                    card.classList.add('is-entering');
+                    delay += 50;
+                } else if (show) {
+                    card.classList.add('visible');
+                }
+            });
+            filterChips.forEach(chip => {
+                const on = chip.dataset.filter === filter;
+                chip.classList.toggle('active', on);
+                chip.setAttribute('aria-pressed', String(on));
+            });
+            showMoreBtn.parentElement.hidden = filter !== 'all';
+            showMoreBtn.setAttribute('aria-expanded', String(expanded));
+            btnText.textContent = expanded ? 'Show less' : 'Show more projects';
+            btnCount.textContent = expanded ? '−' : '+' + extraCount;
+        };
+
+        setProjectFilter = (f, expand) => {
+            filter = f;
+            if (expand !== undefined) expanded = expand;
+            render(true);
+        };
+
+        filterChips.forEach(chip => chip.addEventListener('click', () => setProjectFilter(chip.dataset.filter)));
 
         showMoreBtn.addEventListener('click', () => {
-            const opening = projectsExtra.hidden;
-            projectsExtra.hidden = !opening;
-            showMoreBtn.setAttribute('aria-expanded', String(opening));
-            btnText.textContent = opening ? 'Show less' : 'Show more projects';
-            btnCount.textContent = opening ? '−' : '+' + hiddenCount;
-
-            if (!opening) {
+            expanded = !expanded;
+            render(true);
+            if (!expanded) {
                 const projects = document.getElementById('projects');
                 if (projects) projects.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
             }
         });
+
+        render(false);
     }
 
     /* ----------------------------------------
@@ -236,6 +280,261 @@
             window.location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
             status.textContent = 'Your email app should open with the message ready — just hit send.';
         });
+    }
+
+    /* ========================================
+       Futuristic interaction layer
+    ======================================== */
+    const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+    /* Scroll progress bar + timeline fill */
+    const progressBar = document.getElementById('scrollProgress');
+    const timeline = document.querySelector('.timeline');
+    let progressQueued = false;
+    const updateProgress = () => {
+        progressQueued = false;
+        const max = document.documentElement.scrollHeight - window.innerHeight;
+        if (progressBar) progressBar.style.setProperty('--progress', max > 0 ? (window.scrollY / max).toFixed(4) : '0');
+        if (timeline) {
+            const r = timeline.getBoundingClientRect();
+            const p = Math.min(Math.max((window.innerHeight * 0.65 - r.top) / r.height, 0), 1);
+            timeline.style.setProperty('--timeline', p.toFixed(3));
+        }
+    };
+    window.addEventListener('scroll', () => {
+        if (!progressQueued) { progressQueued = true; requestAnimationFrame(updateProgress); }
+    }, { passive: true });
+    window.addEventListener('resize', updateProgress);
+    updateProgress();
+
+    /* Cursor spotlight on glass cards */
+    if (finePointer) {
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('pointermove', (e) => {
+                const r = card.getBoundingClientRect();
+                card.style.setProperty('--mx', `${e.clientX - r.left}px`);
+                card.style.setProperty('--my', `${e.clientY - r.top}px`);
+            });
+        });
+    }
+
+    /* 3D tilt on project cards + magnetic buttons */
+    if (finePointer && !reduceMotion) {
+        document.querySelectorAll('.project').forEach(card => {
+            card.addEventListener('pointerenter', () => card.classList.add('tilt-ready'));
+            card.addEventListener('pointermove', (e) => {
+                const r = card.getBoundingClientRect();
+                const x = (e.clientX - r.left) / r.width - 0.5;
+                const y = (e.clientY - r.top) / r.height - 0.5;
+                card.style.setProperty('--rx', `${(-y * 7).toFixed(2)}deg`);
+                card.style.setProperty('--ry', `${(x * 9).toFixed(2)}deg`);
+            });
+            card.addEventListener('pointerleave', () => {
+                card.style.removeProperty('--rx');
+                card.style.removeProperty('--ry');
+            });
+        });
+
+        document.querySelectorAll('.magnetic').forEach(btn => {
+            btn.addEventListener('pointermove', (e) => {
+                const r = btn.getBoundingClientRect();
+                const x = e.clientX - (r.left + r.width / 2);
+                const y = e.clientY - (r.top + r.height / 2);
+                btn.style.transform = `translate(${(x * 0.2).toFixed(1)}px, ${(y * 0.3).toFixed(1)}px)`;
+            });
+            btn.addEventListener('pointerleave', () => { btn.style.transform = ''; });
+        });
+    }
+
+    /* Decode effect on mono labels as they scroll in */
+    const GLYPHS = '!<>-_/[]{}=+*^?#01';
+    const decode = (node) => {
+        const target = node.nodeValue;
+        let frame = 0;
+        const total = 20;
+        const tick = () => {
+            frame++;
+            const done = Math.floor((frame / total) * target.length);
+            node.nodeValue = target.split('').map((c, i) =>
+                (c === ' ' || i < done) ? c : GLYPHS[Math.floor(Math.random() * GLYPHS.length)]).join('');
+            if (frame < total) requestAnimationFrame(tick);
+            else node.nodeValue = target;
+        };
+        tick();
+    };
+    if (!reduceMotion && 'IntersectionObserver' in window) {
+        const decodeObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                const textNode = Array.from(entry.target.childNodes).reverse().find(n => n.nodeType === 3 && n.nodeValue.trim());
+                if (textNode) decode(textNode);
+                decodeObserver.unobserve(entry.target);
+            });
+        }, { threshold: 1 });
+        document.querySelectorAll('.eyebrow, .terminal-title').forEach(el => decodeObserver.observe(el));
+    }
+
+    /* Hero neural-network canvas — reacts to the cursor, pulses on click */
+    const heroCanvas = document.getElementById('heroCanvas');
+    if (heroCanvas && heroCanvas.getContext) {
+        const ctx = heroCanvas.getContext('2d');
+        const hero = heroCanvas.parentElement;
+        const pointer = { x: 0, y: 0, active: false };
+        const pulses = [];
+        const LINK = 130;
+        const REACH = 170;
+        let w = 0, h = 0, nodes = [], running = false, inView = true, rgbA = [34, 211, 238], rgbB = [167, 139, 250], light = false;
+
+        const toRgb = (hex) => {
+            let m = hex.trim().replace('#', '');
+            if (m.length === 3) m = m.split('').map(c => c + c).join('');
+            const n = parseInt(m, 16);
+            return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+        };
+        const readColors = () => {
+            const cs = getComputedStyle(root);
+            rgbA = toRgb(cs.getPropertyValue('--accent') || '#22d3ee');
+            rgbB = toRgb(cs.getPropertyValue('--accent-2') || '#a78bfa');
+            light = root.getAttribute('data-theme') === 'light';
+        };
+        const rgba = (c, a) => `rgba(${c[0]},${c[1]},${c[2]},${a.toFixed(3)})`;
+
+        const resize = () => {
+            const dpr = Math.min(window.devicePixelRatio || 1, 2);
+            w = hero.offsetWidth;
+            h = hero.offsetHeight;
+            heroCanvas.width = Math.round(w * dpr);
+            heroCanvas.height = Math.round(h * dpr);
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+            const count = Math.max(28, Math.min(110, Math.round((w * h) / 12500)));
+            nodes = Array.from({ length: count }, () => {
+                const vx = (Math.random() - 0.5) * 0.36;
+                const vy = (Math.random() - 0.5) * 0.36;
+                return { x: Math.random() * w, y: Math.random() * h, vx, vy, bx: vx, by: vy, r: Math.random() * 1.4 + 0.7 };
+            });
+        };
+
+        const frame = () => {
+            ctx.clearRect(0, 0, w, h);
+            const strength = light ? 0.55 : 1;
+
+            nodes.forEach(n => {
+                if (pointer.active) {
+                    const dx = n.x - pointer.x, dy = n.y - pointer.y;
+                    const d = Math.hypot(dx, dy);
+                    if (d < REACH * 0.6 && d > 0.1) {
+                        const f = (1 - d / (REACH * 0.6)) * 0.9;
+                        n.vx += (dx / d) * f * 0.08;
+                        n.vy += (dy / d) * f * 0.08;
+                    }
+                }
+                pulses.forEach(p => {
+                    const dx = n.x - p.x, dy = n.y - p.y;
+                    const d = Math.hypot(dx, dy);
+                    if (Math.abs(d - p.r) < 18 && d > 0.1) { n.vx += (dx / d) * 0.5; n.vy += (dy / d) * 0.5; }
+                });
+                // ease back toward drift speed
+                n.vx = n.vx * 0.96 + n.bx * 0.04;
+                n.vy = n.vy * 0.96 + n.by * 0.04;
+                n.x += n.vx;
+                n.y += n.vy;
+                if (n.x < 0) { n.x = 0; n.vx = Math.abs(n.vx); n.bx = Math.abs(n.bx); }
+                if (n.x > w) { n.x = w; n.vx = -Math.abs(n.vx); n.bx = -Math.abs(n.bx); }
+                if (n.y < 0) { n.y = 0; n.vy = Math.abs(n.vy); n.by = Math.abs(n.by); }
+                if (n.y > h) { n.y = h; n.vy = -Math.abs(n.vy); n.by = -Math.abs(n.by); }
+            });
+
+            ctx.lineWidth = 1;
+            for (let i = 0; i < nodes.length; i++) {
+                const a = nodes[i];
+                for (let j = i + 1; j < nodes.length; j++) {
+                    const b = nodes[j];
+                    const dx = a.x - b.x, dy = a.y - b.y;
+                    const dsq = dx * dx + dy * dy;
+                    if (dsq < LINK * LINK) {
+                        ctx.strokeStyle = rgba(rgbA, (1 - Math.sqrt(dsq) / LINK) * 0.22 * strength);
+                        ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+                    }
+                }
+            }
+
+            if (pointer.active) {
+                nodes.forEach(n => {
+                    const d = Math.hypot(n.x - pointer.x, n.y - pointer.y);
+                    if (d < REACH) {
+                        ctx.strokeStyle = rgba(rgbB, (1 - d / REACH) * 0.55 * strength);
+                        ctx.beginPath(); ctx.moveTo(n.x, n.y); ctx.lineTo(pointer.x, pointer.y); ctx.stroke();
+                    }
+                });
+                const g = ctx.createRadialGradient(pointer.x, pointer.y, 0, pointer.x, pointer.y, 90);
+                g.addColorStop(0, rgba(rgbB, 0.16 * strength));
+                g.addColorStop(1, rgba(rgbB, 0));
+                ctx.fillStyle = g;
+                ctx.beginPath(); ctx.arc(pointer.x, pointer.y, 90, 0, Math.PI * 2); ctx.fill();
+            }
+
+            nodes.forEach(n => {
+                ctx.fillStyle = rgba(rgbA, 0.75 * strength);
+                ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2); ctx.fill();
+            });
+
+            for (let i = pulses.length - 1; i >= 0; i--) {
+                const p = pulses[i];
+                p.r += 6;
+                const life = 1 - p.r / 320;
+                if (life <= 0) { pulses.splice(i, 1); continue; }
+                ctx.strokeStyle = rgba(rgbA, life * 0.6 * strength);
+                ctx.lineWidth = 1.5;
+                ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.stroke();
+                ctx.lineWidth = 1;
+            }
+
+            if (running) requestAnimationFrame(frame);
+        };
+
+        const start = () => {
+            if (running || reduceMotion || !inView || document.hidden) return;
+            running = true;
+            requestAnimationFrame(frame);
+        };
+        const stop = () => { running = false; };
+
+        readColors();
+        resize();
+        if (reduceMotion) frame(); else start();
+
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => { resize(); if (reduceMotion) frame(); }, 150);
+        });
+
+        if ('IntersectionObserver' in window) {
+            new IntersectionObserver(([entry]) => {
+                inView = entry.isIntersecting;
+                if (inView) start(); else stop();
+            }).observe(hero);
+        }
+        document.addEventListener('visibilitychange', () => { if (document.hidden) stop(); else start(); });
+        new MutationObserver(() => { readColors(); if (reduceMotion) frame(); })
+            .observe(root, { attributes: true, attributeFilter: ['data-theme'] });
+
+        if (finePointer && !reduceMotion) {
+            hero.addEventListener('pointermove', (e) => {
+                const r = hero.getBoundingClientRect();
+                pointer.x = e.clientX - r.left;
+                pointer.y = e.clientY - r.top;
+                pointer.active = true;
+            });
+            hero.addEventListener('pointerleave', () => { pointer.active = false; });
+        }
+        if (!reduceMotion) {
+            hero.addEventListener('pointerdown', (e) => {
+                if (e.target.closest('a, button, input, form, .terminal')) return;
+                const r = hero.getBoundingClientRect();
+                pulses.push({ x: e.clientX - r.left, y: e.clientY - r.top, r: 0 });
+            });
+        }
     }
 
     /* ========================================
@@ -287,7 +586,7 @@
         {
             id: 'ai',
             words: ['ai', 'ai tool', 'artificial intelligence', 'claude', 'claude code', 'codex', 'chatgpt', 'gpt', 'gemini', 'cursor', 'copilot', 'llm', 'agent', 'vibe coding'],
-            reply: () => `<p>Jason builds with AI in the loop — it speeds up planning, coding, reviews and debugging, while he stays responsible for the quality of what ships.</p><ul><li>Claude Code &amp; Codex — coding agents</li><li>Cursor — AI-first editor</li><li>ChatGPT &amp; Gemini — research, copy and problem-solving</li></ul>`,
+            reply: () => `<p>Jason builds with AI in the loop — it speeds up planning, coding, reviews and debugging, while he stays responsible for the quality of what ships.</p><ul><li>Claude Code &amp; Codex — coding agents</li><li>Cursor — AI-first editor</li><li>ChatGPT &amp; Gemini — research, copy and problem-solving</li></ul><p>Next on his <a href="#roadmap" data-close-chat>AI roadmap</a>: LLM APIs, AI agents &amp; MCP, RAG and the Next.js stack.</p>`,
         },
         {
             id: 'crm',
@@ -295,9 +594,14 @@
             reply: () => `<p>For CRM and automation Jason works with <strong>HubSpot</strong> and <strong>GoHighLevel</strong> — lead pipelines, forms and follow-up automation connected to the website.</p>`,
         },
         {
+            id: 'learning',
+            words: ['learning', 'learn', 'studying', 'study', 'roadmap', 'upskill', 'future', 'mcp', 'rag', 'langchain', 'langgraph', 'vector', 'embedding', 'next.js', 'nextjs', 'react', 'typescript', 'tailwind', 'n8n', 'zapier', 'supabase', 'openai api', 'claude api', 'ai sdk', 'v0', 'lovable', 'chatbot', 'ai app', 'ai feature'],
+            reply: () => `<p>Jason is actively studying the AI development skills clients hire for today — learning them in public rather than claiming them:</p><ul><li>LLM APIs — Claude, OpenAI, Gemini, Vercel AI SDK</li><li>AI agents &amp; MCP — tool calling, Claude Agent SDK, LangGraph</li><li>RAG &amp; vector search — embeddings, pgvector, Supabase</li><li>AI-ready stack — TypeScript, React, Next.js, Tailwind</li><li>AI automation — n8n, Make, Zapier, HubSpot Breeze, GHL Conversation AI</li><li>Prototyping &amp; evals — v0, Bolt, Lovable</li></ul><p><a href="#roadmap" data-close-chat>See the AI roadmap →</a></p>`,
+        },
+        {
             id: 'skills',
             words: ['stack', 'skill', 'tech', 'technologies', 'tools', 'languages', 'framework'],
-            reply: () => `<p>The core stack:</p><ul><li>Front-end: HTML5, CSS3, JavaScript, jQuery, Bootstrap</li><li>Back-end: PHP, Laravel, SQL, REST APIs</li><li>CMS: WordPress, Elementor Pro, WooCommerce, ACF</li><li>Commerce: Shopify, Liquid, Hydrogen</li><li>AI tools: Claude Code, Codex, ChatGPT, Gemini, Cursor</li><li>CRM: HubSpot, GoHighLevel</li><li>Also: SEO, analytics, Figma, Git</li></ul>`,
+            reply: () => `<p>The core stack:</p><ul><li>Front-end: HTML5, CSS3, JavaScript, jQuery, Bootstrap</li><li>Back-end: PHP, Laravel, SQL, REST APIs</li><li>CMS: WordPress, Elementor Pro, WooCommerce, ACF</li><li>Commerce: Shopify, Liquid, Hydrogen</li><li>AI tools: Claude Code, Codex, ChatGPT, Gemini, Cursor</li><li>Learning now: LLM APIs, AI agents &amp; MCP, RAG, Next.js — <a href="#roadmap" data-close-chat>roadmap</a></li><li>CRM: HubSpot, GoHighLevel</li><li>Also: SEO, analytics, Figma, Git</li></ul>`,
         },
         {
             id: 'shopify',
@@ -397,8 +701,8 @@
     ];
 
     const SUGGESTIONS = {
-        start: ['What Shopify work have you done?', 'Are you available?', 'What\'s your stack?', 'How do you work?'],
-        after: ['Show me travel projects', 'How much does a site cost?', 'Experience', 'Contact'],
+        start: ['What AI tools do you use?', 'What Shopify work have you done?', 'Are you available?', 'What are you learning?'],
+        after: ['Show me travel projects', 'How much does a site cost?', 'What are you learning?', 'Contact'],
     };
 
     const normalize = (s) => ' ' + s.toLowerCase().replace(/[^\w\s.\-']/g, ' ').replace(/\s+/g, ' ') + ' ';
@@ -525,4 +829,125 @@
     }
     document.querySelectorAll('[data-ask]').forEach(btn => btn.addEventListener('click', () => openChat(btn.dataset.ask)));
     document.querySelectorAll('[data-open-chat]').forEach(btn => btn.addEventListener('click', () => openChat()));
+
+    /* ========================================
+       Command palette (⌘K / Ctrl+K)
+    ======================================== */
+    const palette = document.getElementById('palette');
+    const paletteInput = document.getElementById('paletteInput');
+    const paletteList = document.getElementById('paletteList');
+    const paletteOpenBtn = document.getElementById('paletteOpen');
+
+    if (palette && paletteInput && paletteList) {
+        const isMac = /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent);
+        document.querySelectorAll('.kbd-btn kbd').forEach(k => { k.textContent = isMac ? '⌘K' : 'Ctrl K'; });
+
+        const go = (selector) => {
+            const el = document.querySelector(selector);
+            if (el) el.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
+        };
+        const openUrl = (url) => window.open(url, '_blank', 'noopener');
+
+        const ACTIONS = [
+            { group: 'jump to', label: 'About', icon: 'i-arrow', hint: '01', run: () => go('#about') },
+            { group: 'jump to', label: 'Skills & tools', icon: 'i-arrow', hint: '02', run: () => go('#skills') },
+            { group: 'jump to', label: 'AI roadmap', icon: 'i-arrow', hint: '02.1', run: () => go('#roadmap') },
+            { group: 'jump to', label: 'Selected work', icon: 'i-arrow', hint: '03', run: () => go('#projects') },
+            { group: 'jump to', label: 'Experience', icon: 'i-arrow', hint: '04', run: () => go('#experience') },
+            { group: 'jump to', label: 'Process', icon: 'i-arrow', hint: '05', run: () => go('#process') },
+            { group: 'jump to', label: 'Contact', icon: 'i-arrow', hint: '06', run: () => go('#contact') },
+            { group: 'actions', label: 'Ask the assistant', icon: 'i-spark', run: () => openChat() },
+            { group: 'actions', label: 'Toggle light / dark theme', icon: 'i-sun', run: () => themeToggle && themeToggle.click() },
+            { group: 'actions', label: 'Email Jason', icon: 'i-mail', hint: 'mail', run: () => { window.location.href = 'mailto:' + EMAIL; } },
+            { group: 'actions', label: 'Message on WhatsApp', icon: 'i-whatsapp', run: () => openUrl('https://wa.me/639674298088') },
+            { group: 'actions', label: 'Show all projects', icon: 'i-layers', run: () => { setProjectFilter('all', true); go('#projects'); } },
+        ];
+        filterChips.filter(c => c.dataset.filter !== 'all').forEach(chip => {
+            const name = chip.firstChild.nodeValue.trim();
+            ACTIONS.push({ group: 'filter work', label: `Show ${name} projects`, icon: 'i-search', run: () => { setProjectFilter(chip.dataset.filter); go('#projects'); } });
+        });
+        projects.forEach(p => {
+            ACTIONS.push({ group: 'projects', label: p.title, icon: 'i-external', hint: p.url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, ''), run: () => openUrl(p.url) });
+        });
+
+        let results = [];
+        let activeIdx = 0;
+        let paletteLastFocus = null;
+
+        const renderPalette = () => {
+            const q = paletteInput.value.trim().toLowerCase();
+            const words = q.split(/\s+/).filter(Boolean);
+            results = ACTIONS.filter(a => {
+                const hay = `${a.label} ${a.group} ${a.hint || ''}`.toLowerCase();
+                return words.every(wd => hay.includes(wd));
+            });
+            if (q) {
+                results.push({ group: 'assistant', label: `Ask: “${paletteInput.value.trim()}”`, icon: 'i-spark', run: () => openChat(paletteInput.value.trim()) });
+            }
+            activeIdx = Math.min(activeIdx, Math.max(results.length - 1, 0));
+
+            let html = '';
+            let lastGroup = '';
+            results.forEach((a, i) => {
+                if (a.group !== lastGroup) { html += `<li class="palette-group" role="presentation">${a.group}</li>`; lastGroup = a.group; }
+                html += `<li class="palette-item" role="option" id="pal-${i}" data-i="${i}" aria-selected="${i === activeIdx}"><svg class="icon"><use href="#${a.icon}" /></svg><span>${esc(a.label)}</span>${a.hint ? `<small>${esc(a.hint)}</small>` : ''}</li>`;
+            });
+            paletteList.innerHTML = html || '<li class="palette-empty">No matches.</li>';
+            paletteInput.setAttribute('aria-activedescendant', results.length ? `pal-${activeIdx}` : '');
+        };
+
+        const setActive = (i) => {
+            if (!results.length) return;
+            activeIdx = (i + results.length) % results.length;
+            paletteList.querySelectorAll('.palette-item').forEach(el => el.setAttribute('aria-selected', String(+el.dataset.i === activeIdx)));
+            const el = document.getElementById(`pal-${activeIdx}`);
+            if (el) el.scrollIntoView({ block: 'nearest' });
+            paletteInput.setAttribute('aria-activedescendant', `pal-${activeIdx}`);
+        };
+
+        const openPalette = () => {
+            if (!palette.hidden) return;
+            paletteLastFocus = document.activeElement;
+            palette.hidden = false;
+            paletteInput.value = '';
+            activeIdx = 0;
+            renderPalette();
+            paletteInput.focus();
+        };
+        const closePalette = (restore = true) => {
+            palette.hidden = true;
+            if (restore && paletteLastFocus && document.contains(paletteLastFocus)) paletteLastFocus.focus();
+        };
+        const runActive = (i = activeIdx) => {
+            const action = results[i];
+            if (!action) return;
+            closePalette(false);
+            action.run();
+        };
+
+        if (paletteOpenBtn) paletteOpenBtn.addEventListener('click', openPalette);
+        palette.addEventListener('click', (e) => {
+            if (e.target.closest('[data-palette-close]')) { closePalette(); return; }
+            const item = e.target.closest('.palette-item');
+            if (item) runActive(+item.dataset.i);
+        });
+        paletteList.addEventListener('mousemove', (e) => {
+            const item = e.target.closest('.palette-item');
+            if (item && +item.dataset.i !== activeIdx) setActive(+item.dataset.i);
+        });
+        paletteInput.addEventListener('input', () => { activeIdx = 0; renderPalette(); });
+        paletteInput.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowDown') { e.preventDefault(); setActive(activeIdx + 1); }
+            else if (e.key === 'ArrowUp') { e.preventDefault(); setActive(activeIdx - 1); }
+            else if (e.key === 'Enter') { e.preventDefault(); runActive(); }
+            else if (e.key === 'Escape') { e.preventDefault(); closePalette(); }
+            else if (e.key === 'Tab') { e.preventDefault(); }
+        });
+        document.addEventListener('keydown', (e) => {
+            if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+                e.preventDefault();
+                if (palette.hidden) openPalette(); else closePalette();
+            }
+        });
+    }
 })();
