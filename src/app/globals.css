@@ -1,4 +1,12 @@
 /* ========================================
+   Global styles — imported once in src/app/layout.tsx,
+   so these classes work in every page and component.
+
+   This is the original style.css with small additions,
+   marked "Next.js version" below.
+======================================== */
+
+/* ========================================
    Tokens
 ======================================== */
 @property --angle {
@@ -38,8 +46,9 @@
     --radius-sm: 8px;
     --radius: 14px;
     --radius-lg: 20px;
-    --font: 'Geist', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-    --mono: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    /* --font-geist and --font-geist-mono are created by next/font in layout.tsx */
+    --font: var(--font-geist), ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
     --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
     --nav-h: 68px;
     color-scheme: dark;
@@ -504,8 +513,8 @@ kbd {
     font-family: var(--mono); font-size: 0.8rem; color: var(--text-muted);
     margin-bottom: 14px; display: flex; align-items: center; gap: 10px;
 }
-.eyebrow span { color: var(--accent-text); }
-.eyebrow span::before { content: "// "; }
+.eyebrow .eyebrow-num { color: var(--accent-text); }
+.eyebrow .eyebrow-num::before { content: "// "; }
 .eyebrow::after {
     content: ""; flex: 0 0 48px; height: 1px;
     background: linear-gradient(90deg, var(--accent), transparent);
@@ -533,7 +542,7 @@ kbd {
     outline: 2px solid transparent; outline-offset: 5px;
     box-shadow: 0 0 0 2px var(--surface-solid), 0 0 0 4px var(--accent), 0 0 30px -4px var(--accent);
 }
-.profile h3 { font-size: 1.2rem; font-weight: 600; }
+.profile h2 { font-size: 1.2rem; font-weight: 600; }
 .profile-role { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px; }
 .profile-meta { text-align: left; margin-bottom: 22px; border-top: 1px solid var(--border); }
 .profile-meta div {
@@ -582,8 +591,8 @@ kbd {
     70% { box-shadow: 0 0 0 7px rgba(167, 139, 250, 0); }
     100% { box-shadow: 0 0 0 0 rgba(167, 139, 250, 0); }
 }
-.roadmap-card h4 { font-size: 1.05rem; font-weight: 600; margin-bottom: 6px; }
-.roadmap-card h4::before { content: counter(track, decimal-leading-zero) "  "; font-family: var(--mono); font-size: 0.8rem; color: var(--text-dim); font-weight: 400; }
+.roadmap-card h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 6px; }
+.roadmap-card h3::before { content: counter(track, decimal-leading-zero) "  "; font-family: var(--mono); font-size: 0.8rem; color: var(--text-dim); font-weight: 400; }
 .roadmap-card p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 16px; flex: 1; }
 
 /* Projects */
@@ -630,22 +639,20 @@ kbd {
 .project h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 6px; }
 .project p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 16px; flex: 1; }
 .project .tags { margin-bottom: 18px; }
+/* Next.js version: the title links to the project's own page and covers the whole card */
+.project-title-link::after { content: ""; position: absolute; inset: 0; border-radius: inherit; z-index: 1; }
+.project-links { display: flex; flex-wrap: wrap; gap: 18px; }
 .project-link {
+    position: relative; z-index: 2; /* sits above the stretched title link */
     display: inline-flex; align-items: center; gap: 6px; align-self: flex-start;
     font-family: var(--mono); font-size: 0.8rem; color: var(--accent-text);
 }
-/* Make the whole card clickable via the live-site link */
-.project-link::after { content: ""; position: absolute; inset: 0; border-radius: inherit; z-index: 1; }
+.project-link-muted { color: var(--text-muted); }
+.project-link-muted:hover { color: var(--accent-text); }
 .project-link .icon { transition: transform 0.2s var(--ease); }
 .project:hover .project-link .icon { transform: translate(2px, -2px); }
 
-.show-more-wrap { display: flex; justify-content: center; margin-top: 40px; }
-.show-more-count {
-    font-size: 0.75rem; padding: 1px 7px; border-radius: 6px;
-    background: var(--accent-soft); color: var(--accent-text);
-}
-.show-more-chevron { transition: transform 0.25s var(--ease); }
-[aria-expanded="true"] .show-more-chevron { transform: rotate(180deg); }
+.section-actions { display: flex; justify-content: center; margin-top: 40px; }
 
 /* Quote */
 .quote { padding: 104px 0; }
@@ -682,7 +689,7 @@ kbd {
 .timeline-item.visible::before { background: var(--accent); box-shadow: 0 0 14px var(--accent); }
 .timeline-date { display: block; font-family: var(--mono); font-size: 0.8rem; color: var(--accent-text); margin-bottom: 10px; }
 .timeline-card { padding: 22px 24px; }
-.timeline-card h3 { font-size: 1.1rem; font-weight: 600; }
+.timeline-card h2 { font-size: 1.1rem; font-weight: 600; }
 .timeline-company { font-family: var(--mono); font-size: 0.8rem; color: var(--text-dim); margin-bottom: 10px; }
 .timeline-card p:last-child { color: var(--text-muted); font-size: 0.925rem; }
 
@@ -694,7 +701,7 @@ kbd {
     color: var(--accent-text); padding: 3px 8px; margin-bottom: 18px;
     border: 1px solid var(--accent-line); border-radius: 6px;
 }
-.process h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 8px; }
+.process h2 { font-size: 1.1rem; font-weight: 600; margin-bottom: 8px; }
 .process p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 18px; }
 .process-list { display: grid; gap: 6px; padding-top: 16px; border-top: 1px solid var(--border); }
 .process-list li { font-family: var(--mono); font-size: 0.78rem; color: var(--text-muted); }
@@ -881,6 +888,57 @@ div.contact-item:hover::after { opacity: 0; }
     transition: color 0.2s, border-color 0.2s;
 }
 .chat-actions a:hover { color: var(--accent-text); border-color: var(--accent-line); }
+
+/* ========================================
+   Next.js version: multi-page additions
+======================================== */
+
+/* The first section of every page except home: push it below the fixed nav */
+.section.page-top { padding-top: calc(var(--nav-h) + 88px); }
+
+/* "Next page" link at the bottom of each page */
+.page-next { padding: 0 0 96px; }
+.page-next-link {
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    padding: 22px 26px; border-radius: var(--radius-lg);
+}
+.page-next-link small { display: block; font-family: var(--mono); font-size: 0.75rem; color: var(--text-dim); }
+.page-next-link strong { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.02em; }
+.page-next-link > .icon { width: 22px; height: 22px; color: var(--accent-text); transition: transform 0.25s var(--ease); }
+.page-next-link:hover > .icon { transform: translateX(4px); }
+
+/* Project detail page: /projects/[slug] */
+.back-link {
+    display: inline-flex; align-items: center; gap: 8px; margin-bottom: 28px;
+    font-family: var(--mono); font-size: 0.8rem; color: var(--text-muted);
+}
+.back-link:hover { color: var(--accent-text); }
+.detail-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 40px; align-items: start; }
+.detail-shot { overflow: hidden; border-radius: var(--radius-lg); }
+.detail-shot img { width: 100%; height: auto; }
+.detail-info { padding: 28px; display: grid; gap: 20px; position: sticky; top: calc(var(--nav-h) + 24px); }
+.detail-info .profile-meta { margin-bottom: 0; }
+.detail-summary { color: var(--text-muted); font-size: 1.05rem; }
+.detail-pager { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 56px; }
+.detail-pager a { padding: 18px 22px; border-radius: var(--radius); }
+.detail-pager a:last-child { text-align: right; }
+.detail-pager small { display: block; font-family: var(--mono); font-size: 0.72rem; color: var(--text-dim); }
+.detail-pager strong { font-weight: 600; }
+
+/* 404 page */
+.not-found { min-height: 70vh; display: grid; place-items: center; text-align: center; }
+.not-found-code { font-family: var(--mono); font-size: clamp(4rem, 14vw, 8rem); line-height: 1; letter-spacing: -0.06em; }
+.not-found p { color: var(--text-muted); margin: 16px 0 28px; }
+
+@media (max-width: 900px) {
+    .detail-grid { grid-template-columns: 1fr; }
+    .detail-info { position: static; }
+}
+@media (max-width: 640px) {
+    .section.page-top { padding-top: calc(var(--nav-h) + 56px); }
+    .detail-pager { grid-template-columns: 1fr; }
+    .detail-pager a:last-child { text-align: left; }
+}
 
 /* ========================================
    Reveal on scroll (only when JS runs)
