@@ -14,6 +14,22 @@ npm run build    # production build (shows which pages are static)
 npm run lint     # code checks
 ```
 
+## Contact form email (Resend)
+
+The form on `/contact` calls a **Server Action** (`src/app/contact/actions.ts`) that emails the message to
+your Gmail through [Resend](https://resend.com). It needs one secret, `RESEND_API_KEY`:
+
+1. Sign up at resend.com **with jasonjay.ababao1968@gmail.com**. Without a verified domain, Resend only
+   delivers to the address you signed up with.
+2. Create an API key at resend.com/api-keys.
+3. **On your PC:** copy `.env.example` to `.env.local`, paste the key after `RESEND_API_KEY=`, then restart
+   `npm run dev`. `.env.local` is ignored by git, so the key never goes to GitHub.
+4. **On Vercel:** Project → Settings → Environment Variables → add `RESEND_API_KEY`, then redeploy.
+
+Messages arrive from `onboarding@resend.dev` with the subject `Portfolio: …`. Pressing **Reply** in Gmail
+answers the visitor directly. If sending ever fails, the form shows your email address instead, so no
+visitor is left stuck.
+
 ## The one rule of routing: folders = URLs
 
 Every `page.tsx` inside `src/app` is a page. Its folder path is its URL.
@@ -27,7 +43,7 @@ Every `page.tsx` inside `src/app` is a page. Its folder path is its URL.
 | `/projects/curakidney`      | `src/app/projects/[slug]/page.tsx`     | **Dynamic route**, `generateStaticParams`, `notFound()` |
 | `/experience`               | `src/app/experience/page.tsx`          | Simple list page                                 |
 | `/process`                  | `src/app/process/page.tsx`             | Simple list page                                 |
-| `/contact`                  | `src/app/contact/page.tsx`             | Controlled form (Client Component)               |
+| `/contact`                  | `src/app/contact/page.tsx`             | Controlled form + **Server Action** (`actions.ts`) |
 | `/api/projects`             | `src/app/api/projects/route.ts`        | **Route handler**: an API that returns JSON      |
 | any unknown URL             | `src/app/not-found.tsx`                | Custom 404 page                                  |
 | (every page)                | `src/app/layout.tsx`                   | Root layout: nav, footer, chat, fonts, theme     |
