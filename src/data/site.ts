@@ -18,9 +18,9 @@ export const site = {
   whatsappNumber: '+63 967 429 8088',
   whatsappUrl: 'https://wa.me/639674298088',
   githubUrl: 'https://github.com/jasonjayA68',
-  // TODO: add your LinkedIn and Facebook URLs. Empty strings are hidden in the Contact page.
-  linkedinUrl: '',
-  facebookUrl: '',
+  // Leave a URL as an empty string ('') to hide its icon on the Contact page.
+  linkedinUrl: 'https://www.linkedin.com/in/jason-jay-ababao-a91841230/',
+  facebookUrl: 'https://www.facebook.com/jjasoon/',
   // Hard-coded on purpose: reading the clock during rendering makes Next.js treat the page as dynamic.
   copyrightYear: 2026,
   stats: [
