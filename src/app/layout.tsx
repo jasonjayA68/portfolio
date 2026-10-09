@@ -57,7 +57,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
-      <body>
+      {/* suppressHydrationWarning: browser extensions like Grammarly add attributes to <body> */}
+      <body suppressHydrationWarning>
         <Providers>
           <a className="skip-link" href="#main">
             Skip to content

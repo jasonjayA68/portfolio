@@ -550,7 +550,7 @@ kbd {
     padding: 11px 0; border-bottom: 1px solid var(--border); font-size: 0.9rem;
 }
 .profile-meta dt { font-family: var(--mono); font-size: 0.78rem; color: var(--text-dim); }
-.profile-meta dd { font-weight: 500; text-align: right; }
+.profile-meta dd { font-weight: 500; text-align: right; min-width: 0; overflow-wrap: anywhere; }
 .profile-meta .ok { color: var(--ok); }
 
 /* Skills */
@@ -757,7 +757,8 @@ div.contact-item:hover::after { opacity: 0; }
 .hp-field { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
 
 /* Footer */
-.footer { padding: 36px 0 48px; border-top: 1px solid var(--border); }
+/* Extra bottom space so the floating "Ask the assistant" button never covers the footer text */
+.footer { padding: 36px 0 96px; border-top: 1px solid var(--border); }
 .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
 .footer-copy { color: var(--text-dim); font-size: 0.875rem; }
 .footer-built { color: var(--text-dim); font-size: 0.75rem; }
@@ -1002,8 +1003,10 @@ div.contact-item:hover::after { opacity: 0; }
     .section { padding: 80px 0; }
     .section-head { margin-bottom: 40px; }
     .hero { padding-top: calc(var(--nav-h) + 40px); }
-    .hero-stats { gap: 24px; }
+    /* Three equal columns so the stats always share one row on phones */
+    .hero-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
     .stat dd { font-size: 1.6rem; }
+    .stat dt { font-size: 0.68rem; line-height: 1.35; }
     .projects-grid, .skills-grid, .process-grid, .roadmap-grid, .form-row { grid-template-columns: 1fr; }
     .logo-dim { display: none; }
     .terminal { font-size: 0.78rem; }
@@ -1024,6 +1027,23 @@ div.contact-item:hover::after { opacity: 0; }
     }
     .palette { padding-top: 10vh; }
     .palette-foot span:last-child { display: none; }
+
+    /* iPhones zoom into any text box under 16px when tapped; keep them at 16px */
+    .terminal-ask input, .chat-form input, .palette-search input { font-size: 16px; }
+
+    /* Fit the email address on one line */
+    .contact-item { gap: 12px; padding: 14px; font-size: 0.9rem; }
+    .contact-item > .icon { width: 36px; height: 36px; padding: 9px; }
+
+    .footer-inner { flex-direction: column; align-items: flex-start; gap: 10px; }
+}
+
+/* Very small phones (e.g. iPhone SE 1st gen, 320px wide) */
+@media (max-width: 360px) {
+    .logo-text { white-space: nowrap; }
+    .terminal-title { display: none; }
+    .terminal-bar { justify-content: space-between; }
+    .contact-item { font-size: 0.75rem; letter-spacing: -0.01em; }
 }
 
 @media (prefers-reduced-motion: reduce) {
