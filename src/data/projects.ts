@@ -176,8 +176,8 @@ export const projects: Project[] = [
     image: '/assets/projects/connect-ca.webp',
     summary:
       'Toronto real-estate brokerage site with pre-construction listings, VIP access sign-ups and buyer and seller lead funnels.',
-    tags: ['WordPress', 'Real estate'],
-    platforms: ['wordpress'],
+    tags: ['Laravel', 'Real estate'],
+    platforms: ['laravel'],
     industries: ['real estate', 'property'],
     keywords: ['connect.ca', 'toronto'],
     featured: false,
@@ -233,6 +233,7 @@ export const projectFilters = [
   { value: 'all', label: 'All' },
   { value: 'shopify', label: 'Shopify' },
   { value: 'wordpress', label: 'WordPress' },
+  { value: 'laravel', label: 'Laravel' },
   { value: 'e-commerce', label: 'E-commerce' },
   { value: 'travel', label: 'Travel' },
   { value: 'healthcare', label: 'Healthcare' },

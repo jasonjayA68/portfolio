@@ -181,10 +181,14 @@ const intents: Intent[] = [
     id: 'backend',
     words: ['laravel', 'php', 'backend', 'back-end', 'api', 'database', 'sql', 'custom app', 'web app'],
     reply: () => (
-      <p>
-        On the back end {site.firstName} works with PHP and Laravel, SQL databases and REST APIs — custom
-        integrations, booking flows, calculators and CRM hookups that sit behind the CMS sites.
-      </p>
+      <>
+        <p>
+          On the back end {site.firstName} works with PHP and Laravel, SQL databases and REST APIs — custom
+          integrations, booking flows, calculators and CRM hookups that sit behind the CMS sites.
+        </p>
+        <p>Laravel work in this portfolio:</p>
+        <ProjectList list={byPlatform('laravel')} />
+      </>
     ),
   },
   {

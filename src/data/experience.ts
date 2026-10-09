@@ -22,7 +22,7 @@ export const experience: Job[] = [
     dates: 'Apr 2021 — Apr 2023',
     shortDates: 'Apr 2021 – Apr 2023',
     description:
-      'Built and customized WordPress and Shopify sites for international clients including Think Tank Tutors, Go Euro Golf, Go Irish Tours, Woven Panel, Connect.ca, TopTier Virtuals and Your Reformer.',
+      'Built and customized WordPress, Shopify and Laravel sites for international clients including Think Tank Tutors, Go Euro Golf, Go Irish Tours, Woven Panel, Connect.ca, TopTier Virtuals and Your Reformer.',
   },
   {
     role: 'SEO Associate',
