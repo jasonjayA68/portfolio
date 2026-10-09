@@ -20,7 +20,7 @@ const LINES: Line[] = [
   { segments: [{ text: 'Full-stack web developer · 5+ years' }] },
   { segments: [{ text: 'stack', className: 't-key' }, { text: ' WordPress · Shopify · Laravel' }] },
   { segments: [{ text: 'ai', className: 't-key' }, { text: ' Claude Code · Cursor · Codex' }] },
-  { segments: [{ text: 'shipped', className: 't-key' }, { text: ' 14 live client sites · 4 agencies' }] },
+  { segments: [{ text: 'shipped', className: 't-key' }, { text: ' 14 client sites · 4 agencies' }] },
   {
     segments: [
       { text: 'status', className: 't-key' },

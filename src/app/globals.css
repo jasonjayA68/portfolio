@@ -923,6 +923,10 @@ div.contact-item:hover::after { opacity: 0; }
 .detail-info { padding: 28px; display: grid; gap: 20px; position: sticky; top: calc(var(--nav-h) + 24px); }
 .detail-info .profile-meta { margin-bottom: 0; }
 .detail-summary { color: var(--text-muted); font-size: 1.05rem; }
+.detail-note {
+    padding: 12px 14px; border-radius: 10px; font-size: 0.9rem; color: var(--text-muted);
+    border: 1px dashed var(--border-strong); background: var(--surface-2);
+}
 .detail-pager { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 56px; }
 .detail-pager a { padding: 18px 22px; border-radius: var(--radius); }
 .detail-pager a:last-child { text-align: right; }
@@ -930,9 +934,16 @@ div.contact-item:hover::after { opacity: 0; }
 .detail-pager strong { font-weight: 600; }
 
 /* 404 page */
-.not-found { min-height: 70vh; display: grid; place-items: center; text-align: center; }
-.not-found-code { font-family: var(--mono); font-size: clamp(4rem, 14vw, 8rem); line-height: 1; letter-spacing: -0.06em; }
-.not-found p { color: var(--text-muted); margin: 16px 0 28px; }
+.not-found { min-height: 80vh; display: grid; place-items: center; text-align: center; }
+.not-found-inner { display: grid; justify-items: center; gap: 22px; }
+.not-found-code { font-family: var(--mono); font-size: clamp(4.5rem, 16vw, 9rem); line-height: 1; letter-spacing: -0.06em; font-weight: 600; }
+.not-found-text { color: var(--text-muted); max-width: 32rem; }
+.not-found-terminal { width: min(460px, 100%); text-align: left; }
+.not-found-terminal .terminal-body { min-height: 0; padding: 16px 20px; }
+.not-found-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+.not-found-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 12px; }
+.not-found-link { display: flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 12px; font-size: 0.9rem; }
+.not-found-link small { font-family: var(--mono); font-size: 0.72rem; color: var(--accent-text); }
 
 @media (max-width: 900px) {
     .detail-grid { grid-template-columns: 1fr; }

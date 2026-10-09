@@ -17,7 +17,8 @@
 export type Project = {
   slug: string // used in the URL: /projects/<slug>
   title: string
-  url: string // the live website
+  url: string // the website's address
+  offlineNote?: string // set when your version is no longer online; hides the "Live site" links
   image: string // path inside /public
   summary: string
   tags: string[] // shown as small labels on the card
@@ -186,13 +187,14 @@ export const projects: Project[] = [
     slug: 'sunshine-coast-rentals',
     title: 'Sunshine Coast Rentals',
     url: 'https://sunshinecoastpropertyrentals.com',
+    offlineNote: 'The business has since rebranded as Rosel Living, so this version of the site is no longer online.',
     image: '/assets/projects/sunshinecoast.webp',
     summary:
       "Holiday rental site for Queensland's Sunshine Coast with availability search, property listings and integrated booking management.",
     tags: ['WordPress', 'Property'],
     platforms: ['wordpress'],
     industries: ['property', 'real estate'],
-    keywords: ['sunshine', 'queensland'],
+    keywords: ['sunshine', 'queensland', 'rosel'],
     featured: false,
     agency: 'DG Venture LTD',
   },

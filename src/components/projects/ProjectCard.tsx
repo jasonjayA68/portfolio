@@ -37,9 +37,14 @@ export function ProjectCard({ project, className = '', style }: ProjectCardProps
         </h3>
         <p>{project.summary}</p>
         <Tags items={project.tags} />
-        <a href={project.url} className="project-link" target="_blank" rel="noopener noreferrer">
-          Live site<span className="sr-only"> — {project.title} (opens in new tab)</span> <Icon name="external" />
-        </a>
+        {project.offlineNote ? (
+          // Your version isn't online anymore, so don't send visitors to someone else's site
+          <span className="project-link project-link-muted">No longer online</span>
+        ) : (
+          <a href={project.url} className="project-link" target="_blank" rel="noopener noreferrer">
+            Live site<span className="sr-only"> — {project.title} (opens in new tab)</span> <Icon name="external" />
+          </a>
+        )}
       </div>
     </article>
   )

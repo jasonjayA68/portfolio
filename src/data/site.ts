@@ -24,7 +24,7 @@ export const site = {
   // Hard-coded on purpose: reading the clock during rendering makes Next.js treat the page as dynamic.
   copyrightYear: 2026,
   stats: [
-    { label: 'Live client sites', value: 14, suffix: '+' },
+    { label: 'Client sites shipped', value: 14, suffix: '+' },
     { label: 'Years experience', value: 5, suffix: '+' },
     { label: 'Agencies', value: 4, suffix: '' },
   ],

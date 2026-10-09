@@ -36,7 +36,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     title: `${site.name} — ${site.role}`,
-    description: 'Fast, conversion-focused websites on WordPress, Shopify and Laravel. 14 live client sites, 5+ years.',
+    description: 'Fast, conversion-focused websites on WordPress, Shopify and Laravel. 14 client sites, 5+ years.',
   },
 }
 

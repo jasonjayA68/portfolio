@@ -71,7 +71,7 @@ const intents: Intent[] = [
       <>
         <p>
           {site.name} is a full-stack web developer based in {site.locationShort}, with 5+ years of
-          experience. He&apos;s shipped 14 live client sites with agencies and direct clients in Australia,
+          experience. He&apos;s shipped 14 client sites with agencies and direct clients in Australia,
           Canada, Ireland, the Philippines and beyond.
         </p>
         <p>He started in graphic design, so he cares about how things look as much as how they work.</p>
@@ -242,7 +242,7 @@ const intents: Intent[] = [
     words: ['project', 'work', 'portfolio', 'clients', 'examples', 'site', 'website', 'built', 'case'],
     reply: () => (
       <>
-        <p>There are {projects.length} live client sites in this portfolio. A few highlights:</p>
+        <p>There are {projects.length} client sites in this portfolio. A few highlights:</p>
         <ProjectList list={projects.slice(0, 5)} />
         <p>
           <ChatLink href="/projects">See all projects →</ChatLink>
@@ -401,11 +401,17 @@ export function getAnswer(question: string): ReactNode {
         <p>
           <strong>{project.title}</strong> — {project.summary}
         </p>
+        {project.offlineNote && <p>{project.offlineNote}</p>}
         <p>
-          <ChatLink href={`/projects/${project.slug}`}>Project details</ChatLink> ·{' '}
-          <a href={project.url} target="_blank" rel="noopener noreferrer">
-            Live site ↗
-          </a>
+          <ChatLink href={`/projects/${project.slug}`}>Project details</ChatLink>
+          {!project.offlineNote && (
+            <>
+              {' · '}
+              <a href={project.url} target="_blank" rel="noopener noreferrer">
+                Live site ↗
+              </a>
+            </>
+          )}
         </p>
       </>
     )

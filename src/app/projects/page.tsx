@@ -17,7 +17,7 @@ import { ProjectFilter } from '@/components/projects/ProjectFilter'
 
 export const metadata: Metadata = {
   title: 'Selected work',
-  description: 'Live client websites across e-commerce, travel, wellness, healthcare and property.',
+  description: 'Client websites across e-commerce, travel, wellness, healthcare and property.',
 }
 
 export default function ProjectsPage() {
