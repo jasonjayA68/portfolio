@@ -3,16 +3,18 @@
  * The AI roadmap section has id="roadmap", so /skills#roadmap jumps straight to it.
  */
 import type { Metadata } from 'next'
+import { pageMetadata } from '@/lib/seo'
 import { skills, roadmap } from '@/data/skills'
 import { SectionHeader } from '@/components/ui/SectionHeader'
 import { SkillCard } from '@/components/ui/SkillCard'
 import { DecodeText } from '@/components/ui/DecodeText'
 import { NextPageLink } from '@/components/ui/NextPageLink'
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'Skills & tools',
-  description: 'The stack I build with, and the AI development skills I am studying now.',
-}
+  description: 'The tools I build with: WordPress, Elementor, Shopify, Laravel, PHP, SEO, HubSpot and AI coding assistants, plus the AI development skills I am studying now.',
+  path: '/skills',
+})
 
 export default function SkillsPage() {
   return (

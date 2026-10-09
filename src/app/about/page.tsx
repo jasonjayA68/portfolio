@@ -3,6 +3,7 @@
  * File location = URL:  src/app/about/page.tsx  ->  /about
  */
 import type { Metadata } from 'next'
+import { pageMetadata } from '@/lib/seo'
 import Image from 'next/image'
 import Link from 'next/link'
 import { site } from '@/data/site'
@@ -10,10 +11,11 @@ import { SectionHeader } from '@/components/ui/SectionHeader'
 import { NextPageLink } from '@/components/ui/NextPageLink'
 
 // Sets the <title> of this page: "About · Jason Jay Ababao" (see the template in layout.tsx)
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'About',
-  description: `About ${site.name}, a full-stack web developer with 5+ years of experience.`,
-}
+  description: `About ${site.name}, a full-stack web developer from the Philippines with 5+ years building WordPress, Shopify and Laravel websites for agencies and clients worldwide.`,
+  path: '/about',
+})
 
 const highlights = [
   { title: 'Full-stack expertise', text: 'Front-end to back-end — PHP, Laravel, JS and modern CMS platforms.' },

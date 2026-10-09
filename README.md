@@ -30,6 +30,20 @@ Messages arrive from `onboarding@resend.dev` with the subject `Portfolio: …`. 
 answers the visitor directly. If sending ever fails, the form shows your email address instead, so no
 visitor is left stuck.
 
+## SEO
+
+| What                         | File                          |
+| ---------------------------- | ----------------------------- |
+| Site URL, keywords, page metadata helper, JSON-LD | `src/lib/seo.ts` |
+| Site-wide title/description/keywords + JSON-LD script | `src/app/layout.tsx` |
+| Per-page title, description, canonical | `export const metadata = pageMetadata({...})` in each `page.tsx` |
+| Social share image (1200×630)  | `src/app/opengraph-image.tsx` |
+| `/sitemap.xml`                 | `src/app/sitemap.ts` (projects added automatically) |
+| `/robots.txt`                  | `src/app/robots.ts` |
+
+Full URLs use Vercel's `VERCEL_PROJECT_PRODUCTION_URL` (set automatically on every deploy).
+After deploying, submit `https://<your-domain>/sitemap.xml` in Google Search Console.
+
 ## The one rule of routing: folders = URLs
 
 Every `page.tsx` inside `src/app` is a page. Its folder path is its URL.

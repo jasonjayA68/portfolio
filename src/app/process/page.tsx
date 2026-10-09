@@ -1,13 +1,15 @@
 /** ROUTE: /process */
 import type { Metadata } from 'next'
+import { pageMetadata } from '@/lib/seo'
 import { processSteps } from '@/data/process'
 import { SectionHeader } from '@/components/ui/SectionHeader'
 import { NextPageLink } from '@/components/ui/NextPageLink'
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'Process',
-  description: 'Discovery, design, build and launch — how a website project runs from first call to handover.',
-}
+  description: 'How a website project runs: free discovery call, written scope, design mockups, development, QA, SEO setup, launch and handover.',
+  path: '/process',
+})
 
 export default function ProcessPage() {
   return (

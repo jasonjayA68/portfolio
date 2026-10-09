@@ -4,16 +4,18 @@
  * Client Components because they react to typing and clicks.
  */
 import type { Metadata } from 'next'
+import { pageMetadata } from '@/lib/seo'
 import { site } from '@/data/site'
 import { Icon } from '@/components/ui/Icon'
 import { SectionHeader } from '@/components/ui/SectionHeader'
 import { ContactForm } from '@/components/contact/ContactForm'
 import { AskAssistantCard } from '@/components/assistant/AskAssistantCard'
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'Contact',
-  description: `Hire ${site.name} for a new website, a redesign or ongoing maintenance.`,
-}
+  description: `Hire ${site.name} for a new website, redesign or ongoing maintenance. Send a message, email or WhatsApp. Available for freelance projects.`,
+  path: '/contact',
+})
 
 export default function ContactPage() {
   return (

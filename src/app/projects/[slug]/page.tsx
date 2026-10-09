@@ -17,6 +17,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
 import { projects, getProjectBySlug, displayDomain } from '@/data/projects'
+import { pageMetadata } from '@/lib/seo'
 import { Icon } from '@/components/ui/Icon'
 import { Tags } from '@/components/ui/Tags'
 import { DecodeText } from '@/components/ui/DecodeText'
@@ -36,7 +37,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const project = getProjectBySlug(slug)
   if (!project) return { title: 'Project not found' }
-  return { title: project.title, description: project.summary }
+  return pageMetadata({
+    title: `${project.title} — ${project.tags.join(', ')} project`,
+    description: project.summary,
+    path: `/projects/${project.slug}`,
+  })
 }
 
 /**

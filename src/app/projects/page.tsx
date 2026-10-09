@@ -8,6 +8,7 @@
  *   - in the browser, <ProjectFilter> takes over and applies the filter
  */
 import type { Metadata } from 'next'
+import { pageMetadata } from '@/lib/seo'
 import { Suspense } from 'react'
 import { projects } from '@/data/projects'
 import { SectionHeader } from '@/components/ui/SectionHeader'
@@ -15,10 +16,11 @@ import { NextPageLink } from '@/components/ui/NextPageLink'
 import { ProjectCard } from '@/components/projects/ProjectCard'
 import { ProjectFilter } from '@/components/projects/ProjectFilter'
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'Selected work',
-  description: 'Client websites across e-commerce, travel, wellness, healthcare and property.',
-}
+  description: '14 client websites for e-commerce, travel, healthcare, wellness and property brands, built on WordPress, Shopify and Laravel.',
+  path: '/projects',
+})
 
 export default function ProjectsPage() {
   return (

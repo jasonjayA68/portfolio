@@ -1,13 +1,15 @@
 /** ROUTE: /experience */
 import type { Metadata } from 'next'
+import { pageMetadata } from '@/lib/seo'
 import { experience } from '@/data/experience'
 import { SectionHeader } from '@/components/ui/SectionHeader'
 import { NextPageLink } from '@/components/ui/NextPageLink'
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'Experience',
-  description: 'Agency and freelance work history: WordPress, Shopify, SEO and graphic design.',
-}
+  description: '5+ years building WordPress and Shopify sites with agencies DG Venture and ESTRAT360, plus SEO and graphic design experience.',
+  path: '/experience',
+})
 
 export default function ExperiencePage() {
   return (

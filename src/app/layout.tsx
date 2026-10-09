@@ -10,6 +10,7 @@ import type { ReactNode } from 'react'
 import { Geist, Geist_Mono } from 'next/font/google'
 import { site } from '@/data/site'
 import { themeScript } from '@/lib/theme'
+import { siteUrl, keywords, personJsonLd } from '@/lib/seo'
 import { Providers } from '@/components/Providers'
 import { Background } from '@/components/layout/Background'
 import { Nav } from '@/components/layout/Nav'
@@ -26,18 +27,38 @@ import './globals.css'
 const geist = Geist({ subsets: ['latin'], variable: '--font-geist' })
 const geistMono = Geist_Mono({ subsets: ['latin'], weight: ['400', '500'], variable: '--font-geist-mono' })
 
-// <title> and <meta> tags. Pages can override these with their own `metadata` export.
+const homeTitle = `${site.name} — ${site.role}`
+const homeDescription =
+  'Full-stack web developer building fast, conversion-focused websites on WordPress, Shopify and Laravel. 14 client sites, 5+ years. Available for freelance work.'
+
+// <title> and <meta> tags for the whole site. Each page overrides title/description
+// with its own `metadata` export (see pageMetadata() in src/lib/seo.ts).
 export const metadata: Metadata = {
+  // Turns relative URLs like "/about" into full ones like "https://yoursite.com/about"
+  metadataBase: new URL(siteUrl),
   title: {
-    default: `${site.name} — ${site.role}`,
+    default: homeTitle,
     template: `%s · ${site.name}`, // a page titled "About" becomes "About · Jason Jay Ababao"
   },
-  description: site.description,
+  description: homeDescription,
+  keywords,
+  authors: [{ name: site.name, url: siteUrl }],
+  creator: site.name,
+  alternates: { canonical: '/' },
   openGraph: {
     type: 'website',
-    title: `${site.name} — ${site.role}`,
-    description: 'Fast, conversion-focused websites on WordPress, Shopify and Laravel. 14 client sites, 5+ years.',
+    siteName: site.name,
+    locale: 'en_US',
+    url: '/',
+    title: homeTitle,
+    description: homeDescription,
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: homeTitle,
+    description: homeDescription,
+  },
+  robots: { index: true, follow: true },
 }
 
 export const viewport: Viewport = {
@@ -59,6 +80,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       </head>
       {/* suppressHydrationWarning: browser extensions like Grammarly add attributes to <body> */}
       <body suppressHydrationWarning>
+        {/* Structured data for search engines. "<" is escaped so the JSON can't break out of the tag. */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd()).replace(/</g, '\\u003c') }}
+        />
         <Providers>
           <a className="skip-link" href="#main">
             Skip to content
