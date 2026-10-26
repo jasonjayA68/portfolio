@@ -82,7 +82,7 @@ async function ProjectDetails({ params }: Props) {
     <>
       <header className="section-head reveal">
         <p className="eyebrow">
-          <span className="eyebrow-num">03.{String(index + 1).padStart(2, '0')}</span>{' '}
+          <span className="eyebrow-num">04.{String(index + 1).padStart(2, '0')}</span>{' '}
           <DecodeText text="case study" />
         </p>
         <h1 className="section-title">{project.title}</h1>

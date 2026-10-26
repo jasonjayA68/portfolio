@@ -58,7 +58,7 @@ export default function SkillsPage() {
         </div>
       </section>
 
-      <NextPageLink href="/projects" label="Selected work" />
+      <NextPageLink href="/services" label="Services" />
     </>
   )
 }

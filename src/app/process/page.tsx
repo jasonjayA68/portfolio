@@ -17,7 +17,7 @@ export default function ProcessPage() {
       <section className="section page-top">
         <div className="container">
           <SectionHeader
-            number="05"
+            number="07"
             eyebrow="how I work"
             title="A clear process, no surprises."
             subtitle="From first call to launch day — a calm, organized workflow that keeps clients in the loop and projects on time."

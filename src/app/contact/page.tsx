@@ -22,7 +22,7 @@ export default function ContactPage() {
     <section className="section page-top">
       <div className="container">
         <SectionHeader
-          number="06"
+          number="08"
           eyebrow="get in touch"
           title="Let's build something great."
           subtitle="Have a project in mind or need a website refresh? I'd love to hear about it."

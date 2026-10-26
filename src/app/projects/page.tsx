@@ -28,7 +28,7 @@ export default function ProjectsPage() {
       <section className="section page-top">
         <div className="container">
           <SectionHeader
-            number="03"
+            number="04"
             eyebrow="selected work"
             title="Real projects. Live websites."
             subtitle="A selection of client sites I've designed, built or maintained across e-commerce, travel, wellness and professional services."
@@ -41,7 +41,7 @@ export default function ProjectsPage() {
         </div>
       </section>
 
-      <NextPageLink href="/experience" label="Experience" />
+      <NextPageLink href="/lab" label="AI Lab" />
     </>
   )
 }

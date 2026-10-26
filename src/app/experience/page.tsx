@@ -16,7 +16,7 @@ export default function ExperiencePage() {
     <>
       <section className="section page-top">
         <div className="container">
-          <SectionHeader number="04" eyebrow="experience" title="A timeline of my journey." as="h1" />
+          <SectionHeader number="06" eyebrow="experience" title="A timeline of my journey." as="h1" />
 
           {/* The glowing line that fills as you scroll is drawn by components/effects/ScrollProgress.tsx */}
           <ol className="timeline">
