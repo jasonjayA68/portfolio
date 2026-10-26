@@ -9,7 +9,7 @@
 import { ImageResponse } from 'next/og'
 import { site } from '@/data/site'
 
-export const alt = `${site.name} — ${site.role}`
+export const alt = `${site.name} · ${site.roleLong}`
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
 
@@ -52,17 +52,15 @@ export default function OpengraphImage() {
 
         {/* Headline */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
-          <div style={{ display: 'flex', fontSize: 76, fontWeight: 700, letterSpacing: -2, lineHeight: 1.05 }}>
-            Crafting digital experiences that convert.
+          <div style={{ display: 'flex', fontSize: 64, fontWeight: 700, letterSpacing: -2, lineHeight: 1.08 }}>
+            {site.headline}
           </div>
-          <div style={{ display: 'flex', fontSize: 34, color: '#9ba1b0' }}>
-            {site.role} · WordPress · Shopify · Laravel
-          </div>
+          <div style={{ display: 'flex', fontSize: 34, color: '#9ba1b0' }}>{site.roleLong}</div>
         </div>
 
         {/* Footer row */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: 28 }}>
-          <div style={{ display: 'flex', color: '#22d3ee' }}>14 client sites · 5+ years</div>
+          <div style={{ display: 'flex', color: '#22d3ee' }}>AI assistants · lead automations · HubSpot · GoHighLevel</div>
           <div
             style={{
               display: 'flex',
@@ -75,7 +73,7 @@ export default function OpengraphImage() {
             }}
           >
             <div style={{ display: 'flex', width: 14, height: 14, borderRadius: 999, backgroundColor: '#4ade80' }} />
-            Available for freelance work
+            Booking AI projects
           </div>
         </div>
       </div>

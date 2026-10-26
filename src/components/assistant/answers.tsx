@@ -1,10 +1,19 @@
 /**
  * The assistant's "brain" — no AI, just keyword matching.
  *
- * getAnswer("what shopify work have you done?")
+ * getAnswer("can you add a chatbot to my site?")
  *   1. Did the question name a project?   -> describe that project
  *   2. Otherwise score every intent by how many of its words appear
  *   3. Return the reply of the best-scoring intent (or a fallback)
+ *
+ * House rules for every reply (the "system prompt" of this scripted assistant):
+ *   - Answer only from the site's own data; if unsure, say so and offer to connect with Jason.
+ *   - Under 80 words, friendly and specific.
+ *   - When a visitor describes a need, suggest the matching service and ask for their URL and email.
+ *   - Never quote final prices: give the "starting at" price and say Jason confirms after a call.
+ *
+ * Services, FAQ, demos, case studies, skills and experience are read from src/data,
+ * so the chat always says the same thing as the pages.
  *
  * Replies are JSX instead of HTML strings, so links can be real Next.js
  * <Link>s and React escapes everything the visitor types.
@@ -12,6 +21,10 @@
 import type { ReactNode } from 'react'
 import { projects, type Project } from '@/data/projects'
 import { experience } from '@/data/experience'
+import { offers, faqs, howItWorks, priceFallback, type Offer } from '@/data/offers'
+import { labDemos } from '@/data/lab'
+import { getCaseStudy } from '@/data/caseStudies'
+import { skillGroups } from '@/data/skills'
 import { site } from '@/data/site'
 import { ChatLink } from './ChatLink'
 
@@ -42,6 +55,36 @@ function ContactLine() {
   )
 }
 
+/** The ask that ends every "I have a need" reply */
+function DemoAsk() {
+  return (
+    <p>
+      Share your website URL and email through the <ChatLink href="/contact">contact form</ChatLink> and{' '}
+      {site.firstName} will send you a free AI demo.
+    </p>
+  )
+}
+
+const lowerFirst = (text: string) => text.charAt(0).toLowerCase() + text.slice(1)
+
+const priceText = (offer: Offer) =>
+  offer.startingAt ? `Starting at ${offer.startingAt}` : `Starting price: ${priceFallback.toLowerCase()}`
+
+function OfferReply({ offer }: { offer: Offer }) {
+  return (
+    <>
+      <p>
+        That&apos;s the <strong>{offer.name}</strong> ({offer.timeline}): {offer.includes.slice(0, 3).map(lowerFirst).join(', ')}.
+      </p>
+      <p>
+        {priceText(offer)} ({offer.pricingModel.toLowerCase()}). {site.firstName} confirms the final price after a
+        call. <ChatLink href="/services">All services →</ChatLink>
+      </p>
+      <DemoAsk />
+    </>
+  )
+}
+
 const byPlatform = (key: string) => projects.filter((p) => p.platforms.includes(key))
 const byIndustry = (key: string) => projects.filter((p) => p.industries.includes(key))
 
@@ -50,8 +93,32 @@ const byIndustry = (key: string) => projects.filter((p) => p.industries.includes
 type Intent = {
   id: string
   words: string[]
-  reply: () => ReactNode
+  reply: (question: string) => ReactNode
 }
+
+/** Does the (normalized) question contain this word or phrase? */
+const mentions = (q: string, word: string) => q.includes(' ' + word + ' ') || q.includes(' ' + word + 's ')
+
+const faqIntents: Intent[] = faqs.map((faq) => ({
+  id: `faq:${faq.question}`,
+  words: faq.keywords,
+  reply: () => (
+    <>
+      <p>
+        <strong>{faq.question}</strong> {faq.answer}
+      </p>
+      <p>
+        <ChatLink href="/services#faq">More FAQs →</ChatLink>
+      </p>
+    </>
+  ),
+}))
+
+const offerIntents: Intent[] = offers.map((offer) => ({
+  id: `offer:${offer.slug}`,
+  words: offer.keywords,
+  reply: () => <OfferReply offer={offer} />,
+}))
 
 const intents: Intent[] = [
   {
@@ -59,23 +126,84 @@ const intents: Intent[] = [
     words: ['hi', 'hello', 'hey', 'yo', 'good morning', 'good evening', 'sup'],
     reply: () => (
       <p>
-        Hey! 👋 I can tell you about {site.firstName}&apos;s projects, stack, experience, process or
-        availability. What would you like to know?
+        Hey! 👋 I can tell you about {site.firstName}&apos;s AI services, demos, projects, pricing or
+        availability. What does your business need?
       </p>
+    ),
+  },
+  // FAQ before the offers, so "Do I need a new website?" gets the FAQ answer
+  ...faqIntents,
+  {
+    id: 'pricing',
+    words: ['price', 'pricing', 'cost', 'rate', 'budget', 'quote', 'charge', 'fee', 'hourly', 'how much'],
+    reply: (q) => {
+      const offer = offers.find((o) => o.keywords.some((k) => mentions(q, k)))
+      if (offer) return <OfferReply offer={offer} />
+      return (
+        <>
+          <ul>
+            {offers.map((o) => (
+              <li key={o.slug}>
+                <strong>{o.name}</strong>: {o.startingAt ? `from ${o.startingAt}` : priceFallback.toLowerCase()}
+              </li>
+            ))}
+          </ul>
+          <p>
+            {site.firstName} confirms the final price after a free call, in a fixed-price proposal.{' '}
+            <ChatLink href="/services">See services →</ChatLink>
+          </p>
+        </>
+      )
+    },
+  },
+  ...offerIntents,
+  {
+    id: 'services',
+    words: ['service', 'services', 'offer', 'offers', 'what do you do', 'what can you do', 'package', 'packages', 'audit'],
+    reply: () => (
+      <>
+        <p>{site.firstName} offers:</p>
+        <ul>
+          {offers.map((o) => (
+            <li key={o.slug}>
+              <ChatLink href="/services">{o.name}</ChatLink> ({o.timeline})
+            </li>
+          ))}
+        </ul>
+        <p>Or start with a free AI site audit. Tell me about your business and I&apos;ll point you to the right one.</p>
+      </>
+    ),
+  },
+  {
+    id: 'lab',
+    words: ['demo', 'demos', 'lab', 'ai lab', 'prototype', 'proof', 'show me ai', 'ai work', 'ai projects', 'rag demo', 'mcp'],
+    reply: () => (
+      <>
+        <p>AI demos in the lab:</p>
+        <ul>
+          {labDemos.map((demo) => (
+            <li key={demo.slug}>
+              {demo.title} ({demo.status.toLowerCase()})
+            </li>
+          ))}
+        </ul>
+        <p>
+          <ChatLink href="/lab">Open the AI Lab →</ChatLink> Want one on your site? I can pass your URL to{' '}
+          {site.firstName}.
+        </p>
+      </>
     ),
   },
   {
     id: 'about',
     words: ['who is', 'who are you', 'about you', 'about jason', 'about him', 'yourself', 'background', 'introduce', 'bio'],
     reply: () => (
-      <>
-        <p>
-          {site.name} is a full-stack web developer based in {site.locationShort}, with 5+ years of
-          experience. He&apos;s shipped 14 client sites with agencies and direct clients in Australia,
-          Canada, Ireland, the Philippines and beyond.
-        </p>
-        <p>He started in graphic design, so he cares about how things look as much as how they work.</p>
-      </>
+      <p>
+        {site.name} is an AI integration developer in the Philippines. He builds AI assistants and lead automations
+        into WordPress and Shopify sites, connected to HubSpot and GoHighLevel, for tour operators and online
+        stores. Before that: 5+ years and {projects.length} client sites for agencies and brands in Australia, Canada
+        and Ireland. <ChatLink href="/about">More about Jason →</ChatLink>
+      </p>
     ),
   },
   {
@@ -84,73 +212,49 @@ const intents: Intent[] = [
     reply: () => (
       <>
         <p>
-          {site.firstName} builds with AI in the loop — it speeds up planning, coding, reviews and debugging,
-          while he stays responsible for the quality of what ships.
+          {site.firstName} ships with {skillGroups[0].shipping.join(', ')} every day, and is building toward{' '}
+          {skillGroups[0].building.join(', ')}.
         </p>
-        <ul>
-          <li>Claude Code &amp; Codex — coding agents</li>
-          <li>Cursor — AI-first editor</li>
-          <li>ChatGPT &amp; Gemini — research, copy and problem-solving</li>
-        </ul>
         <p>
-          Next on his <ChatLink href="/skills#roadmap">AI roadmap</ChatLink>: LLM APIs, AI agents &amp; MCP,
-          RAG and the Next.js stack.
+          <ChatLink href="/skills">Skills</ChatLink> · <ChatLink href="/lab">AI demos</ChatLink>
         </p>
       </>
     ),
   },
   {
-    id: 'crm',
-    words: ['crm', 'hubspot', 'gohighlevel', 'go high level', 'ghl', 'automation', 'pipeline', 'leads', 'funnel', 'email marketing'],
-    reply: () => (
-      <p>
-        For CRM and automation {site.firstName} works with <strong>HubSpot</strong> and{' '}
-        <strong>GoHighLevel</strong> — lead pipelines, forms and follow-up automation connected to the website.
-      </p>
-    ),
-  },
-  {
     id: 'learning',
-    words: ['learning', 'learn', 'studying', 'study', 'roadmap', 'upskill', 'future', 'mcp', 'rag', 'langchain', 'langgraph', 'vector', 'embedding', 'next.js', 'nextjs', 'react', 'typescript', 'tailwind', 'n8n', 'zapier', 'supabase', 'openai api', 'claude api', 'ai sdk', 'v0', 'lovable', 'chatbot', 'ai app', 'ai feature'],
+    words: ['learning', 'learn', 'studying', 'study', 'roadmap', 'upskill', 'future', 'building toward', 'vector', 'embedding', 'supabase', 'openai api', 'claude api', 'ai sdk'],
     reply: () => (
       <>
-        <p>
-          {site.firstName} is actively studying the AI development skills clients hire for today — learning
-          them in public rather than claiming them:
-        </p>
+        <p>What {site.firstName} is building toward now:</p>
         <ul>
-          <li>LLM APIs — Claude, OpenAI, Gemini, Vercel AI SDK</li>
-          <li>AI agents &amp; MCP — tool calling, Claude Agent SDK, LangGraph</li>
-          <li>RAG &amp; vector search — embeddings, pgvector, Supabase</li>
-          <li>AI-ready stack — TypeScript, React, Next.js, Tailwind</li>
-          <li>AI automation — n8n, Make, Zapier, HubSpot Breeze, GHL Conversation AI</li>
-          <li>Prototyping &amp; evals — v0, Bolt, Lovable</li>
+          {skillGroups.map((group) => (
+            <li key={group.title}>
+              {group.title}: {group.building.join(', ')}
+            </li>
+          ))}
         </ul>
         <p>
-          <ChatLink href="/skills#roadmap">See the AI roadmap →</ChatLink>
+          <ChatLink href="/skills">See skills →</ChatLink>
         </p>
       </>
     ),
   },
   {
     id: 'skills',
-    words: ['stack', 'skill', 'tech', 'technologies', 'tools', 'languages', 'framework'],
+    words: ['stack', 'skill', 'tech', 'technologies', 'tools', 'languages', 'framework', 'next.js', 'nextjs', 'react', 'typescript'],
     reply: () => (
       <>
-        <p>The core stack:</p>
         <ul>
-          <li>Front-end: HTML5, CSS3, JavaScript, jQuery, Bootstrap</li>
-          <li>Back-end: PHP, Laravel, SQL, REST APIs</li>
-          <li>CMS: WordPress, Elementor Pro, WooCommerce, ACF</li>
-          <li>Commerce: Shopify, Liquid, Hydrogen</li>
-          <li>AI tools: Claude Code, Codex, ChatGPT, Gemini, Cursor</li>
-          <li>
-            Learning now: LLM APIs, AI agents &amp; MCP, RAG, Next.js —{' '}
-            <ChatLink href="/skills#roadmap">roadmap</ChatLink>
-          </li>
-          <li>CRM: HubSpot, GoHighLevel</li>
-          <li>Also: SEO, analytics, Figma, Git</li>
+          {skillGroups.map((group) => (
+            <li key={group.title}>
+              {group.title}: {group.shipping.slice(0, 4).join(', ')}
+            </li>
+          ))}
         </ul>
+        <p>
+          <ChatLink href="/skills">Full list →</ChatLink>
+        </p>
       </>
     ),
   },
@@ -159,8 +263,9 @@ const intents: Intent[] = [
     words: ['shopify', 'liquid', 'hydrogen', 'store', 'storefront', 'ecommerce', 'e-commerce', 'shop', 'online store'],
     reply: () => (
       <>
-        <p>Shopify is a specialty — custom Liquid themes, headless Hydrogen builds, apps and integrations. Live Shopify work:</p>
+        <p>Shopify stores {site.firstName} has built:</p>
         <ProjectList list={byPlatform('shopify')} />
+        <p>Want an AI product advisor on your store? Ask me about the AI Website Assistant.</p>
       </>
     ),
   },
@@ -169,11 +274,9 @@ const intents: Intent[] = [
     words: ['wordpress', 'wp', 'elementor', 'woocommerce', 'acf', 'cms'],
     reply: () => (
       <>
-        <p>
-          Most of {site.firstName}&apos;s agency work is WordPress + Elementor Pro — custom themes, ACF,
-          WooCommerce and conversion-focused landing pages. Some live examples:
-        </p>
-        <ProjectList list={byPlatform('wordpress').slice(0, 6)} />
+        <p>WordPress is most of {site.firstName}&apos;s client work. Some live examples:</p>
+        <ProjectList list={byPlatform('wordpress').slice(0, 5)} />
+        <p>Need AI on a WordPress site? Ask me about the AI Website Assistant.</p>
       </>
     ),
   },
@@ -183,21 +286,24 @@ const intents: Intent[] = [
     reply: () => (
       <>
         <p>
-          On the back end {site.firstName} works with PHP and Laravel, SQL databases and REST APIs — custom
-          integrations, booking flows, calculators and CRM hookups that sit behind the CMS sites.
+          On the back end {site.firstName} works with PHP, Laravel, SQL and REST APIs: integrations, booking flows
+          and CRM hookups. Laravel work:
         </p>
-        <p>Laravel work in this portfolio:</p>
         <ProjectList list={byPlatform('laravel')} />
       </>
     ),
   },
   {
     id: 'travel',
-    words: ['travel', 'tour', 'tourism', 'booking', 'itinerary', 'golf'],
+    words: ['travel', 'tour', 'tours', 'tourism', 'tour operator', 'booking', 'itinerary', 'golf'],
     reply: () => (
       <>
-        <p>Travel is a big one — destination pages, itinerary builders and lead-capture funnels:</p>
+        <p>Travel is {site.firstName}&apos;s biggest niche:</p>
         <ProjectList list={byIndustry('travel')} />
+        <p>
+          For tour operators he builds AI assistants that answer itinerary questions and pass leads to sales.{' '}
+          <ChatLink href="/services">See services →</ChatLink>
+        </p>
       </>
     ),
   },
@@ -206,8 +312,9 @@ const intents: Intent[] = [
     words: ['healthcare', 'health', 'medical', 'clinic', 'dialysis', 'hospital', 'doctor', 'patient'],
     reply: () => (
       <>
-        <p>Healthcare work — patient-friendly sites with booking and clear contact options:</p>
+        <p>Healthcare work:</p>
         <ProjectList list={byIndustry('healthcare')} />
+        <p>Clinics are a good fit for the AI Website Assistant: it answers patient questions from your own pages.</p>
       </>
     ),
   },
@@ -233,23 +340,23 @@ const intents: Intent[] = [
   },
   {
     id: 'education',
-    words: ['education', 'tutoring', 'tutor', 'school', 'course', 'learning'],
+    words: ['education', 'tutoring', 'tutor', 'school', 'course'],
     reply: () => (
       <p>
-        In education, {site.firstName} built <ChatLink href="/projects/think-tank-tutors">Think Tank Tutors</ChatLink>{' '}
-        — tutor booking, SAT prep funnels and parent dashboards on WordPress.
+        In education, {site.firstName} built <ChatLink href="/projects/think-tank-tutors">Think Tank Tutors</ChatLink>:
+        tutor booking, SAT prep funnels and parent dashboards on WordPress.
       </p>
     ),
   },
   {
     id: 'projects',
-    words: ['project', 'work', 'portfolio', 'clients', 'examples', 'site', 'website', 'built', 'case'],
+    words: ['project', 'work', 'portfolio', 'clients', 'examples', 'site', 'website', 'built', 'case', 'case study'],
     reply: () => (
       <>
-        <p>There are {projects.length} client sites in this portfolio. A few highlights:</p>
-        <ProjectList list={projects.slice(0, 5)} />
+        <p>Case studies:</p>
+        <ProjectList list={projects.filter((p) => getCaseStudy(p.slug))} />
         <p>
-          <ChatLink href="/projects">See all projects →</ChatLink>
+          <ChatLink href="/projects">All {projects.length} projects →</ChatLink>
         </p>
       </>
     ),
@@ -262,7 +369,7 @@ const intents: Intent[] = [
         <ul>
           {experience.map((job) => (
             <li key={job.company}>
-              <strong>{job.company}</strong> — {job.role} ({job.shortDates})
+              <strong>{job.company}</strong>: {job.role} ({job.shortDates})
             </li>
           ))}
         </ul>
@@ -278,24 +385,10 @@ const intents: Intent[] = [
     reply: () => (
       <>
         <p>
-          Yes — {site.firstName} is currently <strong>open for freelance projects</strong>, from new builds to
-          redesigns and ongoing maintenance.
+          Yes, {site.firstName} is booking AI projects{site.bookingMonth ? ` for ${site.bookingMonth}` : ''}. Tell me
+          what your business needs and I&apos;ll suggest the right service.
         </p>
-        <ContactLine />
-      </>
-    ),
-  },
-  {
-    id: 'pricing',
-    words: ['price', 'pricing', 'cost', 'rate', 'budget', 'quote', 'charge', 'fee', 'hourly', 'how much'],
-    reply: () => (
-      <>
-        <p>
-          Pricing depends on scope — a landing page, a full Shopify store and a custom Laravel build are very
-          different jobs. Every project starts with a free discovery call and a written scope, so you know the
-          cost before anything begins.
-        </p>
-        <ContactLine />
+        <DemoAsk />
       </>
     ),
   },
@@ -303,12 +396,16 @@ const intents: Intent[] = [
     id: 'process',
     words: ['process', 'how do you work', 'workflow', 'steps', 'approach', 'timeline', 'how long', 'deliver'],
     reply: () => (
-      <ul>
-        <li><strong>Discovery</strong> — free call, goals, written scope &amp; timeline</li>
-        <li><strong>Design</strong> — wireframes, then hi-fi responsive mockups</li>
-        <li><strong>Build</strong> — WordPress, Shopify or custom, modular and fast</li>
-        <li><strong>Launch</strong> — QA, SEO &amp; analytics, handover video and support</li>
-      </ul>
+      <>
+        <ol>
+          {howItWorks.map((step, i) => (
+            <li key={step.title}>
+              {i + 1}. {step.title}
+            </li>
+          ))}
+        </ol>
+        <p>Assistants take 2–3 weeks, automations 1–2 weeks, website builds 4–8 weeks.</p>
+      </>
     ),
   },
   {
@@ -316,18 +413,8 @@ const intents: Intent[] = [
     words: ['seo', 'google', 'ranking', 'search', 'performance', 'speed', 'analytics', 'conversion', 'cro'],
     reply: () => (
       <p>
-        {site.firstName} spent time as an SEO associate, so every build ships with on-page SEO, technical fixes,
-        analytics and a performance pass — and conversion in mind from the first wireframe.
-      </p>
-    ),
-  },
-  {
-    id: 'support',
-    words: ['maintenance', 'support', 'update', 'fix', 'bug', 'redesign', 'existing site', 'help'],
-    reply: () => (
-      <p>
-        Yes — beyond new builds, {site.firstName} handles redesigns, fixes, speed improvements and ongoing
-        maintenance for WordPress and Shopify sites. Launches include a handover video and post-launch support.
+        {site.firstName} spent time as an SEO associate, so every build ships with on-page SEO, analytics and a
+        performance pass, plus structured content AI tools can read.
       </p>
     ),
   },
@@ -336,8 +423,8 @@ const intents: Intent[] = [
     words: ['where', 'location', 'based', 'timezone', 'time zone', 'country', 'philippines', 'remote'],
     reply: () => (
       <p>
-        {site.firstName} is based in Naawan, Misamis Oriental, Philippines (UTC+8) and works remotely with
-        clients in Australia, Canada, Europe and the US.
+        {site.firstName} works remotely from the Philippines (UTC+8), overlapping with Australian and European
+        business hours.
       </p>
     ),
   },
@@ -360,9 +447,9 @@ const intents: Intent[] = [
     words: ['are you ai', 'are you an ai', 'are you a bot', 'are you real', 'are you human'],
     reply: () => (
       <p>
-        I&apos;m a lightweight scripted assistant — I match your question to answers written from this
-        portfolio. Nothing you type leaves your browser. For anything I can&apos;t answer, {site.firstName}&apos;s
-        a message away.
+        I&apos;m a lightweight scripted assistant: I match your question to answers written from this portfolio.
+        Nothing you type leaves your browser. For anything I can&apos;t answer, {site.firstName}&apos;s a message
+        away.
       </p>
     ),
   },
@@ -377,14 +464,19 @@ const intents: Intent[] = [
 
 export const greeting = (
   <p>
-    Hi! I&apos;m {site.firstName}&apos;s portfolio assistant. Ask me about his projects, stack, experience,
-    pricing or availability.
+    Hi! I&apos;m {site.firstName}&apos;s portfolio assistant. Ask me about his AI services, demos, projects or
+    pricing.
   </p>
 )
 
 export const suggestions = {
-  start: ['What AI tools do you use?', 'What Shopify work have you done?', 'Are you available?', 'What are you learning?'],
-  after: ['Show me travel projects', 'How much does a site cost?', 'What are you learning?', 'Contact'],
+  start: [
+    'Can you add a chatbot to my WordPress site?',
+    'How much does an automation cost?',
+    'Show me travel work.',
+    'Will the AI make things up?',
+  ],
+  after: ['What services do you offer?', 'Show me AI demos', 'What about customer data?', 'Contact'],
 }
 
 /** "What's your STACK?!" -> " what's your stack " (lowercase, spaces around every word) */
@@ -400,14 +492,16 @@ export function getAnswer(question: string): ReactNode {
     (p) => q.includes(' ' + p.title.toLowerCase() + ' ') || p.keywords.some((k) => q.includes(' ' + k + ' ')),
   )
   if (project) {
+    const study = getCaseStudy(project.slug)
     return (
       <>
         <p>
           <strong>{project.title}</strong> — {project.summary}
         </p>
         {project.offlineNote && <p>{project.offlineNote}</p>}
+        {study && <p>{study.aiUpgrade}</p>}
         <p>
-          <ChatLink href={`/projects/${project.slug}`}>Project details</ChatLink>
+          <ChatLink href={`/projects/${project.slug}`}>{study ? 'Case study' : 'Project details'}</ChatLink>
           {!project.offlineNote && (
             <>
               {' · '}
@@ -427,9 +521,7 @@ export function getAnswer(question: string): ReactNode {
   for (const intent of intents) {
     let score = 0
     for (const word of intent.words) {
-      if (q.includes(' ' + word + ' ') || q.includes(' ' + word + 's ')) {
-        score += word.includes(' ') ? 2 : 1
-      }
+      if (mentions(q, word)) score += word.includes(' ') ? 2 : 1
     }
     if (score > bestScore) {
       best = intent
@@ -437,14 +529,14 @@ export function getAnswer(question: string): ReactNode {
     }
   }
 
-  if (best) return best.reply()
+  if (best) return best.reply(q)
 
-  // 3. Nothing matched
+  // 3. Nothing matched: say so and offer a human
   return (
     <>
       <p>
-        I&apos;m not sure about that one — I only know what&apos;s on this portfolio. Try asking about projects,
-        Shopify or WordPress work, experience, process, pricing or availability.
+        I don&apos;t know that one. I only know what&apos;s on this site: services, AI demos, projects, process
+        and pricing. Want to ask {site.firstName} directly?
       </p>
       <ContactLine />
     </>

@@ -52,6 +52,8 @@ Every `page.tsx` inside `src/app` is a page. Its folder path is its URL.
 | --------------------------- | -------------------------------------- | ------------------------------------------------ |
 | `/`                         | `src/app/page.tsx`                     | Server page mixing in Client Components          |
 | `/about`                    | `src/app/about/page.tsx`               | `metadata` export → the page `<title>`           |
+| `/services`                 | `src/app/services/page.tsx`            | Offer cards + `<details>` FAQ from a data file   |
+| `/lab`                      | `src/app/lab/page.tsx`                 | Demo cards; optional Loom embeds                 |
 |  `/skills`| `src/app/skills/page.tsx`              | Rendering cards from a data array with `.map()`  |
 | `/projects?filter=shopify`  | `src/app/projects/page.tsx`            | `useSearchParams` + `<Suspense>`                 |
 | `/projects/curakidney`      | `src/app/projects/[slug]/page.tsx`     | **Dynamic route**, `generateStaticParams`, `notFound()` |
@@ -68,16 +70,20 @@ Every `page.tsx` inside `src/app` is a page. Its folder path is its URL.
 src/
 ├── app/                  ROUTES (pages, layout, API, global CSS)
 ├── data/                 CONTENT — edit these to change the site's text
-│   ├── site.ts             name, email, WhatsApp, stats
+│   ├── placeholders.ts     EVERY missing fact (prices, results, quotes…), marked TODO
+│   ├── site.ts             name, role, email, WhatsApp, stats, booking link
+│   ├── offers.ts           services, FAQ, free audit, "What I build", "How it works"
+│   ├── lab.ts              AI demo cards for /lab
+│   ├── caseStudies.ts      the 3 full case studies
 │   ├── navigation.ts       menu links
 │   ├── projects.ts         all 14 projects + filter helpers
-│   ├── skills.ts           skills AND the AI roadmap
+│   ├── skills.ts           skill groups: shipping with / building toward
 │   ├── experience.ts       job history
 │   └── process.ts          the 4 process steps
 ├── components/           UI BUILDING BLOCKS
 │   ├── layout/             Nav, Footer, Logo, ThemeToggle, Background
 │   ├── ui/                 Icon, SectionHeader, Tags, SkillCard, …
-│   ├── home/               hero canvas, typing terminal, counters
+│   ├── home/               hero canvas, assistant terminal, counters, testimonials
 │   ├── projects/           ProjectCard, ProjectFilter
 │   ├── contact/            ContactForm
 │   ├── assistant/          chat: answers.tsx (brain), provider (state), panel (UI)
@@ -97,7 +103,7 @@ src/
 6. **`src/components/projects/ProjectFilter.tsx`**: the URL as state.
 7. **`src/components/layout/Nav.tsx`**: `usePathname()` for the active link, `useState` for the mobile menu.
 8. **`src/components/assistant/`**: React Context (`AssistantProvider`) shared by many components.
-9. **`src/components/home/HeroTerminal.tsx`**: an animation driven by state + `useEffect`.
+9. **`src/components/home/AssistantTerminal.tsx`**: an animation driven by state + `useEffect`.
 10. **`src/app/api/projects/route.ts`**: your first API endpoint.
 
 ## Key ideas, in one line each

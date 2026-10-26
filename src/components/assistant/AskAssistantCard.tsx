@@ -10,7 +10,7 @@ export function AskAssistantCard() {
     <button type="button" className="card ask-card" onClick={() => open()}>
       <Icon name="spark" />
       <span>
-        <strong>Quick question?</strong> Ask the portfolio assistant — instant answers about my work, stack and
+        <strong>Quick question?</strong> Ask the portfolio assistant — instant answers about my services, work and
         availability.
       </span>
     </button>

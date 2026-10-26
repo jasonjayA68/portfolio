@@ -1062,7 +1062,8 @@ div.contact-item:hover::after { opacity: 0; }
 ======================================== */
 
 /* Home: one-column hero (the assistant moved to its own section) */
-.hero-inner.hero-solo { grid-template-columns: 1fr; max-width: 900px; margin-left: 0; }
+.hero-inner.hero-solo { grid-template-columns: 1fr; }
+.hero-solo .hero-copy { max-width: 900px; }
 .hero-solo .hero-tagline { max-width: 42rem; }
 .client-strip-subtle { font-size: 0.75rem; opacity: 0.85; }
 

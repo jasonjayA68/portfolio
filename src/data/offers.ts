@@ -144,7 +144,7 @@ export const faqs: Faq[] = [
   {
     question: 'Do I need a new website?',
     answer: 'No. It plugs into your current WordPress or Shopify site.',
-    keywords: ['need a new website', 'need a new site', 'current site', 'existing site', 'my current website', 'plug into'],
+    keywords: ['do i need a new website', 'do i need a new site', 'current site', 'existing site', 'my current website', 'plug into'],
   },
   {
     question: 'What about customer data?',

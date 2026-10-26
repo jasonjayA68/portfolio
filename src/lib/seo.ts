@@ -18,6 +18,14 @@ export const siteUrl =
 
 export const keywords = [
   'Jason Jay Ababao',
+  'AI integration developer',
+  'AI chatbot WordPress',
+  'RAG chatbot',
+  'n8n automation',
+  'HubSpot automation',
+  'GoHighLevel AI',
+  'WordPress MCP',
+  'AI for tour operators',
   'full-stack web developer',
   'freelance web developer',
   'web developer Philippines',
@@ -83,7 +91,7 @@ export const shareImage = {
   url: '/opengraph-image',
   width: 1200,
   height: 630,
-  alt: `${site.name} — ${site.role}`,
+  alt: `${site.name} · ${site.roleLong}`,
 }
 
 /** Structured data (JSON-LD): describes you to search engines as a Person. */
@@ -104,6 +112,6 @@ export function personJsonLd() {
       addressCountry: 'PH',
     },
     sameAs: [site.githubUrl, site.linkedinUrl, site.facebookUrl].filter(Boolean),
-    knowsAbout: ['WordPress', 'Elementor', 'WooCommerce', 'Shopify', 'Liquid', 'Laravel', 'PHP', 'JavaScript', 'SEO', 'HubSpot', 'GoHighLevel'],
+    knowsAbout: ['AI integration', 'AI chatbots', 'Lead automation', 'WordPress', 'Elementor', 'WooCommerce', 'Shopify', 'Liquid', 'Laravel', 'PHP', 'JavaScript', 'SEO', 'HubSpot', 'GoHighLevel'],
   }
 }

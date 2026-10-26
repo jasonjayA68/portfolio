@@ -27,9 +27,8 @@ import './globals.css'
 const geist = Geist({ subsets: ['latin'], variable: '--font-geist' })
 const geistMono = Geist_Mono({ subsets: ['latin'], weight: ['400', '500'], variable: '--font-geist-mono' })
 
-const homeTitle = `${site.name} — ${site.role}`
-const homeDescription =
-  'Full-stack web developer building fast, conversion-focused websites on WordPress, Shopify and Laravel. 14 client sites, 5+ years. Available for freelance work.'
+const homeTitle = `${site.name} · ${site.roleLong}`
+const homeDescription = site.description
 
 // <title> and <meta> tags for the whole site. Each page overrides title/description
 // with its own `metadata` export (see pageMetadata() in src/lib/seo.ts).

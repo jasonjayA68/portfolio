@@ -23,7 +23,7 @@ export const caseStudies: CaseStudy[] = [
     slug: 'go-euro-tours',
     goal: 'A curated European tour operator that needed a site to present its destinations and capture tour enquiries and bookings.',
     built: [
-      'Destination pages for each European region',
+      'Destination pages',
       'Itinerary builder',
       'Lead capture and booking flow',
       'Built on WordPress + Elementor',

@@ -113,7 +113,7 @@ export function ChatPanel() {
             ref={inputRef}
             id="chatInput"
             type="text"
-            placeholder="Ask about projects, stack, rates…"
+            placeholder="Ask about services, demos, pricing…"
             maxLength={200}
             value={input}
             onChange={(event) => setInput(event.target.value)}
