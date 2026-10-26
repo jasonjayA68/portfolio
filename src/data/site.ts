@@ -4,14 +4,18 @@
  * Any page or component that needs your name, email or WhatsApp number imports
  * it from here, so a change in this file updates the whole site.
  */
+import { placeholders } from './placeholders'
+
 export const site = {
   name: 'Jason Jay Ababao',
   firstName: 'Jason',
-  role: 'Full-Stack Web Developer',
+  role: 'AI Integration Developer',
+  roleLong: 'AI Integration Developer for WordPress & Shopify',
+  headline: 'Your website should answer customers and capture leads while you sleep.',
   tagline:
-    'I design and build fast, polished websites for ambitious brands in e-commerce, travel, wellness and professional services — across WordPress, Shopify and Laravel.',
+    "I'm Jason, an AI integration developer. I build AI assistants and lead automations into WordPress and Shopify sites, connected to HubSpot and GoHighLevel, for tour operators and online stores.",
   description:
-    'Jason Jay Ababao — full-stack web developer building fast, conversion-focused websites on WordPress, Shopify and Laravel.',
+    'I add AI assistants and lead automations to WordPress and Shopify sites, connected to HubSpot and GoHighLevel. 14 client sites, 5+ years. Available for projects.',
   location: 'Naawan, Misamis Oriental, PH',
   locationShort: 'Naawan, Philippines',
   email: 'jasonjay.ababao1968@gmail.com',
@@ -21,11 +25,16 @@ export const site = {
   // Leave a URL as an empty string ('') to hide its icon on the Contact page.
   linkedinUrl: 'https://www.linkedin.com/in/jason-jay-ababao-a91841230/',
   facebookUrl: 'https://www.facebook.com/jjasoon/',
+  // "Book a free 20-min call". Falls back to the contact page until a booking link is set.
+  bookingUrl: placeholders.bookingUrl || '/contact',
+  bookingMonth: placeholders.bookingMonth,
   // Hard-coded on purpose: reading the clock during rendering makes Next.js treat the page as dynamic.
   copyrightYear: 2026,
+  // A stat with value null is hidden.
   stats: [
-    { label: 'Client sites shipped', value: 14, suffix: '+' },
-    { label: 'Years experience', value: 5, suffix: '+' },
-    { label: 'Agencies', value: 4, suffix: '' },
-  ],
+    { label: 'Live client sites', value: 14, suffix: '' },
+    { label: 'Years building for clients', value: 5, suffix: '+' },
+    { label: 'Countries served (AU, CA, IE)', value: 3, suffix: '' },
+    { label: 'AI builds shipped', value: placeholders.aiBuildsShipped, suffix: '' },
+  ] as { label: string; value: number | null; suffix: string }[],
 }

@@ -1,8 +1,8 @@
 'use client'
 
 /**
- * The terminal box in the hero. It types out a short intro, then lets
- * visitors ask the assistant a question.
+ * The terminal box in the home page's "Try it live" section. It types out a
+ * short intro, then lets visitors ask the assistant a question.
  *
  * The typing effect is just state: `progress` says which line we're on and how
  * many characters of it are visible. A timer bumps it forward; React redraws.
@@ -17,29 +17,26 @@ type Line = { segments: Segment[]; className?: string }
 
 const LINES: Line[] = [
   { className: 't-cmd', segments: [{ text: '$', className: 't-prompt' }, { text: ' whoami' }] },
-  { segments: [{ text: 'Full-stack web developer · 5+ years' }] },
-  { segments: [{ text: 'stack', className: 't-key' }, { text: ' WordPress · Shopify · Laravel' }] },
-  { segments: [{ text: 'ai', className: 't-key' }, { text: ' Claude Code · Cursor · Codex' }] },
-  { segments: [{ text: 'shipped', className: 't-key' }, { text: ' 14 client sites · 4 agencies' }] },
+  { segments: [{ text: 'AI integration developer · 5+ years' }] },
+  { segments: [{ text: 'builds', className: 't-key' }, { text: ' AI assistants · lead automations' }] },
+  { segments: [{ text: 'sites', className: 't-key' }, { text: ' WordPress · Shopify' }] },
+  { segments: [{ text: 'crm', className: 't-key' }, { text: ' HubSpot · GoHighLevel' }] },
   {
     segments: [
       { text: 'status', className: 't-key' },
       { text: ' ' },
-      { text: 'available for freelance ✓', className: 't-ok' },
+      { text: 'booking AI projects ✓', className: 't-ok' },
     ],
   },
 ]
 
-const HINTS = [
-  { label: 'Shopify work?', question: 'What Shopify work have you done?' },
-  { label: 'Available?', question: 'Are you available?' },
-  { label: 'Your process?', question: 'How do you work?' },
-]
+// Starter prompts: the chip shows the full question
+const HINTS = ['Can you add a chatbot to my WordPress site?', 'How much does an automation cost?', 'Show me travel work.']
 
 const lineLength = (line: Line) => line.segments.reduce((sum, s) => sum + s.text.length, 0)
 const FINISHED = { line: LINES.length, chars: 0 }
 
-export function HeroTerminal() {
+export function AssistantTerminal() {
   const { open } = useAssistant()
   const [question, setQuestion] = useState('')
   const [progress, setProgress] = useState({ line: 0, chars: 0 })
@@ -123,8 +120,8 @@ export function HeroTerminal() {
 
       <div className="terminal-hints">
         {HINTS.map((hint) => (
-          <button key={hint.label} type="button" className="hint-chip" onClick={() => open(hint.question)}>
-            {hint.label}
+          <button key={hint} type="button" className="hint-chip" onClick={() => open(hint)}>
+            {hint}
           </button>
         ))}
       </div>

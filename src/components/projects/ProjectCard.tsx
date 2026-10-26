@@ -9,6 +9,7 @@ type ProjectCardProps = {
   project: Project
   className?: string // e.g. "reveal" or "is-entering"
   style?: CSSProperties
+  result?: string // one-line outcome, shown when set
 }
 
 /**
@@ -16,7 +17,7 @@ type ProjectCardProps = {
  * Clicking anywhere on the card opens /projects/<slug> (the title link is stretched
  * over the card in CSS). The "Live site" link sits on top and opens the real website.
  */
-export function ProjectCard({ project, className = '', style }: ProjectCardProps) {
+export function ProjectCard({ project, className = '', style, result }: ProjectCardProps) {
   return (
     <article className={`card project ${className}`} style={style}>
       <div className="project-shot">
@@ -36,6 +37,7 @@ export function ProjectCard({ project, className = '', style }: ProjectCardProps
           </Link>
         </h3>
         <p>{project.summary}</p>
+        {result && <p className="project-result">{result}</p>}
         <Tags items={project.tags} />
         {project.offlineNote ? (
           // Your version isn't online anymore, so don't send visitors to someone else's site
