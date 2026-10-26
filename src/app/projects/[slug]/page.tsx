@@ -17,6 +17,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
 import { projects, getProjectBySlug, displayDomain } from '@/data/projects'
+import { getCaseStudy, type CaseStudy } from '@/data/caseStudies'
 import { pageMetadata } from '@/lib/seo'
 import { Icon } from '@/components/ui/Icon'
 import { Tags } from '@/components/ui/Tags'
@@ -77,6 +78,7 @@ async function ProjectDetails({ params }: Props) {
   const index = projects.indexOf(project)
   const previous = projects[(index - 1 + projects.length) % projects.length]
   const next = projects[(index + 1) % projects.length]
+  const caseStudy = getCaseStudy(project.slug)
 
   return (
     <>
@@ -138,6 +140,9 @@ async function ProjectDetails({ params }: Props) {
         </aside>
       </div>
 
+      {/* Go Euro Tours, Go Irish Tours and Your Reformer get the full case study */}
+      {caseStudy && <CaseStudySections study={caseStudy} />}
+
       <nav className="detail-pager" aria-label="More projects">
         <Link href={`/projects/${previous.slug}`} className="card">
           <small>← previous</small>
@@ -149,5 +154,71 @@ async function ProjectDetails({ params }: Props) {
         </Link>
       </nav>
     </>
+  )
+}
+
+/**
+ * Client and goal → The problem → What I built → Results → Quote + call to action,
+ * then the "AI upgrade" callout. Sections without real content yet are skipped,
+ * and the step numbers close up so there are no gaps.
+ */
+function CaseStudySections({ study }: { study: CaseStudy }) {
+  const blocks = [
+    { title: 'Client and goal', content: <p>{study.goal}</p> },
+    study.problem && { title: 'The problem', content: <p>{study.problem}</p> },
+    {
+      title: 'What I built',
+      content: (
+        <ul>
+          {study.built.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
+      ),
+    },
+    study.results.length > 0 && {
+      title: 'Results',
+      content: (
+        <ul>
+          {study.results.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
+      ),
+    },
+  ].filter((block): block is { title: string; content: React.JSX.Element } => Boolean(block))
+
+  return (
+    <div className="case">
+      {blocks.map((block, i) => (
+        <section key={block.title} className="card case-block reveal">
+          <h2 data-step={String(i + 1).padStart(2, '0')}>{block.title}</h2>
+          {block.content}
+        </section>
+      ))}
+
+      {study.quote && (
+        <figure className="card case-block case-quote reveal">
+          <blockquote>{study.quote.text}</blockquote>
+          <figcaption>
+            {study.quote.name}, {study.quote.role}, {study.quote.company}
+          </figcaption>
+        </figure>
+      )}
+
+      <div className="case-cta reveal">
+        <Link href="/contact" className="btn btn-primary magnetic">
+          Want something like this? <Icon name="arrow" />
+        </Link>
+      </div>
+
+      <aside className="card ai-callout reveal" aria-label="AI upgrade">
+        <Icon name="spark" />
+        <div>
+          <strong>AI upgrade</strong>
+          <p>{study.aiUpgrade}</p>
+        </div>
+      </aside>
+    </div>
   )
 }
