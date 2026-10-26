@@ -67,7 +67,6 @@ function PaletteDialog() {
       hint: link.href,
       run: () => router.push(link.href),
     })),
-    { group: 'pages', label: 'AI roadmap', icon: 'arrow', hint: '/skills#roadmap', run: () => router.push('/skills#roadmap') },
 
     { group: 'actions', label: 'Ask the assistant', icon: 'spark', run: () => assistant.open() },
     { group: 'actions', label: 'Toggle light / dark theme', icon: 'sun', run: toggleTheme },

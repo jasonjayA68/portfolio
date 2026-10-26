@@ -13,14 +13,14 @@ import { NextPageLink } from '@/components/ui/NextPageLink'
 // Sets the <title> of this page: "About · Jason Jay Ababao" (see the template in layout.tsx)
 export const metadata: Metadata = pageMetadata({
   title: 'About',
-  description: `About ${site.name}, a full-stack web developer from the Philippines with 5+ years building WordPress, Shopify and Laravel websites for agencies and clients worldwide.`,
+  description: `About ${site.name}, an AI integration developer from the Philippines with 5+ years building WordPress, Shopify and Laravel sites, now adding AI assistants and lead automations.`,
   path: '/about',
 })
 
 const highlights = [
-  { title: 'Full-stack expertise', text: 'Front-end to back-end — PHP, Laravel, JS and modern CMS platforms.' },
-  { title: 'E-commerce specialist', text: 'Shopify, WooCommerce, Shopify Hydrogen and Liquid theme development.' },
-  { title: 'Reliable delivery', text: 'Clear communication, on-time launches, long-term agency partnerships.' },
+  { title: 'AI integration', text: 'LLM APIs, RAG, MCP' },
+  { title: 'Web platforms', text: 'WordPress, WooCommerce, Shopify, Laravel' },
+  { title: 'Lead systems', text: 'HubSpot, GoHighLevel, n8n' },
 ]
 
 export default function AboutPage() {
@@ -28,19 +28,23 @@ export default function AboutPage() {
     <>
       <section className="section page-top">
         <div className="container">
-          <SectionHeader number="01" eyebrow="about" title="A designer who codes — with an eye for detail." as="h1" />
+          <SectionHeader number="01" eyebrow="about" title="A web developer who learned to make websites think." as="h1" />
 
           <div className="about-grid">
             <div className="about-text reveal">
               <p>
-                With 5 years of solid experience in web development, I&apos;m a versatile and skilled Full-Stack
-                Developer. I&apos;m deeply passionate about my work and committed to continuous learning — always
-                focusing on what truly matters to deliver meaningful results for my clients.
+                I&apos;ve spent 5+ years building WordPress, Shopify and Laravel sites for agencies and brands in
+                Australia, Canada and Ireland: tour operators, online stores, a dialysis clinic, a real-estate
+                brokerage. Along the way I learned SEO, design and CRM setup in HubSpot and GoHighLevel.
               </p>
               <p>
-                I&apos;ve shipped live sites across WordPress, Shopify, Laravel and custom front-end builds —
-                partnering with agencies and direct clients across Australia, Canada, Ireland and beyond to bridge
-                the gap between design and code.
+                Now I combine all of it with AI. I build assistants that answer customers from a business&apos;s own
+                content, and automations that make sure no lead is ever forgotten. I use AI coding tools every day,
+                which means faster delivery without cutting corners: every AI feature is tested on real questions
+                before it goes live.
+              </p>
+              <p>
+                I work remotely from the Philippines, overlapping with Australian and European business hours.
               </p>
               <ul className="highlights">
                 {highlights.map((item) => (
@@ -61,7 +65,7 @@ export default function AboutPage() {
                 height={320}
               />
               <h2>{site.name}</h2>
-              <p className="profile-role">{site.role} · AI-assisted</p>
+              <p className="profile-role">{site.role}</p>
               <dl className="profile-meta">
                 <div>
                   <dt>location</dt>
@@ -73,7 +77,7 @@ export default function AboutPage() {
                 </div>
                 <div>
                   <dt>specialty</dt>
-                  <dd>WordPress &amp; Shopify</dd>
+                  <dd>AI for WordPress &amp; Shopify</dd>
                 </div>
                 <div>
                   <dt>availability</dt>

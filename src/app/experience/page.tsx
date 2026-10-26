@@ -1,13 +1,15 @@
 /** ROUTE: /experience */
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import { pageMetadata } from '@/lib/seo'
+import { Icon } from '@/components/ui/Icon'
 import { experience } from '@/data/experience'
 import { SectionHeader } from '@/components/ui/SectionHeader'
 import { NextPageLink } from '@/components/ui/NextPageLink'
 
 export const metadata: Metadata = pageMetadata({
   title: 'Experience',
-  description: '5+ years building WordPress and Shopify sites with agencies DG Venture and ESTRAT360, plus SEO and graphic design experience.',
+  description: 'Freelance AI integration developer since Oct 2025, after 5+ years building WordPress, Shopify and Laravel sites with agencies DG Venture and ESTRAT360.',
   path: '/experience',
 })
 
@@ -27,6 +29,12 @@ export default function ExperiencePage() {
                   <h2>{job.role}</h2>
                   <p className="timeline-company">{job.company}</p>
                   <p>{job.description}</p>
+                  {job.result && <p className="timeline-result">{job.result}</p>}
+                  {job.link && (
+                    <Link href={job.link.href} className="timeline-link">
+                      {job.link.label} <Icon name="arrow" />
+                    </Link>
+                  )}
                 </div>
               </li>
             ))}

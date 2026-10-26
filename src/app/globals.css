@@ -1177,7 +1177,7 @@ div.contact-item:hover::after { opacity: 0; }
 /* Timeline link (experience) */
 .timeline-link { display: inline-flex; align-items: center; gap: 6px; margin-top: 12px; font-family: var(--mono); font-size: 0.8rem; color: var(--accent-text); }
 .timeline-link:hover { text-decoration: underline; text-underline-offset: 3px; }
-.timeline-card .timeline-result { margin-top: 10px; font-family: var(--mono); font-size: 0.8rem; color: var(--accent-text); }
+.timeline-card p.timeline-result { margin-top: 10px; font-family: var(--mono); font-size: 0.8rem; color: var(--accent-text); }
 
 /* Case studies */
 .case { margin-top: 56px; display: grid; gap: 16px; max-width: 860px; }
@@ -1221,4 +1221,8 @@ div.contact-item:hover::after { opacity: 0; }
     .faq { margin-top: 72px; }
     .faq-item summary { padding: 16px 18px; }
     .faq-item p { padding: 0 18px 18px; }
+}
+/* Wide screens show the column labels once, above the matrix; keep them for screen readers per row */
+@media (min-width: 901px) {
+    .skill-row .skill-col-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 }

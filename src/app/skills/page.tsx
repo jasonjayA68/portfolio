@@ -1,18 +1,19 @@
 /**
  * ROUTE: /skills
- * The AI roadmap section has id="roadmap", so /skills#roadmap jumps straight to it.
+ * One matrix: each group lists what I ship with today and what I'm building toward.
  */
 import type { Metadata } from 'next'
 import { pageMetadata } from '@/lib/seo'
-import { skills, roadmap } from '@/data/skills'
+import { skillGroups } from '@/data/skills'
+import { Icon } from '@/components/ui/Icon'
+import { Tags } from '@/components/ui/Tags'
 import { SectionHeader } from '@/components/ui/SectionHeader'
-import { SkillCard } from '@/components/ui/SkillCard'
-import { DecodeText } from '@/components/ui/DecodeText'
 import { NextPageLink } from '@/components/ui/NextPageLink'
 
 export const metadata: Metadata = pageMetadata({
   title: 'Skills & tools',
-  description: 'The tools I build with: WordPress, Elementor, Shopify, Laravel, PHP, SEO, HubSpot and AI coding assistants, plus the AI development skills I am studying now.',
+  description:
+    'AI integration, automation and CRM (HubSpot, GoHighLevel), WordPress and Shopify, PHP and Laravel, Next.js and SEO: the tools I ship with today and the AI skills I am building toward.',
   path: '/skills',
 })
 
@@ -24,37 +25,34 @@ export default function SkillsPage() {
           <SectionHeader
             number="02"
             eyebrow="skills & tools"
-            title="The stack I build with — end to end."
-            subtitle="A curated toolkit for shipping modern websites, from design to deployment."
+            title="What I ship with today, and what I'm building toward."
+            subtitle="AI first. The left column is in client work now; the right column is what I'm learning and adding as it matures."
             as="h1"
           />
 
-          {/* .map() turns each item of the data array into a card */}
-          <div className="skills-grid">
-            {skills.map((skill) => (
-              <SkillCard key={skill.title} skill={skill} />
+          <div className="skill-matrix-head" aria-hidden="true">
+            <span />
+            <span>shipping with</span>
+            <span>building toward</span>
+          </div>
+          <ul className="skill-matrix">
+            {skillGroups.map((group) => (
+              <li key={group.title} className="card skill-row reveal">
+                <div className="skill-row-title">
+                  <Icon name={group.icon} className="skill-icon" />
+                  <h2>{group.title}</h2>
+                </div>
+                <div>
+                  <p className="skill-col-label">shipping with</p>
+                  <Tags items={group.shipping} />
+                </div>
+                <div className="skill-col-building">
+                  <p className="skill-col-label">building toward</p>
+                  <Tags items={group.building} />
+                </div>
+              </li>
             ))}
-          </div>
-
-          <div className="roadmap" id="roadmap">
-            <header className="roadmap-head reveal">
-              <p className="eyebrow">
-                <span className="eyebrow-num">02.1</span> <DecodeText text="ai roadmap" />
-              </p>
-              <h2 className="roadmap-title">
-                Leveling up for the AI era — <span className="gradient-text">studying now.</span>
-              </h2>
-              <p className="section-sub">
-                The AI development skills clients are hiring for today. I&apos;m actively learning these and adding
-                them to client work as they mature — tracked here in public.
-              </p>
-            </header>
-            <ol className="roadmap-grid">
-              {roadmap.map((item) => (
-                <SkillCard key={item.title} skill={item} learning />
-              ))}
-            </ol>
-          </div>
+          </ul>
         </div>
       </section>
 

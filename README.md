@@ -52,7 +52,7 @@ Every `page.tsx` inside `src/app` is a page. Its folder path is its URL.
 | --------------------------- | -------------------------------------- | ------------------------------------------------ |
 | `/`                         | `src/app/page.tsx`                     | Server page mixing in Client Components          |
 | `/about`                    | `src/app/about/page.tsx`               | `metadata` export → the page `<title>`           |
-| `/skills`, `/skills#roadmap`| `src/app/skills/page.tsx`              | Rendering cards from a data array with `.map()`  |
+|  `/skills`| `src/app/skills/page.tsx`              | Rendering cards from a data array with `.map()`  |
 | `/projects?filter=shopify`  | `src/app/projects/page.tsx`            | `useSearchParams` + `<Suspense>`                 |
 | `/projects/curakidney`      | `src/app/projects/[slug]/page.tsx`     | **Dynamic route**, `generateStaticParams`, `notFound()` |
 | `/experience`               | `src/app/experience/page.tsx`          | Simple list page                                 |
